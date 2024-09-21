@@ -15,7 +15,7 @@ const geistMono = localFont({
 
 export const metadata: Metadata = {
   title: "Paroki Kristus Raja Barong Tongkok",
-  description: "Portal Aplikasi Paroki Kristus Raja Barong Tongkok",
+  description: "Portal Paroki Kristus Raja Barong Tongkok",
 };
 
 export default function RootLayout({

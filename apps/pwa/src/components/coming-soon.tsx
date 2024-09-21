@@ -13,7 +13,7 @@ export default function ComingSoon() {
         <h1 className="text-5xl">
           <b>Paroki Kristus Raja Barong Tongkok</b>
         </h1>
-        <p>Website masih dalam tahap pengembangan</p>
+        <p>Portal aplikasi masih dalam tahap pengembangan</p>
 
         <div className="mt-10 mb-5">
           <div className="shadow w-full bg-white mt-2 max-w-2xl mx-auto rounded-full">
@@ -21,7 +21,7 @@ export default function ComingSoon() {
               className="rounded-full bg-indigo-600 text-xs leading-none text-center text-white py-1"
               style={{ width: "75%" }}
             >
-              75%
+              &nbsp;
             </div>
           </div>
         </div>
