@@ -1,0 +1,9 @@
+services:
+  strapi:
+    build:
+      target: prod
+      dockerfile: ./apps/strapi/Dockerfile
+    env_file:
+      - ./.env
+    ports:
+      - 1337:1337
