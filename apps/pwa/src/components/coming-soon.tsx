@@ -10,10 +10,13 @@ export default function ComingSoon() {
       <div className="absolute top-0 right-0 bottom-0 left-0 bg-gray-900 opacity-75"></div>
 
       <div className="z-50 flex flex-col justify-center text-white w-full h-screen">
-        <h1 className="text-2xl">
-          <b>Paroki Kristus Raja Barong Tongkok</b>
+        <h1 className="text-2xl sm-1xl">
+          <b>PKRBT</b>
         </h1>
-        <p>Portal aplikasi masih dalam tahap pengembangan</p>
+        <p>
+          Portal aplikasi Paroki Kristus Raja Barong Tongkok masih dalam tahap
+          pengembangan
+        </p>
 
         <div className="mt-10 mb-5">
           <div className="shadow w-full bg-white mt-2 max-w-2xl mx-auto rounded-full">
