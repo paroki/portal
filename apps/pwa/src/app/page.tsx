@@ -1,5 +1,5 @@
-import ComingSoon from "@/components/coming-soon";
+import JadwalMisa from "@/components/jadwal-misa";
 
 export default function Home() {
-  return <ComingSoon />;
+  return <JadwalMisa />;
 }
