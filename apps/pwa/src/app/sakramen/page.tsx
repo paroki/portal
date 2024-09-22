@@ -1,7 +1,6 @@
 import lipsum from "@/util/lipsum";
 
 export default function Sakramen() {
-  const paragraphs = [lipsum.generateSentences()];
   return (
     <div>
       <h1>Sakramen</h1>
