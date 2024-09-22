@@ -7,10 +7,23 @@
       "inputs": ["$TURBO_DEFAULT$", ".env*"],
       "outputs": [".next/**", "!.next/cache/**", "dist", ".strapi"]
     },
+    "dev": {
+      "cache": false,
+      "persistent": true
+    },
     "lint": {
       "dependsOn": ["^lint"]
     },
-    "dev": {
+    "test": {
+      "dependsOn": ["^build"]
+    },
+    "start": {
+      "dependsOn": ["^build"]
+    },
+    "coverage": {
+      "dependsOn": ["^build"]
+    },
+    "e2e": {
       "cache": false,
       "persistent": true
     }

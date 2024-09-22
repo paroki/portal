@@ -5,9 +5,14 @@
     "build": "turbo build",
     "dev": "turbo dev",
     "lint": "turbo lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "test": "turbo run test",
+    "coverage": "turbo run coverage",
+    "e2e": "turbo run e2e",
+    "start": "turbo run start"
   },
   "devDependencies": {
+    "@types/node": "^22.5.5",
     "prettier": "^3.2.5",
     "turbo": "^2.1.2",
     "typescript": "^5.4.5"

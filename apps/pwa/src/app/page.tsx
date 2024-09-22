@@ -1,5 +1,10 @@
 import JadwalMisa from "@/components/jadwal-misa";
 
 export default function Home() {
-  return <JadwalMisa />;
+  return (
+    <div>
+      <h1>Beranda</h1>
+      <JadwalMisa />
+    </div>
+  );
 }
