@@ -23,6 +23,9 @@
     "coverage": {
       "dependsOn": ["^build"]
     },
+    "seed:example": {
+      "dependsOn": ["^build"]
+    },
     "e2e": {
       "cache": false,
       "persistent": true

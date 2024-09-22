@@ -1,6 +1,6 @@
 {
   "name": "strapi",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "private": true,
   "description": "A Strapi application",
   "scripts": {
@@ -14,12 +14,13 @@
   },
   "dependencies": {
     "@strapi/plugin-cloud": "5.0.0",
+    "@strapi/plugin-documentation": "^5.0.0",
     "@strapi/plugin-users-permissions": "5.0.0",
+    "@strapi/provider-email-sendgrid": "^5.0.0",
     "@strapi/strapi": "5.0.0",
     "better-sqlite3": "9.4.3",
     "fs-extra": "^10.0.0",
     "mime-types": "^2.1.27",
-    "pg": "^8.13.0",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-router-dom": "^6.0.0",
@@ -36,6 +37,6 @@
     "npm": ">=6.0.0"
   },
   "strapi": {
-    "uuid": "5f592a24-e328-4b20-a8fa-14e5178bf3be"
+    "uuid": "e7792615-fd29-4a92-a312-ce95e83da4bf"
   }
 }
