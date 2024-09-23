@@ -8,7 +8,7 @@ on:
 
 jobs:
   tests:
-    name: Build and Test
+    name: Unit Testing
     timeout-minutes: 15
     runs-on: ubuntu-latest
     steps:
@@ -40,25 +40,36 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-pnpm-store-
 
+      - name: Cache turbo build setup
+        uses: actions/cache@v4
+        with:
+          path: .turbo
+          key: ${{ runner.os }}-turbo-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-turbo-
+
       - name: install dependencies
         run: pnpm install
 
       - name: build
-        run: pnpm build
+        shell: bash
+        run: |
+          cp apps/strapi/.env.default apps/strapi/.env
+          pnpm build
 
       - name: test with coverage
         run: pnpm coverage
 
       - uses: codecov/codecov-action@v4
         with:
-          fail_ci_if_error: true # optional (default = false)
-          files: ./apps/pwa/clover.xml
-          flags: pwa # optional
-          name: pwa # optional
+          flags: web # optional
+          name: web # optional
+          files: apps/web/coverage/clover.xml
           token: ${{ secrets.CODECOV_TOKEN }} # required
-          verbose: true # optional (default = false)
+          verbose: true
 
   e2e:
+    name: E2E Testing
     timeout-minutes: 60
     runs-on: ubuntu-latest
     needs: tests
@@ -82,27 +93,36 @@ jobs:
         run: |
           echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
 
-      - uses: actions/cache@v4
-        name: Setup pnpm cache
+      - name: Setup pnpm cache
+        uses: actions/cache@v4
         with:
           path: ${{ env.STORE_PATH }}
           key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
           restore-keys: |
             ${{ runner.os }}-pnpm-store-
 
+      - name: Turbo build cache
+        uses: actions/cache@v4
+        with:
+          path: .turbo
+          key: ${{ runner.os }}-turbo-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-turbo-
+
       - name: Install dependencies
         run: pnpm install
 
       - name: Build
+        shell: bash
         run: |
-          mv ./apps/strapi/.env.default ./apps/strapi/.env
+          cp apps/strapi/.env.default apps/strapi/.env
           pnpm build
 
       - name: Start dev server
         run: nohup pnpm start &
 
       - name: Install Playwright Browsers
-        working-directory: ./apps/pwa
+        working-directory: ./apps/web
         run: pnpm playwright install --with-deps
 
       - name: Run Playwright tests
@@ -111,18 +131,6 @@ jobs:
       - uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}
         with:
-          name: pwa-playwright-report
-          path: ./apps/pwa/playwright-report/
+          name: web-playwright-report
+          path: ./apps/web/playwright-report/
           retention-days: 30
-
-  gitlab:
-    name: GitLab Sync
-    runs-on: ubuntu-latest
-    needs: e2e
-    if: ${{ needs.e2e.result }}
-    steps:
-      - uses: keninkujovic/gitlab-sync@2.0.0
-        with:
-          gitlab_url: ${{ secrets.GITLAB_URL }}
-          username: ${{ secrets.GITLAB_USERNAME }}
-          gitlab_pat: ${{ secrets.GITLAB_PAT }}

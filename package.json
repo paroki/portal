@@ -9,7 +9,8 @@
     "test": "turbo run test",
     "coverage": "turbo run coverage",
     "e2e": "turbo run e2e",
-    "start": "turbo run start"
+    "start": "turbo run start",
+    "seed:example": "turbo run seed:example"
   },
   "devDependencies": {
     "@types/node": "^22.5.5",

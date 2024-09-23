@@ -4,38 +4,26 @@
   "info": {
     "singularName": "sejarah",
     "pluralName": "sejarahs",
-    "displayName": "Sejarah",
-    "description": ""
+    "displayName": "Sejarah"
   },
   "options": {
     "draftAndPublish": false
   },
-  "pluginOptions": {
-    "i18n": {
-      "localized": true
-    }
-  },
+  "pluginOptions": {},
   "attributes": {
     "title": {
       "type": "string",
       "default": "Sejarah",
-      "required": true,
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      }
+      "required": true
     },
     "blocks": {
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      },
       "type": "dynamiczone",
       "components": [
-        "shared.media",
-        "shared.rich-text"
+        "shared.slider",
+        "shared.seo",
+        "shared.rich-text",
+        "shared.quote",
+        "shared.media"
       ]
     }
   }

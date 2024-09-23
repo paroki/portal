@@ -580,6 +580,36 @@ export interface ApiAuthorAuthor extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiBeritaBerita extends Struct.CollectionTypeSchema {
+  collectionName: 'beritas';
+  info: {
+    singularName: 'berita';
+    pluralName: 'beritas';
+    displayName: 'Berita';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    judul: Schema.Attribute.String & Schema.Attribute.Required;
+    slug: Schema.Attribute.UID<'judul'> & Schema.Attribute.Required;
+    blocks: Schema.Attribute.DynamicZone<
+      ['shared.slider', 'shared.rich-text', 'shared.media', 'shared.seo']
+    >;
+    kategori: Schema.Attribute.Relation<'manyToOne', 'api::kategori.kategori'>;
+    createdAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    publishedAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::berita.berita'>;
+  };
+}
+
 export interface ApiCategoryCategory extends Struct.CollectionTypeSchema {
   collectionName: 'categories';
   info: {
@@ -611,6 +641,42 @@ export interface ApiCategoryCategory extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiDppDpp extends Struct.CollectionTypeSchema {
+  collectionName: 'dpps';
+  info: {
+    singularName: 'dpp';
+    pluralName: 'dpps';
+    displayName: 'DPP';
+    description: '';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    nomor: Schema.Attribute.Integer & Schema.Attribute.Required;
+    nama: Schema.Attribute.String & Schema.Attribute.Required;
+    periode: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'2024-2027'>;
+    jabatan: Schema.Attribute.String & Schema.Attribute.Required;
+    bidang: Schema.Attribute.String & Schema.Attribute.Required;
+    tempat_lahir: Schema.Attribute.String;
+    tanggal_lahir: Schema.Attribute.Date;
+    handphone: Schema.Attribute.BigInteger;
+    foto: Schema.Attribute.Media<'images'>;
+    seksi: Schema.Attribute.String;
+    createdAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    publishedAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::dpp.dpp'>;
+  };
+}
+
 export interface ApiGlobalGlobal extends Struct.SingleTypeSchema {
   collectionName: 'globals';
   info: {
@@ -639,16 +705,46 @@ export interface ApiGlobalGlobal extends Struct.SingleTypeSchema {
   };
 }
 
-export interface ApiSejarahSejarah extends Struct.SingleTypeSchema {
-  collectionName: 'sejarahs';
+export interface ApiKategoriKategori extends Struct.CollectionTypeSchema {
+  collectionName: 'kategoris';
   info: {
-    singularName: 'sejarah';
-    pluralName: 'sejarahs';
-    displayName: 'Sejarah';
+    singularName: 'kategori';
+    pluralName: 'kategoris';
+    displayName: 'Kategori';
     description: '';
   };
   options: {
     draftAndPublish: false;
+  };
+  attributes: {
+    kategori: Schema.Attribute.String;
+    slug: Schema.Attribute.UID<'kategori'>;
+    keterangan: Schema.Attribute.Text;
+    beritas: Schema.Attribute.Relation<'oneToMany', 'api::berita.berita'>;
+    createdAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    publishedAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::kategori.kategori'
+    >;
+  };
+}
+
+export interface ApiSaintSaint extends Struct.CollectionTypeSchema {
+  collectionName: 'saints';
+  info: {
+    singularName: 'saint';
+    pluralName: 'saints';
+    displayName: 'Saint';
+  };
+  options: {
+    draftAndPublish: true;
   };
   pluginOptions: {
     i18n: {
@@ -656,20 +752,80 @@ export interface ApiSejarahSejarah extends Struct.SingleTypeSchema {
     };
   };
   attributes: {
-    title: Schema.Attribute.String &
+    nama: Schema.Attribute.String &
       Schema.Attribute.Required &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
           localized: true;
         };
-      }> &
-      Schema.Attribute.DefaultTo<'Sejarah'>;
-    blocks: Schema.Attribute.DynamicZone<['shared.media', 'shared.rich-text']> &
+      }>;
+    asal: Schema.Attribute.String &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
           localized: true;
         };
       }>;
+    slug: Schema.Attribute.UID<'nama'> &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    pesta: Schema.Attribute.Date &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: false;
+        };
+      }>;
+    blocks: Schema.Attribute.DynamicZone<
+      [
+        'shared.slider',
+        'shared.seo',
+        'shared.rich-text',
+        'shared.quote',
+        'shared.media',
+      ]
+    > &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    createdAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    publishedAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::saint.saint'>;
+  };
+}
+
+export interface ApiSejarahSejarah extends Struct.SingleTypeSchema {
+  collectionName: 'sejarahs';
+  info: {
+    singularName: 'sejarah';
+    pluralName: 'sejarahs';
+    displayName: 'Sejarah';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    title: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'Sejarah'>;
+    blocks: Schema.Attribute.DynamicZone<
+      [
+        'shared.slider',
+        'shared.seo',
+        'shared.rich-text',
+        'shared.quote',
+        'shared.media',
+      ]
+    >;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
@@ -1063,8 +1219,12 @@ declare module '@strapi/strapi' {
       'api::about.about': ApiAboutAbout;
       'api::article.article': ApiArticleArticle;
       'api::author.author': ApiAuthorAuthor;
+      'api::berita.berita': ApiBeritaBerita;
       'api::category.category': ApiCategoryCategory;
+      'api::dpp.dpp': ApiDppDpp;
       'api::global.global': ApiGlobalGlobal;
+      'api::kategori.kategori': ApiKategoriKategori;
+      'api::saint.saint': ApiSaintSaint;
       'api::sejarah.sejarah': ApiSejarahSejarah;
       'admin::permission': AdminPermission;
       'admin::user': AdminUser;

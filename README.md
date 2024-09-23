@@ -13,17 +13,27 @@ Portal Paroki Kristus Raja Barong Tongkok
 Install turbo
 
 ```sh
+cd path/to/project
 npm install -g turbo
+```
+
+Configure strapi
+
+```sh
+cd path/to/project
+cp apps/strapi/.env.default apps/strapi/.env
 ```
 
 Install packages
 
 ```sh
+cd path/to/project
 pnpm install
 ```
 
-Start servers
+Start dev servers
 
 ```sh
+cd path/to/project
 pnpm dev
 ```

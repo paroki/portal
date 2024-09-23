@@ -1,0 +1,32 @@
+{
+  "kind": "collectionType",
+  "collectionName": "kategoris",
+  "info": {
+    "singularName": "kategori",
+    "pluralName": "kategoris",
+    "displayName": "Kategori",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "kategori": {
+      "type": "string"
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "kategori"
+    },
+    "keterangan": {
+      "type": "text"
+    },
+    "beritas": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::berita.berita",
+      "mappedBy": "kategori"
+    }
+  }
+}

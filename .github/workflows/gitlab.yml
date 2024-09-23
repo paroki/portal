@@ -1,0 +1,16 @@
+name: GitLab
+
+on:
+  push:
+    branches: ["main"]
+
+jobs:
+  gitlab:
+    name: GitLab Mirror
+    runs-on: ubuntu-latest
+    steps:
+      - uses: keninkujovic/gitlab-sync@2.0.0
+        with:
+          gitlab_url: ${{ secrets.GITLAB_URL }}
+          username: ${{ secrets.GITLAB_USERNAME }}
+          gitlab_pat: ${{ secrets.GITLAB_PAT }}
