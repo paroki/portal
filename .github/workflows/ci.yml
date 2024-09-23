@@ -55,6 +55,7 @@ jobs:
         shell: bash
         run: |
           cp apps/strapi/.env.default apps/strapi/.env
+          cp apps/web/.env.default apps/web/.env
           pnpm build
 
       - name: test with coverage
@@ -116,6 +117,7 @@ jobs:
         shell: bash
         run: |
           cp apps/strapi/.env.default apps/strapi/.env
+          cp apps/web/.env.default apps/web/.env
           pnpm build
 
       - name: Start dev server

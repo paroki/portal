@@ -30,7 +30,17 @@ export interface SharedSeo extends Struct.ComponentSchema {
 export interface SharedRichText extends Struct.ComponentSchema {
   collectionName: 'components_shared_rich_texts';
   info: {
-    displayName: 'Rich text';
+    displayName: 'Rich Text';
+  };
+  attributes: {
+    body: Schema.Attribute.Blocks;
+  };
+}
+
+export interface SharedRichTextMd extends Struct.ComponentSchema {
+  collectionName: 'components_shared_rich_text_md';
+  info: {
+    displayName: 'Rich Text (Markdown)';
     icon: 'align-justify';
     description: '';
   };
@@ -39,26 +49,14 @@ export interface SharedRichText extends Struct.ComponentSchema {
   };
 }
 
-export interface SharedQuote extends Struct.ComponentSchema {
-  collectionName: 'components_shared_quotes';
+export interface SharedImage extends Struct.ComponentSchema {
+  collectionName: 'components_shared_image';
   info: {
-    displayName: 'Quote';
-    icon: 'indent';
-  };
-  attributes: {
-    title: Schema.Attribute.String;
-    body: Schema.Attribute.Text;
-  };
-}
-
-export interface SharedMedia extends Struct.ComponentSchema {
-  collectionName: 'components_shared_media';
-  info: {
-    displayName: 'Media';
+    displayName: 'Image';
     icon: 'file-video';
   };
   attributes: {
-    file: Schema.Attribute.Media<'images' | 'files' | 'videos'>;
+    file: Schema.Attribute.Media<'images'>;
   };
 }
 
@@ -68,8 +66,8 @@ declare module '@strapi/strapi' {
       'shared.slider': SharedSlider;
       'shared.seo': SharedSeo;
       'shared.rich-text': SharedRichText;
-      'shared.quote': SharedQuote;
-      'shared.media': SharedMedia;
+      'shared.rich-text-md': SharedRichTextMd;
+      'shared.image': SharedImage;
     }
   }
 }

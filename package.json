@@ -10,7 +10,7 @@
     "coverage": "turbo run coverage",
     "e2e": "turbo run e2e",
     "start": "turbo run start",
-    "seed:example": "turbo run seed:example"
+    "seed:dev": "turbo run seed:dev"
   },
   "devDependencies": {
     "@types/node": "^22.5.5",
@@ -18,7 +18,7 @@
     "turbo": "^2.1.2",
     "typescript": "^5.4.5"
   },
-  "packageManager": "pnpm@8.15.6",
+  "packageManager": "pnpm@9.11.0",
   "engines": {
     "node": "20.x"
   }

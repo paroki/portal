@@ -7,20 +7,19 @@
     "build": "strapi build",
     "deploy": "strapi deploy",
     "develop": "strapi develop",
-    "seed:example": "node ./scripts/seed.js",
     "start": "strapi start",
     "strapi": "strapi",
+    "seed:dev": "node ./scripts/seed-dev.js",
     "dev": "strapi develop"
   },
   "dependencies": {
     "@strapi/plugin-cloud": "5.0.0",
     "@strapi/plugin-documentation": "^5.0.0",
     "@strapi/plugin-users-permissions": "5.0.0",
-    "@strapi/provider-email-sendgrid": "^5.0.0",
+    "@strapi/provider-upload-cloudinary": "^5.0.0",
     "@strapi/strapi": "5.0.0",
     "better-sqlite3": "9.4.3",
-    "fs-extra": "^10.0.0",
-    "mime-types": "^2.1.27",
+    "pg": "^8.13.0",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-router-dom": "^6.0.0",
@@ -30,6 +29,10 @@
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "fs-extra": "^11.2.0",
+    "lorem-ipsum": "^2.0.8",
+    "mime-types": "^2.1.35",
+    "strapi-plugin-init-admin-user": "^0.2.3",
     "typescript": "^5"
   },
   "engines": {
@@ -37,6 +40,6 @@
     "npm": ">=6.0.0"
   },
   "strapi": {
-    "uuid": "e7792615-fd29-4a92-a312-ce95e83da4bf"
+    "uuid": "27142ef8-f9ff-4566-b748-d291392ed8f0"
   }
 }

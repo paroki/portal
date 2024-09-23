@@ -1,0 +1,8 @@
+.dockerignore
+.editorconfig
+.env
+.gitignore
+*.md
+compose.yaml
+node_modules
+

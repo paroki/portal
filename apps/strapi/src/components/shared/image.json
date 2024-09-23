@@ -1,0 +1,15 @@
+{
+  "collectionName": "components_shared_image",
+  "info": {
+    "displayName": "Image",
+    "icon": "file-video"
+  },
+  "options": {},
+  "attributes": {
+    "file": {
+      "allowedTypes": ["images"],
+      "type": "media",
+      "multiple": false
+    }
+  }
+}

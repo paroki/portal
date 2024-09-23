@@ -1,10 +1,10 @@
 {
   "kind": "collectionType",
-  "collectionName": "beritas",
+  "collectionName": "statics",
   "info": {
-    "singularName": "berita",
-    "pluralName": "beritas",
-    "displayName": "Berita",
+    "singularName": "static",
+    "pluralName": "statics",
+    "displayName": "Static",
     "description": ""
   },
   "options": {
@@ -20,18 +20,12 @@
       "type": "uid",
       "targetField": "judul"
     },
-    "kategori": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::kategori.kategori",
-      "mappedBy": "berita"
-    },
     "blocks": {
       "type": "dynamiczone",
       "components": [
+        "shared.rich-text-md",
         "shared.slider",
         "shared.seo",
-        "shared.rich-text-md",
         "shared.image",
         "shared.rich-text"
       ]
