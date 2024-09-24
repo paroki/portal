@@ -3,8 +3,8 @@
   "collectionName": "kategoris",
   "info": {
     "singularName": "kategori",
-    "pluralName": "kategoris",
-    "displayName": "Kategori",
+    "pluralName": "kategories",
+    "displayName": "Berita - Kategori",
     "description": ""
   },
   "options": {
@@ -12,21 +12,19 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "kategori": {
-      "type": "string"
+    "nama": {
+      "type": "string",
+      "required": true
     },
     "slug": {
       "type": "uid",
-      "targetField": "kategori"
+      "targetField": "nama"
     },
-    "keterangan": {
-      "type": "text"
-    },
-    "beritas": {
+    "berita": {
       "type": "relation",
-      "relation": "oneToMany",
+      "relation": "manyToOne",
       "target": "api::berita.berita",
-      "mappedBy": "kategori"
+      "inversedBy": "kategori"
     }
   }
 }

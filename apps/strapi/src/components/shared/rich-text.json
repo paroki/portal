@@ -1,14 +1,12 @@
 {
   "collectionName": "components_shared_rich_texts",
   "info": {
-    "displayName": "Rich text",
-    "icon": "align-justify",
-    "description": ""
+    "displayName": "Rich Text"
   },
   "options": {},
   "attributes": {
     "body": {
-      "type": "richtext"
+      "type": "blocks"
     }
   }
 }

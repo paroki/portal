@@ -1,5 +1,106 @@
 import type { Struct, Schema } from '@strapi/strapi';
 
+export interface ApiBeritaBerita extends Struct.CollectionTypeSchema {
+  collectionName: 'beritas';
+  info: {
+    singularName: 'berita';
+    pluralName: 'beritas';
+    displayName: 'Berita';
+    description: '';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    judul: Schema.Attribute.String & Schema.Attribute.Required;
+    slug: Schema.Attribute.UID<'judul'>;
+    kategori: Schema.Attribute.Relation<'oneToMany', 'api::kategori.kategori'>;
+    blocks: Schema.Attribute.DynamicZone<
+      [
+        'shared.slider',
+        'shared.seo',
+        'shared.rich-text-md',
+        'shared.image',
+        'shared.rich-text',
+      ]
+    >;
+    createdAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    publishedAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::berita.berita'>;
+  };
+}
+
+export interface ApiKategoriKategori extends Struct.CollectionTypeSchema {
+  collectionName: 'kategoris';
+  info: {
+    singularName: 'kategori';
+    pluralName: 'kategories';
+    displayName: 'Berita - Kategori';
+    description: '';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    nama: Schema.Attribute.String & Schema.Attribute.Required;
+    slug: Schema.Attribute.UID<'nama'>;
+    berita: Schema.Attribute.Relation<'manyToOne', 'api::berita.berita'>;
+    createdAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    publishedAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::kategori.kategori'
+    >;
+  };
+}
+
+export interface ApiStaticStatic extends Struct.CollectionTypeSchema {
+  collectionName: 'statics';
+  info: {
+    singularName: 'static';
+    pluralName: 'statics';
+    displayName: 'Static';
+    description: '';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    judul: Schema.Attribute.String & Schema.Attribute.Required;
+    slug: Schema.Attribute.UID<'judul'>;
+    blocks: Schema.Attribute.DynamicZone<
+      [
+        'shared.rich-text-md',
+        'shared.slider',
+        'shared.seo',
+        'shared.image',
+        'shared.rich-text',
+      ]
+    >;
+    createdAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    publishedAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::static.static'>;
+  };
+}
+
 export interface PluginUploadFile extends Struct.CollectionTypeSchema {
   collectionName: 'files';
   info: {
@@ -485,362 +586,6 @@ export interface PluginUsersPermissionsUser
   };
 }
 
-export interface ApiAboutAbout extends Struct.SingleTypeSchema {
-  collectionName: 'abouts';
-  info: {
-    singularName: 'about';
-    pluralName: 'abouts';
-    displayName: 'About';
-    description: 'Write about yourself and the content you create';
-  };
-  options: {
-    draftAndPublish: false;
-  };
-  attributes: {
-    title: Schema.Attribute.String;
-    blocks: Schema.Attribute.DynamicZone<
-      ['shared.media', 'shared.quote', 'shared.rich-text', 'shared.slider']
-    >;
-    createdAt: Schema.Attribute.DateTime;
-    updatedAt: Schema.Attribute.DateTime;
-    publishedAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    locale: Schema.Attribute.String;
-    localizations: Schema.Attribute.Relation<'oneToMany', 'api::about.about'>;
-  };
-}
-
-export interface ApiArticleArticle extends Struct.CollectionTypeSchema {
-  collectionName: 'articles';
-  info: {
-    singularName: 'article';
-    pluralName: 'articles';
-    displayName: 'Article';
-    description: 'Create your blog content';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    title: Schema.Attribute.String;
-    description: Schema.Attribute.Text &
-      Schema.Attribute.SetMinMaxLength<{
-        maxLength: 80;
-      }>;
-    slug: Schema.Attribute.UID<'title'>;
-    cover: Schema.Attribute.Media<'images' | 'files' | 'videos'>;
-    author: Schema.Attribute.Relation<'manyToOne', 'api::author.author'>;
-    category: Schema.Attribute.Relation<'manyToOne', 'api::category.category'>;
-    blocks: Schema.Attribute.DynamicZone<
-      ['shared.media', 'shared.quote', 'shared.rich-text', 'shared.slider']
-    >;
-    createdAt: Schema.Attribute.DateTime;
-    updatedAt: Schema.Attribute.DateTime;
-    publishedAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    locale: Schema.Attribute.String;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::article.article'
-    >;
-  };
-}
-
-export interface ApiAuthorAuthor extends Struct.CollectionTypeSchema {
-  collectionName: 'authors';
-  info: {
-    singularName: 'author';
-    pluralName: 'authors';
-    displayName: 'Author';
-    description: 'Create authors for your content';
-  };
-  options: {
-    draftAndPublish: false;
-  };
-  attributes: {
-    name: Schema.Attribute.String;
-    avatar: Schema.Attribute.Media<'images' | 'files' | 'videos'>;
-    email: Schema.Attribute.String;
-    articles: Schema.Attribute.Relation<'oneToMany', 'api::article.article'>;
-    createdAt: Schema.Attribute.DateTime;
-    updatedAt: Schema.Attribute.DateTime;
-    publishedAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    locale: Schema.Attribute.String;
-    localizations: Schema.Attribute.Relation<'oneToMany', 'api::author.author'>;
-  };
-}
-
-export interface ApiBeritaBerita extends Struct.CollectionTypeSchema {
-  collectionName: 'beritas';
-  info: {
-    singularName: 'berita';
-    pluralName: 'beritas';
-    displayName: 'Berita';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    judul: Schema.Attribute.String & Schema.Attribute.Required;
-    slug: Schema.Attribute.UID<'judul'> & Schema.Attribute.Required;
-    blocks: Schema.Attribute.DynamicZone<
-      ['shared.slider', 'shared.rich-text', 'shared.media', 'shared.seo']
-    >;
-    kategori: Schema.Attribute.Relation<'manyToOne', 'api::kategori.kategori'>;
-    createdAt: Schema.Attribute.DateTime;
-    updatedAt: Schema.Attribute.DateTime;
-    publishedAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    locale: Schema.Attribute.String;
-    localizations: Schema.Attribute.Relation<'oneToMany', 'api::berita.berita'>;
-  };
-}
-
-export interface ApiCategoryCategory extends Struct.CollectionTypeSchema {
-  collectionName: 'categories';
-  info: {
-    singularName: 'category';
-    pluralName: 'categories';
-    displayName: 'Category';
-    description: 'Organize your content into categories';
-  };
-  options: {
-    draftAndPublish: false;
-  };
-  attributes: {
-    name: Schema.Attribute.String;
-    slug: Schema.Attribute.UID;
-    articles: Schema.Attribute.Relation<'oneToMany', 'api::article.article'>;
-    description: Schema.Attribute.Text;
-    createdAt: Schema.Attribute.DateTime;
-    updatedAt: Schema.Attribute.DateTime;
-    publishedAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    locale: Schema.Attribute.String;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::category.category'
-    >;
-  };
-}
-
-export interface ApiDppDpp extends Struct.CollectionTypeSchema {
-  collectionName: 'dpps';
-  info: {
-    singularName: 'dpp';
-    pluralName: 'dpps';
-    displayName: 'DPP';
-    description: '';
-  };
-  options: {
-    draftAndPublish: false;
-  };
-  attributes: {
-    nomor: Schema.Attribute.Integer & Schema.Attribute.Required;
-    nama: Schema.Attribute.String & Schema.Attribute.Required;
-    periode: Schema.Attribute.String &
-      Schema.Attribute.Required &
-      Schema.Attribute.DefaultTo<'2024-2027'>;
-    jabatan: Schema.Attribute.String & Schema.Attribute.Required;
-    bidang: Schema.Attribute.String & Schema.Attribute.Required;
-    tempat_lahir: Schema.Attribute.String;
-    tanggal_lahir: Schema.Attribute.Date;
-    handphone: Schema.Attribute.BigInteger;
-    foto: Schema.Attribute.Media<'images'>;
-    seksi: Schema.Attribute.String;
-    createdAt: Schema.Attribute.DateTime;
-    updatedAt: Schema.Attribute.DateTime;
-    publishedAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    locale: Schema.Attribute.String;
-    localizations: Schema.Attribute.Relation<'oneToMany', 'api::dpp.dpp'>;
-  };
-}
-
-export interface ApiGlobalGlobal extends Struct.SingleTypeSchema {
-  collectionName: 'globals';
-  info: {
-    singularName: 'global';
-    pluralName: 'globals';
-    displayName: 'Global';
-    description: 'Define global settings';
-  };
-  options: {
-    draftAndPublish: false;
-  };
-  attributes: {
-    siteName: Schema.Attribute.String & Schema.Attribute.Required;
-    favicon: Schema.Attribute.Media<'images' | 'files' | 'videos'>;
-    siteDescription: Schema.Attribute.Text & Schema.Attribute.Required;
-    defaultSeo: Schema.Attribute.Component<'shared.seo', false>;
-    createdAt: Schema.Attribute.DateTime;
-    updatedAt: Schema.Attribute.DateTime;
-    publishedAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    locale: Schema.Attribute.String;
-    localizations: Schema.Attribute.Relation<'oneToMany', 'api::global.global'>;
-  };
-}
-
-export interface ApiKategoriKategori extends Struct.CollectionTypeSchema {
-  collectionName: 'kategoris';
-  info: {
-    singularName: 'kategori';
-    pluralName: 'kategoris';
-    displayName: 'Kategori';
-    description: '';
-  };
-  options: {
-    draftAndPublish: false;
-  };
-  attributes: {
-    kategori: Schema.Attribute.String;
-    slug: Schema.Attribute.UID<'kategori'>;
-    keterangan: Schema.Attribute.Text;
-    beritas: Schema.Attribute.Relation<'oneToMany', 'api::berita.berita'>;
-    createdAt: Schema.Attribute.DateTime;
-    updatedAt: Schema.Attribute.DateTime;
-    publishedAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    locale: Schema.Attribute.String;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::kategori.kategori'
-    >;
-  };
-}
-
-export interface ApiSaintSaint extends Struct.CollectionTypeSchema {
-  collectionName: 'saints';
-  info: {
-    singularName: 'saint';
-    pluralName: 'saints';
-    displayName: 'Saint';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  pluginOptions: {
-    i18n: {
-      localized: true;
-    };
-  };
-  attributes: {
-    nama: Schema.Attribute.String &
-      Schema.Attribute.Required &
-      Schema.Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
-    asal: Schema.Attribute.String &
-      Schema.Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
-    slug: Schema.Attribute.UID<'nama'> &
-      Schema.Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
-    pesta: Schema.Attribute.Date &
-      Schema.Attribute.SetPluginOptions<{
-        i18n: {
-          localized: false;
-        };
-      }>;
-    blocks: Schema.Attribute.DynamicZone<
-      [
-        'shared.slider',
-        'shared.seo',
-        'shared.rich-text',
-        'shared.quote',
-        'shared.media',
-      ]
-    > &
-      Schema.Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
-    createdAt: Schema.Attribute.DateTime;
-    updatedAt: Schema.Attribute.DateTime;
-    publishedAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    locale: Schema.Attribute.String;
-    localizations: Schema.Attribute.Relation<'oneToMany', 'api::saint.saint'>;
-  };
-}
-
-export interface ApiSejarahSejarah extends Struct.SingleTypeSchema {
-  collectionName: 'sejarahs';
-  info: {
-    singularName: 'sejarah';
-    pluralName: 'sejarahs';
-    displayName: 'Sejarah';
-  };
-  options: {
-    draftAndPublish: false;
-  };
-  attributes: {
-    title: Schema.Attribute.String &
-      Schema.Attribute.Required &
-      Schema.Attribute.DefaultTo<'Sejarah'>;
-    blocks: Schema.Attribute.DynamicZone<
-      [
-        'shared.slider',
-        'shared.seo',
-        'shared.rich-text',
-        'shared.quote',
-        'shared.media',
-      ]
-    >;
-    createdAt: Schema.Attribute.DateTime;
-    updatedAt: Schema.Attribute.DateTime;
-    publishedAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    locale: Schema.Attribute.String;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::sejarah.sejarah'
-    >;
-  };
-}
-
 export interface AdminPermission extends Struct.CollectionTypeSchema {
   collectionName: 'admin_permissions';
   info: {
@@ -1206,6 +951,9 @@ export interface AdminTransferTokenPermission
 declare module '@strapi/strapi' {
   export module Public {
     export interface ContentTypeSchemas {
+      'api::berita.berita': ApiBeritaBerita;
+      'api::kategori.kategori': ApiKategoriKategori;
+      'api::static.static': ApiStaticStatic;
       'plugin::upload.file': PluginUploadFile;
       'plugin::upload.folder': PluginUploadFolder;
       'plugin::i18n.locale': PluginI18NLocale;
@@ -1216,16 +964,6 @@ declare module '@strapi/strapi' {
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
-      'api::about.about': ApiAboutAbout;
-      'api::article.article': ApiArticleArticle;
-      'api::author.author': ApiAuthorAuthor;
-      'api::berita.berita': ApiBeritaBerita;
-      'api::category.category': ApiCategoryCategory;
-      'api::dpp.dpp': ApiDppDpp;
-      'api::global.global': ApiGlobalGlobal;
-      'api::kategori.kategori': ApiKategoriKategori;
-      'api::saint.saint': ApiSaintSaint;
-      'api::sejarah.sejarah': ApiSejarahSejarah;
       'admin::permission': AdminPermission;
       'admin::user': AdminUser;
       'admin::role': AdminRole;

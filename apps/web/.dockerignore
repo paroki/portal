@@ -1,0 +1,7 @@
+.dockerignore
+.next
+.turbo
+coverage
+node_modules
+.env.local
+next-env.d.ts
