@@ -10,7 +10,8 @@
     "coverage": "turbo run coverage",
     "e2e": "turbo run e2e",
     "start": "turbo run start",
-    "seed:dev": "turbo run seed:dev"
+    "seed:dev": "turbo run seed:dev",
+    "generate:types": "turbo run generate:types"
   },
   "devDependencies": {
     "@types/node": "^22.5.5",

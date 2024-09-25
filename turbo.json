@@ -23,7 +23,9 @@
     "coverage": {
       "dependsOn": ["^build"]
     },
-    "seed:dev": {
+    "seed:dev": {},
+    "generate:types": {
+      "cache": false
     },
     "e2e": {
       "cache": false,

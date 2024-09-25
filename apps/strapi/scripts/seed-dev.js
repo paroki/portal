@@ -5,7 +5,7 @@ const path = require("path");
 const mime = require("mime-types");
 const LoremIpsum = require("lorem-ipsum").LoremIpsum;
 const { kategories, statics, beritas } = require("../data/data.json");
-const { fileURLToPath } = require("url");
+const { password } = require("pg/lib/defaults");
 
 const lipsum = new LoremIpsum({
   sentencesPerParagraph: {
@@ -179,7 +179,6 @@ async function updateBlocks(blocks) {
       if (exp[0] === "paragraphs") {
         const blockCopy = { ...block };
         blockCopy.body = lipsum.generateParagraphs(exp[1]);
-        console.log(blockCopy);
         updatedBlocks.push(blockCopy);
       } else {
         updatedBlocks.push(block);
@@ -247,6 +246,26 @@ async function cleanupTempDir() {
   fs.mkdirSync(directory);
 }
 
+async function createSuperUser() {
+  // const password = await strapi.service("admin::auth").hashPassword("admin");
+  const superAdminRole = await strapi.service("admin::role").getSuperAdmin();
+  const userData = {
+    username: "admin",
+    password: "admin",
+    firstname: "Test",
+    lastname: "User",
+    email: "test@pkrbt.id",
+    blocked: false,
+    isActive: true,
+    roles: superAdminRole ? [superAdminRole.id] : [],
+  };
+  const ret = await strapi.service("admin::user").create({
+    ...userData,
+  });
+
+  console.log(`created user with email: ${ret.email} password: ${password}`);
+}
+
 async function main() {
   await cleanupTempDir();
 
@@ -257,7 +276,7 @@ async function main() {
 
   app.log.level = "error";
 
-  // initAdmin(strapi);
+  await createSuperUser();
   await seedData();
   await app.destroy();
 

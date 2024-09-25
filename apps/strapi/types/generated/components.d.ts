@@ -23,7 +23,7 @@ export interface SharedSeo extends Struct.ComponentSchema {
   attributes: {
     metaTitle: Schema.Attribute.String & Schema.Attribute.Required;
     metaDescription: Schema.Attribute.Text & Schema.Attribute.Required;
-    shareImage: Schema.Attribute.Media<'images'>;
+    shareImageUrl: Schema.Attribute.String;
   };
 }
 
