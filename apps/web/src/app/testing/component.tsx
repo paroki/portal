@@ -1,6 +1,5 @@
 "use client";
 
-import createStrapi from "@/util/strapi";
 import { Berita, PagedCollection } from "@pkrbt/strapi-bridge";
 import { useState } from "react";
 import invariant from "tiny-invariant";
