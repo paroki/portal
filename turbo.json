@@ -1,6 +1,13 @@
 {
   "$schema": "https://turbo.build/schema.json",
   "ui": "tui",
+  "globalEnv": [
+    "STRAPI_URL",
+    "STRAPI_PUBLIC_TOKEN",
+    "AUTH_SECRET",
+    "AUTH_GOOGLE_ID",
+    "AUTH_GOOGLE_SECRET"
+  ],
   "tasks": {
     "build": {
       "dependsOn": ["^build"],
@@ -23,7 +30,9 @@
     "coverage": {
       "dependsOn": ["^build"]
     },
-    "seed:dev": {},
+    "seed:dev": {
+      "cache": false
+    },
     "generate:types": {
       "cache": false
     },

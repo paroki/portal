@@ -10,7 +10,7 @@ export default {
       // 'dk',
       // 'es',
       // 'he',
-      // 'id',
+      "id",
       // 'it',
       // 'ja',
       // 'ko',

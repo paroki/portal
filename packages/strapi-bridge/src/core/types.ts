@@ -1,5 +1,5 @@
 import { ClientOptions } from "openapi-fetch";
-import type { Strapi } from ".";
+import type { StrapiCore as Strapi } from ".";
 
 export interface StrapiOptions {
   baseUrl?: string;

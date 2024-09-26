@@ -1,11 +1,13 @@
 {
   "name": "@pkrbt/strapi-bridge",
-  "version": "1.0.0",
+  "version": "0.0.0-development",
   "description": "PKRBT Strapi Brige",
-  "main": "dist/index.js",
-  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
   "scripts": {
-    "build": "tsc",
+    "build": "tsup src/index.ts --format cjs,esm --dts",
+    "dev": "tsup src/index.ts --format cjs,esm --dts --watch",
     "generate:types": "openapi-typescript ../../apps/strapi/src/extensions/documentation/documentation/1.0.0/full_documentation.json -o src/strapi.ts",
     "lint": "eslint . --max-warnings 0",
     "test": "vitest",
@@ -24,6 +26,7 @@
     "eslint": "^8.57.1",
     "msw": "^2.4.9",
     "openapi-typescript": "^7.4.1",
+    "tsup": "^8.3.0",
     "typescript": "^5.6.2",
     "vitest": "^2.1.1"
   },

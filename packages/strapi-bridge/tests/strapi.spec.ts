@@ -1,11 +1,9 @@
 import { expect, it, describe } from "vitest";
-import { Strapi } from "../src";
+import { createStrapi } from "./helper";
 
 describe("strapi", () => {
   it("should initialize plugins", () => {
-    const strapi = new Strapi({
-      fetch: {},
-    });
+    const strapi = createStrapi();
 
     expect(strapi).toBeDefined();
     expect(strapi.berita).toBeDefined();

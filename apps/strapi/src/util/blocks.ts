@@ -46,3 +46,7 @@ export async function extractBlocks(
 
   return { deskripsi, thumbnail, hasSeo };
 }
+
+export const populatedFields = ["blocks.file", "blocks.body", "blocks.files"];
+
+export function decorateParams(e: any) {}

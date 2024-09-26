@@ -1,5 +1,5 @@
-import { Strapi } from "./core";
-import { Item, PagedCollection } from "./types";
+import { StrapiCore as Strapi } from ".";
+import { Item, PagedCollection } from "../types";
 
 /**
  * Reusable strapi rest function
@@ -50,7 +50,6 @@ export function rest<T extends Item>(strapi: Strapi, path: any) {
     },
     list: async function (init = {}): Promise<PagedCollection<T>> {
       const { data: rdata, error } = await strapi.fetch.GET(path, init);
-
       if (error) {
         console.log(error);
         return Promise.reject(error);
