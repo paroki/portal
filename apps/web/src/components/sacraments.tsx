@@ -1,9 +1,9 @@
 'use client';
 
-import { Frank_Ruhl_Libre } from 'next/font/google';
+import { Frank_Ruhl_Libre as Frank } from 'next/font/google';
 import { Text } from '@radix-ui/themes';
 
-const frank = Frank_Ruhl_Libre({
+const frank = Frank({
   subsets: ['latin']
 });
 
@@ -12,6 +12,8 @@ export default function Sacraments() {
     name: string;
     from: string;
   }
+
+  console.log(frank.style);
 
   interface Groom extends Base {}
   interface Bride extends Base {}

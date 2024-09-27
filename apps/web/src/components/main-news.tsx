@@ -1,12 +1,12 @@
 'use client';
 
 import * as React from 'react';
-import Link from 'next/link';
 import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel';
 import Autoplay from 'embla-carousel-autoplay';
 import { Box, Card, Inset, Strong, Text } from '@radix-ui/themes';
 import { EyeIcon } from 'lucide-react';
 import LinkBtn from './link';
+import Image from 'next/image';
 
 interface News {
   title: string;
@@ -66,7 +66,9 @@ export default function MainNews() {
                     <div className="absolute w-full h-full bg-primary-400 opacity-0 group-hover:opacity-50 top-0 flex justify-center items-center transition-all">
                       <EyeIcon className="text-white w-9 h-9" />
                     </div>
-                    <img
+                    <Image
+                      width={200}
+                      height={140}
                       src={news.thumb}
                       alt="Bold typography"
                       style={{
