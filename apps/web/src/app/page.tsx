@@ -6,6 +6,8 @@ import MisaSchedule from '@/components/schedule';
 import Announcement from '@/components/announcement';
 import Sacraments from '@/components/sacraments';
 import Info from '@/components/info';
+import { Text } from '@radix-ui/themes';
+import Rings from '@/components/icons/rings';
 
 export default function Home() {
   return (
@@ -30,7 +32,15 @@ export default function Home() {
             <Announcement />
           </div>
           <div className="grow">
-            <ContainerHeader>Akan Penerima Sakramen</ContainerHeader>
+            <div className="flex gap-5 items-center">
+              <Rings />
+              <div>
+                <ContainerHeader>Akan Menerima Sakramen</ContainerHeader>
+                <Text as="p" className="text-sm">
+                  Jika umat mengetahui adanya halangan perkawinan ini, wajib memberitahu pastor paroki
+                </Text>
+              </div>
+            </div>
             <Sacraments />
           </div>
         </div>

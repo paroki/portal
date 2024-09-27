@@ -1,11 +1,14 @@
 'use client';
 
+import type { Session } from 'next-auth';
+
 import * as React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { LucideChevronDown, Menu, X } from 'lucide-react';
+import { SignIn, SignOut } from './auth';
 
-export function Navigation() {
+export async function Navigation({ session }: { session: Session }) {
   interface MenuItems {
     name: string;
     path: string;
@@ -107,6 +110,7 @@ export function Navigation() {
               </li>
             )
           )}
+          <li>{session ? <SignOut /> : <SignIn />}</li>
         </ul>
       </nav>
     </div>

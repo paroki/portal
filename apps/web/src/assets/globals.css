@@ -37,7 +37,7 @@ h4 {
 }
 
 .main-nav {
-  @apply flex flex-col md:flex-row w-full md:justify-center md:space-x-6 p-4 md:border-b space-y-2 md:space-y-0 gap-1 md:gap-0;
+  @apply flex flex-col md:flex-row w-full md:justify-center md:items-center md:space-x-6 p-4 md:border-b space-y-2 md:space-y-0 gap-1 md:gap-0;
 }
 
 .main-nav li a {
@@ -45,7 +45,7 @@ h4 {
 }
 
 .parent-nav {
-  @apply relative;
+  @apply relative box-border;
 }
 
 .subnav {

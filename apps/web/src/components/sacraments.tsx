@@ -1,6 +1,11 @@
 'use client';
 
+import { Frank_Ruhl_Libre } from 'next/font/google';
 import { Text } from '@radix-ui/themes';
+
+const frank = Frank_Ruhl_Libre({
+  subsets: ['latin']
+});
 
 export default function Sacraments() {
   interface Base {
@@ -19,7 +24,7 @@ export default function Sacraments() {
     {
       bride: {
         name: 'Dian',
-        from: 'St. Fransiskus Asisi Samarinda'
+        from: 'Lingkungan St. Fransiskus Asisi Samarinda Kecamatan Sangkulirang'
       },
       groom: {
         name: 'Doni',
@@ -42,20 +47,15 @@ export default function Sacraments() {
   return (
     <>
       {datas.map((data, index) => (
-        <div key={index} className="flex justify-between items-center border-b py-4">
-          <div className="hidden md:block">
-            <Text as="p" className="p-2 rounded bg-primary-200">
-              {index + 1}
-            </Text>
-          </div>
-          <div>
+        <div key={index} className="flex justify-between items-start border-b py-4">
+          <div className="w-64">
             <h4>{data.groom.name}</h4>
             <Text as="p" className="text-sm">
               {data.groom.from}
             </Text>
           </div>
-          <div className="text-md md:text-2xl text-primary-600 text-center p-4">&</div>
-          <div>
+          <div className={`text-md md:text-3xl text-primary-400 text-center p-4 ${frank.className}`}>&</div>
+          <div className="w-64">
             <h4>{data.bride.name}</h4>
             <Text as="p" className="text-sm">
               {data.bride.from}

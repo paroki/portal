@@ -6,5 +6,5 @@ interface ContainerType {
 }
 
 export default function Container({ children, className }: ContainerType) {
-  return <div className={`p-8 mx-auto ${className}`}>{children}</div>;
+  return <div className={`p-8 py-12 mx-auto ${className}`}>{children}</div>;
 }

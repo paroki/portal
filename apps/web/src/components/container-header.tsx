@@ -9,8 +9,6 @@ interface ContainerHeaderType {
 }
 
 export default function ContainerHeader({ children, size, className }: ContainerHeaderType) {
-  console.log(size);
-
   return (
     <h3 className={`${size === 'smaller' ? 'text-sm' : 'text-xl'} uppercase tracking-widest mb-2 ${className}`}>
       {children}
