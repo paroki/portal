@@ -13,6 +13,7 @@ export interface ApiBeritaBerita extends Struct.CollectionTypeSchema {
   };
   attributes: {
     judul: Schema.Attribute.String & Schema.Attribute.Required;
+    deskripsi: Schema.Attribute.Text;
     slug: Schema.Attribute.UID<'judul'>;
     kategori: Schema.Attribute.Relation<'oneToMany', 'api::kategori.kategori'>;
     blocks: Schema.Attribute.DynamicZone<
@@ -24,6 +25,9 @@ export interface ApiBeritaBerita extends Struct.CollectionTypeSchema {
         'shared.rich-text',
       ]
     >;
+    metaTitle: Schema.Attribute.String;
+    metaDescription: Schema.Attribute.Text;
+    shareImageUrl: Schema.Attribute.String;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;

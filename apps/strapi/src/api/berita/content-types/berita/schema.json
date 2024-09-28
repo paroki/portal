@@ -16,6 +16,9 @@
       "type": "string",
       "required": true
     },
+    "deskripsi": {
+      "type": "text"
+    },
     "slug": {
       "type": "uid",
       "targetField": "judul"
@@ -35,6 +38,15 @@
         "shared.image",
         "shared.rich-text"
       ]
+    },
+    "metaTitle": {
+      "type": "string"
+    },
+    "metaDescription": {
+      "type": "text"
+    },
+    "shareImageUrl": {
+      "type": "string"
     }
   }
 }
