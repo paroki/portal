@@ -6,7 +6,7 @@ import type {
   StrapiPlugin,
   UnionToIntersection,
 } from "./types";
-import { paths } from "../types/strapi";
+import { paths } from "../types/openapi";
 import qs from "qs";
 
 export class Strapi {

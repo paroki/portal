@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "@next/third-parties": "^14.2.13",
-    "@pkrbt/strapi-bridge": "workspace:*",
+    "@pkrbt/openapi": "workspace:*",
     "@radix-ui/react-navigation-menu": "^1.2.0",
     "@radix-ui/react-separator": "^1.1.0",
     "@radix-ui/react-slot": "^1.1.0",

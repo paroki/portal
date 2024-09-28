@@ -1,4 +1,4 @@
-import { components } from "./strapi";
+import { components } from "./openapi";
 
 export type FetchOptions = {
   headers: HeadersInit;
