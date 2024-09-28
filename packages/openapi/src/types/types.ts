@@ -1,7 +1,7 @@
 import { components } from "./openapi";
 
 export type FetchOptions = {
-  headers: HeadersInit;
+  headers: any;
 };
 
 export type Pagination = {

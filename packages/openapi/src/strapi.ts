@@ -6,4 +6,5 @@ export const Strapi = StrapiCore.plugin(blog).defaults({
   fetch: {},
 });
 
+// eslint-disable-next-line no-redeclare
 export type Strapi = InstanceType<typeof Strapi>;

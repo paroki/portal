@@ -1,5 +1,3 @@
-import { Container, Flex, Text } from '@radix-ui/themes';
-
 const Day = ({ day, time }: { day: string; time: string }) => {
   return (
     <div className="flex">
@@ -14,7 +12,11 @@ interface ContainerHeaderType {
 }
 
 const Header = ({ children }: ContainerHeaderType) => {
-  return <h4 className="my-2 border-y border-gray-500 text-sm py-4 w-full text-center">{children}</h4>;
+  return (
+    <h4 className="my-2 border-y border-gray-500 text-sm py-4 w-full text-center">
+      {children}
+    </h4>
+  );
 };
 
 export default function MisaSchedule() {

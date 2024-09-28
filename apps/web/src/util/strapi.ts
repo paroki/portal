@@ -1,6 +1,6 @@
 "use server";
 
-import { Strapi } from "@pkrbt/strapi-bridge";
+import { Strapi } from "@pkrbt/openapi";
 
 export default async function createStrapi() {
   const token = process.env.STRAPI_PUBLIC_TOKEN;

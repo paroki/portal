@@ -10,8 +10,7 @@
     "start": "strapi start",
     "strapi": "strapi",
     "seed:dev": "node ./scripts/seed-dev.js",
-    "dev": "strapi develop",
-    "test": "jest --forceExit"
+    "dev": "strapi develop"
   },
   "dependencies": {
     "@strapi/plugin-cloud": "5.0.0",

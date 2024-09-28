@@ -6,7 +6,7 @@ Portal Paroki Kristus Raja Barong Tongkok
 - [dev server](https://dev.pkrbt.id/)
 
 [![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/paroki/portal/ci.yml?branch=main&style=flat-square)](https://github.com/paroki/portal/actions/workflows/ci.yml?branch=main)
-[![Codecov](https://img.shields.io/codecov/c/github/paroki/portal?flag=web&style=flat-square&label=web-coverage)](https://app.codecov.io/gh/paroki/portal)
+[![Codecov](https://img.shields.io/codecov/c/github/paroki/portal?style=flat-square&label=next)](https://app.codecov.io/gh/paroki/portal)
 
 ### TL;DR
 

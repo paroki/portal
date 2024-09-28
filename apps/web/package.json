@@ -1,13 +1,13 @@
 {
   "name": "@pkrbt/web",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test": "vitest --ui",
+    "test": "vitest",
     "coverage": "vitest --coverage --ui",
     "e2e": "pnpm exec playwright test"
   },
