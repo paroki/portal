@@ -2,26 +2,68 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --radius: 0.5rem;
   }
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  @apply text-gray-800;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+a {
+  @apply hover:text-primary-600 transition-all;
+}
+
+h1 {
+  @apply scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl;
+}
+
+h2 {
+  @apply scroll-m-20 text-3xl font-semibold tracking-tight first:mt-0;
+}
+
+h3 {
+  @apply scroll-m-20 text-2xl font-semibold tracking-tight;
+}
+
+h4 {
+  @apply scroll-m-20 text-xl font-semibold tracking-tight;
+}
+
+.container-nav {
+  @apply fixed md:static top-0 w-full flex text-center h-screen md:h-auto bg-primary-200 md:bg-transparent items-center z-50 -translate-y-full md:translate-y-0 transition-all;
+}
+
+.main-nav {
+  @apply flex flex-col md:flex-row w-full md:justify-center md:items-center md:space-x-6 p-4 md:border-b space-y-2 md:space-y-0 gap-1 md:gap-0;
+}
+
+.main-nav li a {
+  @apply p-3 block md:inline hover:bg-primary-300 md:hover:bg-gray-100 rounded text-sm transition-all;
+}
+
+.parent-nav {
+  @apply relative box-border;
+}
+
+.subnav {
+  @apply absolute bg-gray-100 w-full h-auto max-h-0 overflow-hidden transition-all duration-200 -translate-y-4 opacity-0 shadow-sm rounded;
+}
+
+.subnav li a {
+  @apply block hover:bg-gray-200;
+}
+
+.parent-nav:hover .subnav {
+  @apply max-h-96 translate-y-0 opacity-100;
+}
+
+.link-active {
+  @apply md:bg-gray-100 bg-primary-300;
+}
+
+.show {
+  @apply translate-y-0;
 }
