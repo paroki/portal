@@ -54,7 +54,7 @@ jobs:
       - name: build
         shell: bash
         run: |
-          cp apps/strapi/.env.default apps/strapi/.env
+          cp apps/api/.env.default apps/api/.env
           cp apps/web/.env.default apps/web/.env
           pnpm build
 

@@ -12,7 +12,8 @@
         "strapi",
         "api",
         "pwa",
-        "test"
+        "test",
+	"web"
       ]
     ],
     "scope-empty": [
@@ -83,7 +84,8 @@
         "refactor",
         "revert",
         "style",
-        "test"
+        "test",
+	"perf",
       ]
     ]
   }

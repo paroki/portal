@@ -1368,9 +1368,13 @@ export interface components {
         BeritaRequest: {
             data: {
                 judul: string;
+                deskripsi?: string;
                 slug?: string;
                 kategori?: (number | string)[];
                 blocks?: (components["schemas"]["SharedSliderComponent"] | components["schemas"]["SharedSeoComponent"] | components["schemas"]["SharedRichTextMdComponent"] | components["schemas"]["SharedImageComponent"] | components["schemas"]["SharedRichTextComponent"])[];
+                metaTitle?: string;
+                metaDescription?: string;
+                shareImageUrl?: string;
                 locale?: string;
                 localizations?: (number | string)[];
             };
@@ -1390,6 +1394,7 @@ export interface components {
             id?: number;
             documentId?: string;
             judul: string;
+            deskripsi?: string;
             slug?: string;
             kategori?: {
                 id?: number;
@@ -1400,12 +1405,16 @@ export interface components {
                     id?: number;
                     documentId?: string;
                     judul?: string;
+                    deskripsi?: string;
                     slug?: string;
                     kategori?: {
                         id?: number;
                         documentId?: string;
                     }[];
                     blocks?: (components["schemas"]["SharedSliderComponent"] | components["schemas"]["SharedSeoComponent"] | components["schemas"]["SharedRichTextMdComponent"] | components["schemas"]["SharedImageComponent"] | components["schemas"]["SharedRichTextComponent"])[];
+                    metaTitle?: string;
+                    metaDescription?: string;
+                    shareImageUrl?: string;
                     /** Format: date-time */
                     createdAt?: string;
                     /** Format: date-time */
@@ -1447,6 +1456,9 @@ export interface components {
                 }[];
             }[];
             blocks?: (components["schemas"]["SharedSliderComponent"] | components["schemas"]["SharedSeoComponent"] | components["schemas"]["SharedRichTextMdComponent"] | components["schemas"]["SharedImageComponent"] | components["schemas"]["SharedRichTextComponent"])[];
+            metaTitle?: string;
+            metaDescription?: string;
+            shareImageUrl?: string;
             /** Format: date-time */
             createdAt?: string;
             /** Format: date-time */
@@ -1527,53 +1539,7 @@ export interface components {
             __component?: string;
             metaTitle?: string;
             metaDescription?: string;
-            shareImage?: {
-                id?: number;
-                documentId?: string;
-                name?: string;
-                alternativeText?: string;
-                caption?: string;
-                width?: number;
-                height?: number;
-                formats?: unknown;
-                hash?: string;
-                ext?: string;
-                mime?: string;
-                /** Format: float */
-                size?: number;
-                url?: string;
-                previewUrl?: string;
-                provider?: string;
-                provider_metadata?: unknown;
-                related?: {
-                    id?: number;
-                    documentId?: string;
-                }[];
-                folder?: {
-                    id?: number;
-                    documentId?: string;
-                };
-                folderPath?: string;
-                /** Format: date-time */
-                createdAt?: string;
-                /** Format: date-time */
-                updatedAt?: string;
-                /** Format: date-time */
-                publishedAt?: string;
-                createdBy?: {
-                    id?: number;
-                    documentId?: string;
-                };
-                updatedBy?: {
-                    id?: number;
-                    documentId?: string;
-                };
-                locale?: string;
-                localizations?: {
-                    id?: number;
-                    documentId?: string;
-                }[];
-            };
+            shareImageUrl?: string;
         };
         SharedRichTextMdComponent: {
             id?: number;
@@ -1666,6 +1632,7 @@ export interface components {
                 id?: number;
                 documentId?: string;
                 judul?: string;
+                deskripsi?: string;
                 slug?: string;
                 kategori?: {
                     id?: number;
@@ -1788,6 +1755,9 @@ export interface components {
                     }[];
                 }[];
                 blocks?: (components["schemas"]["SharedSliderComponent"] | components["schemas"]["SharedSeoComponent"] | components["schemas"]["SharedRichTextMdComponent"] | components["schemas"]["SharedImageComponent"] | components["schemas"]["SharedRichTextComponent"])[];
+                metaTitle?: string;
+                metaDescription?: string;
+                shareImageUrl?: string;
                 /** Format: date-time */
                 createdAt?: string;
                 /** Format: date-time */
