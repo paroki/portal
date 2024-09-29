@@ -2,7 +2,7 @@
   "name": "portal",
   "private": true,
   "scripts": {
-    "postinstall": "husky init",
+    "prepare": "husky init",
     "build": "turbo build",
     "dev": "turbo dev",
     "lint": "turbo lint",
