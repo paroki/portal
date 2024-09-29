@@ -7,14 +7,19 @@ import { Item, PagedCollection } from "../types";
 export function rest<T extends Item>(strapi: Strapi, path: any) {
   return {
     create: async (item: T): Promise<T> => {
-      const { data, error } = await strapi.fetch.POST(path, item as any);
+      try {
+        const { data, error } = await strapi.fetch.POST(path, item as any);
 
-      if (error) {
-        console.log(error);
-        return Promise.reject(error);
+        if (error) {
+          console.log(error);
+          return Promise.reject(error);
+        }
+
+        return data;
+      } catch (e) {
+        console.log(e);
+        return Promise.reject(e);
       }
-
-      return data;
     },
     read: async (documentId: string, init = {}): Promise<T> => {
       const url: any = `${path}/${documentId}`;

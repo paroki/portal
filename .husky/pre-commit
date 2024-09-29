@@ -1,2 +1,1 @@
-turbo run lint --ui=stream
-turbo run test --ui=stream -- ---no-watch
+pnpm lint

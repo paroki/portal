@@ -1,14 +1,14 @@
 {
   "name": "@pkrbt/openapi",
   "version": "0.0.0",
-  "description": "PKRBT Strapi Brige",
+  "description": "pkrbt open api integration",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
   "scripts": {
     "build": "tsup src/index.ts --format cjs,esm --dts",
     "dev": "tsup src/index.ts --format cjs,esm --dts --watch",
-    "generate:types": "openapi-typescript ../../apps/strapi/src/extensions/documentation/documentation/1.0.0/full_documentation.json -o src/openapi.ts",
+    "generate:types": "openapi-typescript ../../apps/strapi/src/extensions/documentation/documentation/1.0.0/full_documentation.json -o src/types/openapi.ts",
     "lint": "eslint . --max-warnings 0",
     "test": "vitest",
     "coverage": "vitest --coverage"
