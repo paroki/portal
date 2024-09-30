@@ -1,6 +1,7 @@
 # Alpine image
 FROM node:20-alpine AS base
 
+ENV NODE_ENV production
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
 RUN apk update && apk add --no-cache \
@@ -29,7 +30,7 @@ FROM base AS build
 
 COPY pnpm-lock.yaml /pkrbt
 RUN pnpm fetch --prod --filter=api
-COPY . /pkrbt
+COPY --link . /pkrbt
 
 WORKDIR /pkrbt
 
@@ -42,7 +43,8 @@ RUN pnpm build
 
 FROM base AS prod
 
-COPY --from=build --chown=node:node /prod/api /api
+COPY --link --from=build --chown=node:node /prod/api /api
+
 USER node
 WORKDIR /api
 EXPOSE 1337
