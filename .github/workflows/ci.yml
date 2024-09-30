@@ -2,137 +2,29 @@ name: CI
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main
+    tags:
+      - "v*"
   pull_request:
-    branches: [main]
+    branches:
+      - main
 
 jobs:
-  tests:
-    name: Unit Testing
-    timeout-minutes: 15
-    runs-on: ubuntu-latest
-    steps:
-      - name: Check out code
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 2
+  testing:
+    name: Testing
+    uses: paroki/portal/.github/workflows/testing.yml@ci
+    secrets: inherit
 
-      - name: Install Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
+  image:
+    name: Image
+    needs: ["testing"]
+    if: github.event_name != 'pull_request'
+    uses: paroki/portal/.github/workflows/image.yml@ci
+    secrets: inherit
 
-      - uses: pnpm/action-setup@v4
-        name: Install pnpm
-        with:
-          run_install: false
-
-      - name: Get pnpm store directory
-        shell: bash
-        run: |
-          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
-
-      - uses: actions/cache@v4
-        name: Setup pnpm cache
-        with:
-          path: ${{ env.STORE_PATH }}
-          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-pnpm-store-
-
-      - name: Cache turbo build setup
-        uses: actions/cache@v4
-        with:
-          path: .turbo
-          key: ${{ runner.os }}-turbo-${{ github.sha }}
-          restore-keys: |
-            ${{ runner.os }}-turbo-
-
-      - name: install dependencies
-        run: pnpm install
-
-      - name: build
-        shell: bash
-        run: |
-          cp apps/api/.env.default apps/api/.env
-          cp apps/web/.env.default apps/web/.env
-          pnpm build
-
-      - name: test with coverage
-        run: pnpm coverage
-
-      - uses: codecov/codecov-action@v4
-        with:
-          flags: web # optional
-          name: web # optional
-          files: apps/web/coverage/clover.xml
-          token: ${{ secrets.CODECOV_TOKEN }} # required
-          verbose: true
-
-  e2e:
-    name: E2E Testing
-    timeout-minutes: 60
-    runs-on: ubuntu-latest
-    needs: tests
-    if: ${{ needs.tests.result }}
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Install Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-
-      - uses: pnpm/action-setup@v4
-        name: Install pnpm
-        with:
-          run_install: false
-
-      - name: Get pnpm store directory
-        shell: bash
-        run: |
-          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
-
-      - name: Setup pnpm cache
-        uses: actions/cache@v4
-        with:
-          path: ${{ env.STORE_PATH }}
-          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-pnpm-store-
-
-      - name: Turbo build cache
-        uses: actions/cache@v4
-        with:
-          path: .turbo
-          key: ${{ runner.os }}-turbo-${{ github.sha }}
-          restore-keys: |
-            ${{ runner.os }}-turbo-
-
-      - name: Install dependencies
-        run: pnpm install
-
-      - name: Build
-        shell: bash
-        run: |
-          cp apps/strapi/.env.default apps/strapi/.env
-          cp apps/web/.env.default apps/web/.env
-          pnpm build
-
-      - name: Start dev server
-        run: nohup pnpm start &
-
-      - name: Install Playwright Browsers
-        working-directory: ./apps/web
-        run: pnpm playwright install --with-deps
-
-      - name: Run Playwright tests
-        run: pnpm e2e
-
-      - uses: actions/upload-artifact@v4
-        if: ${{ !cancelled() }}
-        with:
-          name: web-playwright-report
-          path: ./apps/web/playwright-report/
-          retention-days: 30
+  gitlab:
+    name: GitLab
+    needs: ["testing", "image"]
+    uses: paroki/portal/.github/workflows/gitlab.yml@ci
+    secrets: inherit

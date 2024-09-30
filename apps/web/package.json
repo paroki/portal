@@ -1,6 +1,6 @@
 {
   "name": "@pkrbt/web",
-  "version": "0.0.0",
+  "version": "0.0.0-development",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "test": "vitest",
-    "coverage": "vitest --coverage --ui",
+    "coverage:ui": "vitest --coverage",
     "e2e": "pnpm exec playwright test"
   },
   "dependencies": {
@@ -48,6 +48,7 @@
     "@vitejs/plugin-react": "^4.3.1",
     "@vitest/coverage-v8": "^2.1.1",
     "@vitest/ui": "^2.1.1",
+    "dotenv": "^16.4.5",
     "eslint": "^8",
     "eslint-config-next": "14.2.13",
     "jsdom": "^25.0.0",

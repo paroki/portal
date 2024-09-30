@@ -1,6 +1,6 @@
 {
   "name": "@pkrbt/openapi",
-  "version": "0.0.0",
+  "version": "0.0.0-development",
   "description": "pkrbt open api integration",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
@@ -10,8 +10,8 @@
     "dev": "tsup src/index.ts --format cjs,esm --dts --watch",
     "generate:types": "openapi-typescript ../../apps/strapi/src/extensions/documentation/documentation/1.0.0/full_documentation.json -o src/types/openapi.ts",
     "lint": "eslint . --max-warnings 0",
-    "test": "vitest",
-    "coverage": "vitest --coverage"
+    "test:ui": "vitest",
+    "coverage:ui": "vitest --coverage"
   },
   "keywords": [],
   "author": "PKRBT Developers",

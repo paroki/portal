@@ -12,6 +12,7 @@ export default defineConfig({
       include: ["src"],
     },
     include: ["./src/**/*.{test,spec}.{ts,tsx}"],
+    setupFiles: ["dotenv/config"],
   },
   resolve: {
     alias: {
