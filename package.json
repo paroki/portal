@@ -2,7 +2,7 @@
   "name": "portal",
   "private": true,
   "scripts": {
-    "prepare": "husky init",
+    "prepare": "husky install",
     "build": "turbo build",
     "dev": "turbo dev",
     "lint": "turbo lint",
@@ -12,8 +12,7 @@
     "e2e": "turbo run e2e",
     "start": "turbo run start",
     "seed:dev": "turbo run seed:dev",
-    "generate:types": "turbo run generate:types",
-    "prepare": "husky"
+    "generate:types": "turbo run generate:types"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.5.0",

@@ -69,6 +69,7 @@ export class Strapi {
 
     this.fetch = createClient<paths>({
       ...fetchOptions,
+      fetch: undefined,
       querySerializer(params) {
         return qs.stringify(params, {
           encodeValuesOnly: true, // prettify URL

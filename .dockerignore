@@ -1,3 +1,4 @@
+.commitlintrc
 .dockerignore
 .editorconfig
 .env
@@ -5,4 +6,4 @@
 *.md
 compose.yaml
 node_modules
-
+docker

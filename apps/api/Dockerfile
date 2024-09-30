@@ -1,6 +1,8 @@
 # Alpine image
 FROM node:20-alpine AS base
 
+ENV PNPM_HOME="/pnpm"
+ENV PATH="$PNPM_HOME:$PATH"
 RUN apk update && apk add --no-cache \
   libc6-compat \
   build-base \
@@ -21,24 +23,28 @@ RUN corepack enable && \
     turbo \
     node-gyp
 
+WORKDIR /pkrbt
+
 FROM base AS build
 
-RUN mkdir /pkrbt
-COPY --link pnpm-lock.yaml /pkrbt
+COPY pnpm-lock.yaml /pkrbt
+RUN pnpm fetch --prod --filter=api
+COPY . /pkrbt
+
 WORKDIR /pkrbt
-RUN pnpm fetch --prod --filter=strapi
-COPY --link . /pkrbt
 
-RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --filter=strapi --frozen-lockfile
-RUN turbo prune --docker strapi
-RUN pnpm deploy --filter=strapi /prod/strapi
+RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --filter=api --frozen-lockfile
+RUN turbo prune --docker @pkrbt/api
+RUN pnpm deploy --filter=api /prod/api
 
-WORKDIR /prod/strapi
+WORKDIR /prod/api
 RUN pnpm build
 
 FROM base AS prod
-COPY --from=build --chown=node:node /prod/strapi /strapi
+
+COPY --from=build --chown=node:node /prod/api /api
 USER node
-WORKDIR /strapi
+WORKDIR /api
 EXPOSE 1337
+
 CMD [ "pnpm", "start" ]
