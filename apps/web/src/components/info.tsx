@@ -1,6 +1,6 @@
 'use client';
 
-import Address from './adress';
+import Address from './address';
 import ContainerHeader from './container-header';
 import ServiceTime from './service-time';
 import SocialMedia from './social-media';

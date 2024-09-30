@@ -7,22 +7,22 @@ export default function SocialMedia() {
   return (
     <ul className="flex justify-center gap-5">
       <li>
-        <Link href="#" className="p-2 text-primary-50 rounded-full bg-primary-300 block">
+        <Link href="#" className="p-2 text-primary-50 rounded-full bg-primary-400 block">
           <Instagram />
         </Link>
       </li>
       <li>
-        <Link href="#" className="p-2 text-primary-50 rounded-full bg-primary-300 block">
+        <Link href="#" className="p-2 text-primary-50 rounded-full bg-primary-400 block">
           <FacebookCircle />
         </Link>
       </li>
       <li>
-        <Link href="#" className="p-2 text-primary-50 rounded-full bg-primary-300 block">
+        <Link href="#" className="p-2 text-primary-50 rounded-full bg-primary-400 block">
           <Youtube />
         </Link>
       </li>
       <li>
-        <Link href="#" className="p-2 text-primary-50 rounded-full bg-primary-300 block">
+        <Link href="#" className="p-2 text-primary-50 rounded-full bg-primary-400 block">
           <Tiktok />
         </Link>
       </li>

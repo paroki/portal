@@ -12,14 +12,18 @@ import Rings from '@/components/icons/rings';
 export default function Home() {
   return (
     <div>
-      <Container className="max-w-screen-lg">
-        <Jumbotron />
+      <Container>
+        <div className="max-w-screen-lg mx-auto">
+          <Jumbotron />
+        </div>
       </Container>
-      <Container className="max-w-screen-lg">
-        <ContainerHeader>Berita</ContainerHeader>
-        <MainNews />
+      <Container className="bg-gray-50">
+        <div className="max-w-screen-lg mx-auto">
+          <ContainerHeader>Berita</ContainerHeader>
+          <MainNews />
+        </div>
       </Container>
-      <Container className="bg-primary-50">
+      <Container className="bg-white">
         <div className="max-w-screen-lg mx-auto">
           <ContainerHeader>Jadwal Misa</ContainerHeader>
           <MisaSchedule />
@@ -28,14 +32,14 @@ export default function Home() {
       <Container className="bg-gray-50">
         <div className="flex flex-col md:flex-row w-full gap-8 max-w-screen-lg mx-auto ">
           <div className="grow max-w-[380px] md:border-r md:pr-8">
-            <ContainerHeader>Pengumuman</ContainerHeader>
+            <ContainerHeader className="text-base">Pengumuman</ContainerHeader>
             <Announcement />
           </div>
           <div className="grow">
             <div className="flex gap-5 items-center">
               <Rings />
               <div>
-                <ContainerHeader>Akan Menerima Sakramen</ContainerHeader>
+                <ContainerHeader className="text-base">Akan Menerima Sakramen Perkawinan</ContainerHeader>
                 <Text as="p" className="text-sm">
                   Jika umat mengetahui adanya halangan perkawinan ini, wajib memberitahu pastor paroki
                 </Text>

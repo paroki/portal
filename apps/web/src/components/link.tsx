@@ -11,7 +11,7 @@ export default function LinkBtn({ name, path }: LinkBtnType) {
     <div className="flex justify-end mt-8">
       <Link
         href={path}
-        className="p-2 bg-primary-300 hover:text-inherit shadow rounded tracking-widest uppercase text-sm hover:bg-primary-400 transition-colors">
+        className="p-2 bg-primary-400 text-gray-50 hover:text-gray-50 hover:text-inherit shadow rounded tracking-widest uppercase text-xs hover:bg-primary-500 transition-colors">
         {name}
       </Link>
     </div>

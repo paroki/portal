@@ -31,7 +31,7 @@ export default function Announcement() {
       <ul>
         {announces.map((ann, index) => (
           <li key={index} className="border-b py-2">
-            <Link className="block font-semibold" href={ann.path}>
+            <Link className="block font-semibold text-base" href={ann.path}>
               {ann.title}
             </Link>
             <Text as="span" className="text-sm">
