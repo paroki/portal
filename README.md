@@ -6,7 +6,7 @@ Portal Paroki Kristus Raja Barong Tongkok
 - [dev server](https://dev.pkrbt.id/)
 
 [![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/paroki/portal/ci.yml?branch=main&style=flat-square)](https://github.com/paroki/portal/actions/workflows/ci.yml?branch=main)
-[![Codecov](https://img.shields.io/codecov/c/github/paroki/portal?flag=pwa&style=flat-square&label=pwa-coverage)](https://app.codecov.io/gh/paroki/portal)
+[![Codecov](https://img.shields.io/codecov/c/github/paroki/portal?style=flat-square&label=next)](https://app.codecov.io/gh/paroki/portal)
 
 ### TL;DR
 
@@ -48,9 +48,11 @@ pnpm dev
 
 #### Generate strapi API token
 
-- Create new super user by opening [this url](https://localhost:1337)
+- Open [this url](https://localhost:1337) and login to strapi with: 
+    * email: test@pkrbt.id
+    * paassword: admin
 - Create new API Token ty opening [this url](http://localhost:1337/admin/settings/api-tokens/create).
-- Copy API Token, and replace `NEXT_STRAPI_READER_TOKEN` value in file `apps/web/.env` with copied value
+- Copy API Token, and replace `STRAPI_READER_TOKEN` value in file `apps/web/.env` with copied value
 
 #### Thats it
 

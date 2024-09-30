@@ -1,13 +1,5 @@
-import Jumbotron from '@/components/jumbotron';
-import MainNews from '@/components/main-news';
-import ContainerHeader from '@/components/container-header';
-import Container from '@/components/ui/container';
-import MisaSchedule from '@/components/schedule';
-import Announcement from '@/components/announcement';
-import Sacraments from '@/components/sacraments';
-import Info from '@/components/info';
-import { Text } from '@radix-ui/themes';
-import Rings from '@/components/icons/rings';
+import { strapi } from '@/util/strapi';
+import Homepage from '@/components/Homepage';
 
 export default function Home() {
   return (
