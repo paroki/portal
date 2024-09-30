@@ -27,9 +27,9 @@ export default function RootLayout({
         <link rel="icon" href="/favicon.ico" sizes="any" />
       </head>
       <body>
-        <Header />
         <Navigation />
-        <main className="mx-auto">{children}</main>
+        {/* <Header /> */}
+        <main className="mx-auto min-h-[90vh]">{children}</main>
         <Footer />
       </body>
     </html>

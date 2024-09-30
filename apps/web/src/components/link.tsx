@@ -1,5 +1,5 @@
-import * as React from "react";
-import Link from "next/link";
+import * as React from 'react';
+import Link from 'next/link';
 
 interface LinkBtnType {
   name: string;
@@ -12,8 +12,7 @@ export default function LinkBtn({ name, path }: LinkBtnType) {
       <Link
         passHref
         href={path}
-        className="p-2 bg-primary-300 hover:text-inherit shadow rounded tracking-widest uppercase text-sm hover:bg-primary-400 transition-colors"
-      >
+        className="p-2 bg-primary-400 text-gray-50 hover:text-gray-50 hover:text-inherit shadow rounded tracking-widest uppercase text-xs hover:bg-primary-500 transition-colors">
         {name}
       </Link>
     </div>

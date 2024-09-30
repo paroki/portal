@@ -13,8 +13,6 @@ export default function Sacraments() {
     from: string;
   }
 
-  console.log(frank.style);
-
   interface Groom extends Base {}
   interface Bride extends Base {}
 
@@ -49,15 +47,15 @@ export default function Sacraments() {
   return (
     <>
       {datas.map((data, index) => (
-        <div key={index} className="flex justify-between items-start border-b py-4">
+        <div key={index} className="flex justify-between items-start border-b py-4 gap-2">
           <div className="w-64">
             <h4>{data.groom.name}</h4>
             <Text as="p" className="text-sm">
               {data.groom.from}
             </Text>
           </div>
-          <div className={`text-md md:text-3xl text-primary-400 text-center p-4 ${frank.className}`}>&</div>
-          <div className="w-64">
+          <div className={`text-xl md:text-3xl text-primary-400 text-center p-4 ${frank.className}`}>&</div>
+          <div className="w-64 text-right">
             <h4>{data.bride.name}</h4>
             <Text as="p" className="text-sm">
               {data.bride.from}
