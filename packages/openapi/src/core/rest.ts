@@ -1,5 +1,5 @@
 import { StrapiCore as Strapi } from ".";
-import { Item, PagedCollection } from "../types";
+import { Item, PagedCollection, SearchParams } from "../types";
 
 /**
  * Reusable strapi rest function
@@ -48,8 +48,23 @@ export function rest<T extends Item>(strapi: Strapi, path: any) {
 
       return data;
     },
-    search: async function (init = {}): Promise<PagedCollection<T>> {
-      const { data: rdata, error } = await strapi.fetch.GET(path, init);
+    search: async function ({
+      page = 1,
+      limit = 5,
+      filters = {},
+      sort,
+    }: SearchParams): Promise<PagedCollection<T>> {
+      const { data: rdata, error } = await strapi.fetch.GET(path, {
+        query: {
+          pagination: {
+            page,
+            limit,
+          },
+          filters,
+          sort,
+        },
+      });
+
       if (error) {
         console.log(error);
         return Promise.reject(error);
