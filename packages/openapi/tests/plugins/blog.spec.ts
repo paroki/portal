@@ -89,7 +89,7 @@ describe("strapi.article", () => {
     expect(item).toBeDefined();
   });
 
-  it("list() should fetch a list of article", async () => {
+  it("search() should fetch a list of article", async () => {
     const rawData = {
       data: [{ id: 1 }],
       meta: { page: 1 },
@@ -103,7 +103,15 @@ describe("strapi.article", () => {
 
     const strapi = createStrapi();
 
-    const { items, meta } = await strapi.article.search();
+    const { items, meta } = await strapi.article.search({
+      limit: 3,
+      sort: ["title:asc"],
+      filters: {
+        slug: {
+          $eq: "test",
+        },
+      },
+    });
 
     expect(items).toBeDefined();
     expect(meta).toBeDefined();
