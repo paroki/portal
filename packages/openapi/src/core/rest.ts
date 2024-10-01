@@ -1,19 +1,13 @@
-import { StrapiCore as Strapi } from "../core";
+import { StrapiCore as Strapi } from ".";
 import { Item, PagedCollection } from "../types";
 
 /**
  * Reusable strapi rest function
  */
-export function rest<T extends Item>(api: Strapi, path: any) {
+export function rest<T extends Item>(strapi: Strapi, path: any) {
   return {
     create: async (item: T): Promise<T> => {
-      const { data, error } = await api.fetch.POST(path, {
-        body: {
-          data: {
-            ...item,
-          },
-        },
-      });
+      const { data, error } = await strapi.fetch.POST(path, item as any);
 
       if (error) {
         console.log(error);
@@ -24,7 +18,7 @@ export function rest<T extends Item>(api: Strapi, path: any) {
     },
     read: async (documentId: string, init = {}): Promise<T> => {
       const url: any = `${path}/${documentId}`;
-      const { data: item, error } = await api.fetch.GET(url, init);
+      const { data: item, error } = await strapi.fetch.GET(url, init);
 
       if (error) {
         console.log(error);
@@ -34,7 +28,7 @@ export function rest<T extends Item>(api: Strapi, path: any) {
     },
     update: async (documentId: string, item: T): Promise<T> => {
       const url: any = `${path}/${documentId}`;
-      const { data, error } = await api.fetch.PUT(url, item as any);
+      const { data, error } = await strapi.fetch.PUT(url, item as any);
 
       if (error) {
         console.log(error);
@@ -45,7 +39,7 @@ export function rest<T extends Item>(api: Strapi, path: any) {
     },
     delete: async (item: T, init?: {}): Promise<T> => {
       const url: any = `${path}/${item.documentId}`;
-      const { data, error } = await api.fetch.DELETE(url, init as any);
+      const { data, error } = await strapi.fetch.DELETE(url, init as any);
 
       if (error) {
         console.log(error);
@@ -55,7 +49,7 @@ export function rest<T extends Item>(api: Strapi, path: any) {
       return data;
     },
     search: async function (init = {}): Promise<PagedCollection<T>> {
-      const { data: rdata, error } = await api.fetch.GET(path, init);
+      const { data: rdata, error } = await strapi.fetch.GET(path, init);
       if (error) {
         console.log(error);
         return Promise.reject(error);

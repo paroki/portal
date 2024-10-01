@@ -1,12 +1,13 @@
-'use client';
+"use client";
 
-import Search from '@/components/search';
-import Container from '@/components/ui/container';
-import { useEffect, useState } from 'react';
-import { type News, newsAllPromise } from '@/util/news';
-import { Box, Inset, Text, Card } from '@radix-ui/themes';
-import Loading from '@/util/loading';
-import Link from 'next/link';
+import Search from "@/components/search";
+import Container from "@/components/ui/container";
+import { useEffect, useState } from "react";
+import { type News, newsAllPromise } from "@/util/news";
+import { Box, Inset, Text, Card } from "@radix-ui/themes";
+import Loading from "@/util/loading";
+import Link from "next/link";
+import Image from "next/image";
 
 export default function Page() {
   const [newsData, setNewsData] = useState<News[]>([]);
@@ -18,14 +19,14 @@ export default function Page() {
       setIsLoading(false);
       setNewsData(data);
     } catch (error) {
-      console.error('Error fetching news:', error);
+      console.error("Error fetching news:", error);
       setIsLoading(false);
     }
   };
 
   useEffect(() => {
     const fetchData = async () => {
-      await renderNews('');
+      await renderNews("");
     };
 
     fetchData().catch((err) => {
@@ -44,19 +45,23 @@ export default function Page() {
             <Loading />
           ) : (
             newsData.map((newsItem, index) => (
-              <Link href={`/berita/${newsItem.id}`}>
-                <Box maxWidth="240px" key={index} className="rounded overflow-hidden bg-gray-100  shadow-sm">
+              <Link key={index} href={`/berita/${newsItem.id}`}>
+                <Box
+                  maxWidth="240px"
+                  key={index}
+                  className="rounded overflow-hidden bg-gray-100  shadow-sm"
+                >
                   <Card size="2">
                     <Inset clip="padding-box" side="top" pb="current">
-                      <img
+                      <Image
                         src={newsItem.thumb}
                         alt="Bold typography"
                         style={{
-                          display: 'block',
-                          objectFit: 'cover',
-                          width: '100%',
+                          display: "block",
+                          objectFit: "cover",
+                          width: "100%",
                           height: 140,
-                          backgroundColor: 'var(--gray-5)'
+                          backgroundColor: "var(--gray-5)",
                         }}
                       />
                     </Inset>

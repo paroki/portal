@@ -1,4 +1,4 @@
-import createClient, { ClientOptions, type Client } from "openapi-fetch";
+import createClient, { type Client } from "openapi-fetch";
 import type {
   Constructor,
   ReturnTypeOf,
@@ -55,9 +55,18 @@ export class Strapi {
 
   fetch: Client<paths>;
   options: StrapiOptions;
-  fetchOptions: ClientOptions;
 
   constructor(options: StrapiOptions) {
+    this.fetch = createClient<paths>({
+      baseUrl: options.baseUrl + "/api",
+      querySerializer(params) {
+        return qs.stringify(params, {
+          encodeValuesOnly: true, // prettify URL
+        });
+      },
+    });
+    this.options = options;
+
     // apply plugins
     // https://stackoverflow.com/a/16345172
     const classConstructor = this.constructor as typeof Strapi;
@@ -65,29 +74,5 @@ export class Strapi {
       // @ts-ignore
       Object.assign(this, classConstructor.plugins[i](this, options));
     }
-
-    const fetchOptions: ClientOptions = {
-      baseUrl: options.baseUrl + options.path,
-      fetch: options.fetch,
-      querySerializer(params) {
-        return qs.stringify(params, {
-          encodeValuesOnly: true, // prettify URL
-        });
-      },
-    };
-
-    if (options.token) {
-      fetchOptions.headers = {
-        Authorization: `Bearer ${options.token}`,
-      };
-    }
-
-    if (options.fetch) {
-      fetchOptions.fetch = options.fetch;
-    }
-
-    this.fetch = createClient<paths>(fetchOptions);
-    this.options = options;
-    this.fetchOptions = fetchOptions;
   }
 }

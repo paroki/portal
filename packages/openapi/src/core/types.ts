@@ -1,10 +1,9 @@
+import { ClientOptions } from "openapi-fetch";
 import type { StrapiCore as Strapi } from ".";
 
 export interface StrapiOptions {
-  baseUrl: string;
-  path: string;
-  token?: string;
-  fetch?: any;
+  baseUrl?: string;
+  path?: string;
 }
 
 export type Constructor<T> = new (...args: any[]) => T;
@@ -32,13 +31,3 @@ export type UnionToIntersection<Union> = (
 ) extends (argument: infer Intersection) => void // tslint:disable-line: no-unused
   ? Intersection
   : never;
-
-export type SearchParams = {
-  page: number;
-  maxPerPage: number;
-  filters: {
-    [key: string]: string | number;
-  };
-};
-
-export type WithRequired<T, K extends keyof T> = T & { [P in K]-?: T[P] };

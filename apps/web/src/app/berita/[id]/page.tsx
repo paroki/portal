@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { getNewsByIdPromise, News } from '@/util/news';
-import React, { useEffect, useState } from 'react';
+import { getNewsByIdPromise, News } from "@/util/news";
+import React, { useEffect, useState } from "react";
 
 export default function NewsDetail({ params }: { params: { id: string } }) {
   const [newsDetail, setNewsDetail] = useState<News>();
@@ -15,7 +15,7 @@ export default function NewsDetail({ params }: { params: { id: string } }) {
     fetchData().catch((err) => {
       console.log(err);
     });
-  }, []);
+  }, [params]);
 
   return (
     <div>

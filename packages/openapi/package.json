@@ -1,7 +1,7 @@
 {
   "name": "@pkrbt/openapi",
   "version": "0.0.0-development",
-  "description": "pkrbt open api integration",
+  "description": "PKRBT Strapi Brige",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
@@ -26,7 +26,6 @@
     "dotenv": "^16.4.5",
     "eslint": "^8.57.1",
     "msw": "^2.4.9",
-    "openapi-msw": "^0.7.1",
     "openapi-typescript": "^7.4.1",
     "tsup": "^8.3.0",
     "typescript": "^5.6.2",

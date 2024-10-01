@@ -1,5 +1,13 @@
-import { strapi } from '@/util/strapi';
-import Homepage from '@/components/Homepage';
+import Container from "@/components/ui/container";
+import Jumbotron from "@/components/jumbotron";
+import ContainerHeader from "@/components/container-header";
+import MainNews from "@/components/main-news";
+import MisaSchedule from "@/components/schedule";
+import Announcement from "@/components/announcement";
+import Rings from "@/components/icons/rings";
+import Sacraments from "@/components/sacraments";
+import { Text } from "@radix-ui/themes";
+import Info from "@/components/info";
 
 export default function Home() {
   return (
@@ -31,9 +39,12 @@ export default function Home() {
             <div className="flex gap-5 items-center">
               <Rings />
               <div>
-                <ContainerHeader className="text-base">Akan Menerima Sakramen Perkawinan</ContainerHeader>
+                <ContainerHeader className="text-base">
+                  Akan Menerima Sakramen Perkawinan
+                </ContainerHeader>
                 <Text as="p" className="text-sm">
-                  Jika umat mengetahui adanya halangan perkawinan ini, wajib memberitahu pastor paroki
+                  Jika umat mengetahui adanya halangan perkawinan ini, wajib
+                  memberitahu pastor paroki
                 </Text>
               </div>
             </div>

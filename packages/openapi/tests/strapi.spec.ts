@@ -1,13 +1,15 @@
-import { describe, expect, it } from "vitest";
-import { api } from "./mocks";
+import { expect, it, describe } from "vitest";
+import { createStrapi } from "./helper";
 
 describe("strapi", () => {
   it("should initialize plugins", () => {
-    expect(api).toBeDefined();
-    expect(api.article).toBeDefined();
-    expect(api.article.search).toBeTypeOf("function");
-    expect(api.article.create).toBeTypeOf("function");
-    expect(api.article.update).toBeTypeOf("function");
-    expect(api.article.delete).toBeTypeOf("function");
+    const strapi = createStrapi();
+
+    expect(strapi).toBeDefined();
+    expect(strapi.article).toBeDefined();
+    expect(strapi.article.search).toBeTypeOf("function");
+    expect(strapi.article.create).toBeTypeOf("function");
+    expect(strapi.article.update).toBeTypeOf("function");
+    expect(strapi.article.delete).toBeTypeOf("function");
   });
 });
