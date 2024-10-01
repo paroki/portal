@@ -8,10 +8,11 @@
   "scripts": {
     "build": "tsup src/index.ts --format cjs,esm --dts",
     "dev": "tsup src/index.ts --format cjs,esm --dts --watch",
-    "generate:types": "openapi-typescript ../../apps/strapi/src/extensions/documentation/documentation/1.0.0/full_documentation.json -o src/types/openapi.ts",
+    "generate:types": "openapi-typescript ../../apps/api/src/extensions/documentation/documentation/1.0.0/full_documentation.json -o src/types/openapi.ts",
     "lint": "eslint . --max-warnings 0",
-    "test:ui": "vitest",
-    "coverage:ui": "vitest --coverage"
+    "test": "vitest",
+    "test:ui": "vitest --ui",
+    "coverage": "vitest --coverage"
   },
   "keywords": [],
   "author": "PKRBT Developers",
@@ -25,6 +26,7 @@
     "dotenv": "^16.4.5",
     "eslint": "^8.57.1",
     "msw": "^2.4.9",
+    "openapi-msw": "^0.7.1",
     "openapi-typescript": "^7.4.1",
     "tsup": "^8.3.0",
     "typescript": "^5.6.2",

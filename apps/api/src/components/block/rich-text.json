@@ -1,0 +1,14 @@
+{
+  "collectionName": "components_block_rich_text_md",
+  "info": {
+    "displayName": "Rich Text (Markdown)",
+    "icon": "align-justify",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "body": {
+      "type": "richtext"
+    }
+  }
+}

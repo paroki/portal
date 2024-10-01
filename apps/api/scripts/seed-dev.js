@@ -5,7 +5,7 @@ const path = require("path");
 const mime = require("mime-types");
 const _ = require("lodash");
 const LoremIpsum = require("lorem-ipsum").LoremIpsum;
-const { kategories, statics, beritas } = require("../data/data.json");
+const { categories, statics, articles } = require("../data/data.json");
 
 const lipsum = new LoremIpsum({
   sentencesPerParagraph: {
@@ -218,21 +218,21 @@ async function importStatics() {
   }
 }
 
-async function importKategories() {
-  for (const kategori of kategories) {
-    await createEntry({ model: "kategori", entry: kategori });
+async function importCategories() {
+  for (const category of categories) {
+    await createEntry({ model: "category", entry: category });
   }
 }
 
-async function importBeritas() {
-  for (const berita of beritas) {
-    const updatedBlocks = await updateBlocks(berita.blocks);
-    berita.slug = _.kebabCase(berita.judul);
-    (berita.deskripsi = lipsum.generateParagraphs(1)),
+async function importArticles() {
+  for (const article of articles) {
+    const updatedBlocks = await updateBlocks(article.blocks);
+    article.slug = _.kebabCase(article.judul);
+    (article.deskripsi = lipsum.generateParagraphs(1)),
       await createEntry({
-        model: "berita",
+        model: "article",
         entry: {
-          ...berita,
+          ...article,
           blocks: updatedBlocks,
           publishedAt: Date.now(),
         },
@@ -242,14 +242,14 @@ async function importBeritas() {
 
 async function importSeedData() {
   await setPublicPermissions({
-    kategori: ["find", "findOne"],
+    category: ["find", "findOne"],
     static: ["find", "findOne"],
-    berita: ["find", "findOne"],
+    article: ["find", "findOne"],
   });
 
-  await importKategories();
+  await importCategories();
   await importStatics();
-  await importBeritas();
+  await importArticles();
 }
 
 async function cleanupTempDir() {

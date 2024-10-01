@@ -1,13 +1,14 @@
 {
   "kind": "collectionType",
-  "collectionName": "statics",
+  "collectionName": "articles",
   "info": {
-    "singularName": "static",
-    "pluralName": "statics",
-    "displayName": "Blog.Static"
+    "singularName": "article",
+    "pluralName": "articles",
+    "displayName": "Blog.Article",
+    "description": ""
   },
   "options": {
-    "draftAndPublish": false
+    "draftAndPublish": true
   },
   "pluginOptions": {
     "i18n": {
@@ -24,15 +25,6 @@
       "type": "string",
       "required": true
     },
-    "description": {
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      },
-      "type": "string",
-      "required": false
-    },
     "slug": {
       "pluginOptions": {
         "i18n": {
@@ -40,7 +32,14 @@
         }
       },
       "type": "uid",
-      "targetField": "title"
+      "targetField": "title",
+      "required": false
+    },
+    "category": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::category.category",
+      "inversedBy": "articles"
     },
     "blocks": {
       "pluginOptions": {

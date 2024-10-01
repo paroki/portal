@@ -24,22 +24,19 @@ export interface Item {
   id?: number;
   documentId?: string;
 }
-export type SharedImage = components["schemas"]["SharedImageComponent"];
-export type SharedSlider = components["schemas"]["SharedSliderComponent"];
-export type SharedRichText = components["schemas"]["SharedRichTextComponent"];
-export type SharedRichTextMd =
-  components["schemas"]["SharedRichTextMdComponent"];
-export type SharedSeo = components["schemas"]["SharedSeoComponent"];
+export type BlockImage = components["schemas"]["BlockImageComponent"];
+export type BlockSlider = components["schemas"]["BlockSliderComponent"];
+export type BlockRichText = components["schemas"]["BlockRichTextComponent"];
+export type BlockSeo = components["schemas"]["BlockSeoComponent"];
 
 export type BlockComponent =
-  | SharedImage
-  | SharedSlider
-  | SharedRichText
-  | SharedRichTextMd
-  | SharedSeo;
+  | BlockImage
+  | BlockSlider
+  | BlockRichText
+  | BlockSeo;
 
 export type Blocks = BlockComponent[];
 
 /* Blog Type Section */
-export type Berita = components["schemas"]["Berita"] & Item;
+export type Article = components["schemas"]["Article"] & Item;
 export type Static = components["schemas"]["Static"] & Item;

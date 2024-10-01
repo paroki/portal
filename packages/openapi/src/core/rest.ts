@@ -1,29 +1,30 @@
-import { StrapiCore as Strapi } from ".";
+import { StrapiCore as Strapi } from "../core";
 import { Item, PagedCollection } from "../types";
 
 /**
  * Reusable strapi rest function
  */
-export function rest<T extends Item>(strapi: Strapi, path: any) {
+export function rest<T extends Item>(api: Strapi, path: any) {
   return {
     create: async (item: T): Promise<T> => {
-      try {
-        const { data, error } = await strapi.fetch.POST(path, item as any);
+      const { data, error } = await api.fetch.POST(path, {
+        body: {
+          data: {
+            ...item,
+          },
+        },
+      });
 
-        if (error) {
-          console.log(error);
-          return Promise.reject(error);
-        }
-
-        return data;
-      } catch (e) {
-        console.log(e);
-        return Promise.reject(e);
+      if (error) {
+        console.log(error);
+        return Promise.reject(error);
       }
+
+      return data;
     },
     read: async (documentId: string, init = {}): Promise<T> => {
       const url: any = `${path}/${documentId}`;
-      const { data: item, error } = await strapi.fetch.GET(url, init);
+      const { data: item, error } = await api.fetch.GET(url, init);
 
       if (error) {
         console.log(error);
@@ -33,7 +34,7 @@ export function rest<T extends Item>(strapi: Strapi, path: any) {
     },
     update: async (documentId: string, item: T): Promise<T> => {
       const url: any = `${path}/${documentId}`;
-      const { data, error } = await strapi.fetch.PUT(url, item as any);
+      const { data, error } = await api.fetch.PUT(url, item as any);
 
       if (error) {
         console.log(error);
@@ -44,7 +45,7 @@ export function rest<T extends Item>(strapi: Strapi, path: any) {
     },
     delete: async (item: T, init?: {}): Promise<T> => {
       const url: any = `${path}/${item.documentId}`;
-      const { data, error } = await strapi.fetch.DELETE(url, init as any);
+      const { data, error } = await api.fetch.DELETE(url, init as any);
 
       if (error) {
         console.log(error);
@@ -53,8 +54,8 @@ export function rest<T extends Item>(strapi: Strapi, path: any) {
 
       return data;
     },
-    list: async function (init = {}): Promise<PagedCollection<T>> {
-      const { data: rdata, error } = await strapi.fetch.GET(path, init);
+    search: async function (init = {}): Promise<PagedCollection<T>> {
+      const { data: rdata, error } = await api.fetch.GET(path, init);
       if (error) {
         console.log(error);
         return Promise.reject(error);

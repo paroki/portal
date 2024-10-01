@@ -1,13 +1,13 @@
-import type { StrapiCore as Strapi } from "../core";
+import type { StrapiCore as Strapi } from "../";
 import { rest } from "../core";
-import type { Berita, Static } from "../types";
+import type { Article, Static } from "../types";
 
 /**
  * Organize plugins by it's type
  */
-export function blog(strapi: Strapi) {
+export function blog(api: Strapi) {
   return {
-    berita: rest<Berita>(strapi, "/beritas"),
-    static: rest<Static>(strapi, "/statics"),
+    article: rest<Article>(api, "/articles"),
+    static: rest<Static>(api, "/statics"),
   };
 }

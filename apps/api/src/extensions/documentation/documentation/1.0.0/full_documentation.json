@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "2024-09-29T00:09:41.424Z"
+    "x-generation-date": "2024-10-01T01:53:59.239Z"
   },
   "x-strapi-config": {
     "plugins": [
@@ -38,7 +38,7 @@
     }
   ],
   "paths": {
-    "/beritas": {
+    "/articles": {
       "get": {
         "responses": {
           "200": {
@@ -46,7 +46,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/BeritaListResponse"
+                  "$ref": "#/components/schemas/ArticleListResponse"
                 }
               }
             }
@@ -103,7 +103,7 @@
           }
         },
         "tags": [
-          "Berita"
+          "Article"
         ],
         "parameters": [
           {
@@ -209,7 +209,7 @@
             }
           }
         ],
-        "operationId": "get/beritas"
+        "operationId": "get/articles"
       },
       "post": {
         "responses": {
@@ -218,7 +218,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/BeritaResponse"
+                  "$ref": "#/components/schemas/ArticleResponse"
                 }
               }
             }
@@ -275,23 +275,23 @@
           }
         },
         "tags": [
-          "Berita"
+          "Article"
         ],
         "parameters": [],
-        "operationId": "post/beritas",
+        "operationId": "post/articles",
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/BeritaRequest"
+                "$ref": "#/components/schemas/ArticleRequest"
               }
             }
           }
         }
       }
     },
-    "/beritas/{id}": {
+    "/articles/{id}": {
       "get": {
         "responses": {
           "200": {
@@ -299,7 +299,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/BeritaResponse"
+                  "$ref": "#/components/schemas/ArticleResponse"
                 }
               }
             }
@@ -356,7 +356,7 @@
           }
         },
         "tags": [
-          "Berita"
+          "Article"
         ],
         "parameters": [
           {
@@ -370,7 +370,7 @@
             }
           }
         ],
-        "operationId": "get/beritas/{id}"
+        "operationId": "get/articles/{id}"
       },
       "put": {
         "responses": {
@@ -379,7 +379,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/BeritaResponse"
+                  "$ref": "#/components/schemas/ArticleResponse"
                 }
               }
             }
@@ -436,7 +436,7 @@
           }
         },
         "tags": [
-          "Berita"
+          "Article"
         ],
         "parameters": [
           {
@@ -450,13 +450,13 @@
             }
           }
         ],
-        "operationId": "put/beritas/{id}",
+        "operationId": "put/articles/{id}",
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/BeritaRequest"
+                "$ref": "#/components/schemas/ArticleRequest"
               }
             }
           }
@@ -527,7 +527,7 @@
           }
         },
         "tags": [
-          "Berita"
+          "Article"
         ],
         "parameters": [
           {
@@ -541,10 +541,10 @@
             }
           }
         ],
-        "operationId": "delete/beritas/{id}"
+        "operationId": "delete/articles/{id}"
       }
     },
-    "/kategories": {
+    "/categories": {
       "get": {
         "responses": {
           "200": {
@@ -552,7 +552,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/KategoriListResponse"
+                  "$ref": "#/components/schemas/CategoryListResponse"
                 }
               }
             }
@@ -609,7 +609,7 @@
           }
         },
         "tags": [
-          "Kategori"
+          "Category"
         ],
         "parameters": [
           {
@@ -715,7 +715,7 @@
             }
           }
         ],
-        "operationId": "get/kategories"
+        "operationId": "get/categories"
       },
       "post": {
         "responses": {
@@ -724,7 +724,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/KategoriResponse"
+                  "$ref": "#/components/schemas/CategoryResponse"
                 }
               }
             }
@@ -781,23 +781,23 @@
           }
         },
         "tags": [
-          "Kategori"
+          "Category"
         ],
         "parameters": [],
-        "operationId": "post/kategories",
+        "operationId": "post/categories",
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/KategoriRequest"
+                "$ref": "#/components/schemas/CategoryRequest"
               }
             }
           }
         }
       }
     },
-    "/kategories/{id}": {
+    "/categories/{id}": {
       "get": {
         "responses": {
           "200": {
@@ -805,7 +805,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/KategoriResponse"
+                  "$ref": "#/components/schemas/CategoryResponse"
                 }
               }
             }
@@ -862,7 +862,7 @@
           }
         },
         "tags": [
-          "Kategori"
+          "Category"
         ],
         "parameters": [
           {
@@ -876,7 +876,7 @@
             }
           }
         ],
-        "operationId": "get/kategories/{id}"
+        "operationId": "get/categories/{id}"
       },
       "put": {
         "responses": {
@@ -885,7 +885,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/KategoriResponse"
+                  "$ref": "#/components/schemas/CategoryResponse"
                 }
               }
             }
@@ -942,7 +942,7 @@
           }
         },
         "tags": [
-          "Kategori"
+          "Category"
         ],
         "parameters": [
           {
@@ -956,13 +956,13 @@
             }
           }
         ],
-        "operationId": "put/kategories/{id}",
+        "operationId": "put/categories/{id}",
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/KategoriRequest"
+                "$ref": "#/components/schemas/CategoryRequest"
               }
             }
           }
@@ -1033,7 +1033,7 @@
           }
         },
         "tags": [
-          "Kategori"
+          "Category"
         ],
         "parameters": [
           {
@@ -1047,513 +1047,7 @@
             }
           }
         ],
-        "operationId": "delete/kategories/{id}"
-      }
-    },
-    "/organisasis": {
-      "get": {
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/OrganisasiListResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "Organisasi"
-        ],
-        "parameters": [
-          {
-            "name": "sort",
-            "in": "query",
-            "description": "Sort by attributes ascending (asc) or descending (desc)",
-            "deprecated": false,
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "pagination[withCount]",
-            "in": "query",
-            "description": "Return page/pageSize (default: true)",
-            "deprecated": false,
-            "required": false,
-            "schema": {
-              "type": "boolean"
-            }
-          },
-          {
-            "name": "pagination[page]",
-            "in": "query",
-            "description": "Page number (default: 0)",
-            "deprecated": false,
-            "required": false,
-            "schema": {
-              "type": "integer"
-            }
-          },
-          {
-            "name": "pagination[pageSize]",
-            "in": "query",
-            "description": "Page size (default: 25)",
-            "deprecated": false,
-            "required": false,
-            "schema": {
-              "type": "integer"
-            }
-          },
-          {
-            "name": "pagination[start]",
-            "in": "query",
-            "description": "Offset value (default: 0)",
-            "deprecated": false,
-            "required": false,
-            "schema": {
-              "type": "integer"
-            }
-          },
-          {
-            "name": "pagination[limit]",
-            "in": "query",
-            "description": "Number of entities to return (default: 25)",
-            "deprecated": false,
-            "required": false,
-            "schema": {
-              "type": "integer"
-            }
-          },
-          {
-            "name": "fields",
-            "in": "query",
-            "description": "Fields to return (ex: title,author)",
-            "deprecated": false,
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "populate",
-            "in": "query",
-            "description": "Relations to return",
-            "deprecated": false,
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "filters",
-            "in": "query",
-            "description": "Filters to apply",
-            "deprecated": false,
-            "required": false,
-            "schema": {
-              "type": "object",
-              "additionalProperties": true
-            },
-            "style": "deepObject"
-          },
-          {
-            "name": "locale",
-            "in": "query",
-            "description": "Locale to apply",
-            "deprecated": false,
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "operationId": "get/organisasis"
-      },
-      "post": {
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/OrganisasiResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "Organisasi"
-        ],
-        "parameters": [],
-        "operationId": "post/organisasis",
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/OrganisasiRequest"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/organisasis/{id}": {
-      "get": {
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/OrganisasiResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "Organisasi"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "description": "",
-            "deprecated": false,
-            "required": true,
-            "schema": {
-              "type": "number"
-            }
-          }
-        ],
-        "operationId": "get/organisasis/{id}"
-      },
-      "put": {
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/OrganisasiResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "Organisasi"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "description": "",
-            "deprecated": false,
-            "required": true,
-            "schema": {
-              "type": "number"
-            }
-          }
-        ],
-        "operationId": "put/organisasis/{id}",
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/OrganisasiRequest"
-              }
-            }
-          }
-        }
-      },
-      "delete": {
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "integer",
-                  "format": "int64"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "Organisasi"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "description": "",
-            "deprecated": false,
-            "required": true,
-            "schema": {
-              "type": "number"
-            }
-          }
-        ],
-        "operationId": "delete/organisasis/{id}"
+        "operationId": "delete/categories/{id}"
       }
     },
     "/statics": {
@@ -3514,7 +3008,7 @@
           }
         }
       },
-      "BeritaRequest": {
+      "ArticleRequest": {
         "type": "object",
         "required": [
           "data"
@@ -3522,63 +3016,45 @@
         "properties": {
           "data": {
             "required": [
-              "judul"
+              "title"
             ],
             "type": "object",
             "properties": {
-              "judul": {
-                "type": "string"
-              },
-              "deskripsi": {
+              "title": {
                 "type": "string"
               },
               "slug": {
                 "type": "string"
               },
-              "kategori": {
-                "type": "array",
-                "items": {
-                  "oneOf": [
-                    {
-                      "type": "integer"
-                    },
-                    {
-                      "type": "string"
-                    }
-                  ],
-                  "example": "string or id"
-                }
+              "category": {
+                "oneOf": [
+                  {
+                    "type": "integer"
+                  },
+                  {
+                    "type": "string"
+                  }
+                ],
+                "example": "string or id"
               },
               "blocks": {
                 "type": "array",
                 "items": {
                   "anyOf": [
                     {
-                      "$ref": "#/components/schemas/SharedSliderComponent"
+                      "$ref": "#/components/schemas/BlockSliderComponent"
                     },
                     {
-                      "$ref": "#/components/schemas/SharedSeoComponent"
+                      "$ref": "#/components/schemas/BlockSeoComponent"
                     },
                     {
-                      "$ref": "#/components/schemas/SharedRichTextMdComponent"
+                      "$ref": "#/components/schemas/BlockRichTextComponent"
                     },
                     {
-                      "$ref": "#/components/schemas/SharedImageComponent"
-                    },
-                    {
-                      "$ref": "#/components/schemas/SharedRichTextComponent"
+                      "$ref": "#/components/schemas/BlockImageComponent"
                     }
                   ]
                 }
-              },
-              "metaTitle": {
-                "type": "string"
-              },
-              "metaDescription": {
-                "type": "string"
-              },
-              "shareImageUrl": {
-                "type": "string"
               },
               "locale": {
                 "type": "string"
@@ -3601,13 +3077,13 @@
           }
         }
       },
-      "BeritaListResponse": {
+      "ArticleListResponse": {
         "type": "object",
         "properties": {
           "data": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/Berita"
+              "$ref": "#/components/schemas/Article"
             }
           },
           "meta": {
@@ -3636,10 +3112,10 @@
           }
         }
       },
-      "Berita": {
+      "Article": {
         "type": "object",
         "required": [
-          "judul"
+          "title"
         ],
         "properties": {
           "id": {
@@ -3648,33 +3124,33 @@
           "documentId": {
             "type": "string"
           },
-          "judul": {
-            "type": "string"
-          },
-          "deskripsi": {
+          "title": {
             "type": "string"
           },
           "slug": {
             "type": "string"
           },
-          "kategori": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "properties": {
-                "id": {
-                  "type": "number"
-                },
-                "documentId": {
-                  "type": "string"
-                },
-                "nama": {
-                  "type": "string"
-                },
-                "slug": {
-                  "type": "string"
-                },
-                "berita": {
+          "category": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "number"
+              },
+              "documentId": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "description": {
+                "type": "string"
+              },
+              "slug": {
+                "type": "string"
+              },
+              "articles": {
+                "type": "array",
+                "items": {
                   "type": "object",
                   "properties": {
                     "id": {
@@ -3683,26 +3159,20 @@
                     "documentId": {
                       "type": "string"
                     },
-                    "judul": {
-                      "type": "string"
-                    },
-                    "deskripsi": {
+                    "title": {
                       "type": "string"
                     },
                     "slug": {
                       "type": "string"
                     },
-                    "kategori": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "id": {
-                            "type": "number"
-                          },
-                          "documentId": {
-                            "type": "string"
-                          }
+                    "category": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "number"
+                        },
+                        "documentId": {
+                          "type": "string"
                         }
                       }
                     },
@@ -3711,31 +3181,19 @@
                       "items": {
                         "anyOf": [
                           {
-                            "$ref": "#/components/schemas/SharedSliderComponent"
+                            "$ref": "#/components/schemas/BlockSliderComponent"
                           },
                           {
-                            "$ref": "#/components/schemas/SharedSeoComponent"
+                            "$ref": "#/components/schemas/BlockSeoComponent"
                           },
                           {
-                            "$ref": "#/components/schemas/SharedRichTextMdComponent"
+                            "$ref": "#/components/schemas/BlockRichTextComponent"
                           },
                           {
-                            "$ref": "#/components/schemas/SharedImageComponent"
-                          },
-                          {
-                            "$ref": "#/components/schemas/SharedRichTextComponent"
+                            "$ref": "#/components/schemas/BlockImageComponent"
                           }
                         ]
                       }
-                    },
-                    "metaTitle": {
-                      "type": "string"
-                    },
-                    "metaDescription": {
-                      "type": "string"
-                    },
-                    "shareImageUrl": {
-                      "type": "string"
                     },
                     "createdAt": {
                       "type": "string",
@@ -3789,20 +3247,48 @@
                       }
                     }
                   }
-                },
-                "createdAt": {
-                  "type": "string",
-                  "format": "date-time"
-                },
-                "updatedAt": {
-                  "type": "string",
-                  "format": "date-time"
-                },
-                "publishedAt": {
-                  "type": "string",
-                  "format": "date-time"
-                },
-                "createdBy": {
+                }
+              },
+              "createdAt": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "updatedAt": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "publishedAt": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "createdBy": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "number"
+                  },
+                  "documentId": {
+                    "type": "string"
+                  }
+                }
+              },
+              "updatedBy": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "number"
+                  },
+                  "documentId": {
+                    "type": "string"
+                  }
+                }
+              },
+              "locale": {
+                "type": "string"
+              },
+              "localizations": {
+                "type": "array",
+                "items": {
                   "type": "object",
                   "properties": {
                     "id": {
@@ -3810,34 +3296,6 @@
                     },
                     "documentId": {
                       "type": "string"
-                    }
-                  }
-                },
-                "updatedBy": {
-                  "type": "object",
-                  "properties": {
-                    "id": {
-                      "type": "number"
-                    },
-                    "documentId": {
-                      "type": "string"
-                    }
-                  }
-                },
-                "locale": {
-                  "type": "string"
-                },
-                "localizations": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "id": {
-                        "type": "number"
-                      },
-                      "documentId": {
-                        "type": "string"
-                      }
                     }
                   }
                 }
@@ -3849,31 +3307,19 @@
             "items": {
               "anyOf": [
                 {
-                  "$ref": "#/components/schemas/SharedSliderComponent"
+                  "$ref": "#/components/schemas/BlockSliderComponent"
                 },
                 {
-                  "$ref": "#/components/schemas/SharedSeoComponent"
+                  "$ref": "#/components/schemas/BlockSeoComponent"
                 },
                 {
-                  "$ref": "#/components/schemas/SharedRichTextMdComponent"
+                  "$ref": "#/components/schemas/BlockRichTextComponent"
                 },
                 {
-                  "$ref": "#/components/schemas/SharedImageComponent"
-                },
-                {
-                  "$ref": "#/components/schemas/SharedRichTextComponent"
+                  "$ref": "#/components/schemas/BlockImageComponent"
                 }
               ]
             }
-          },
-          "metaTitle": {
-            "type": "string"
-          },
-          "metaDescription": {
-            "type": "string"
-          },
-          "shareImageUrl": {
-            "type": "string"
           },
           "createdAt": {
             "type": "string",
@@ -3928,18 +3374,18 @@
           }
         }
       },
-      "BeritaResponse": {
+      "ArticleResponse": {
         "type": "object",
         "properties": {
           "data": {
-            "$ref": "#/components/schemas/Berita"
+            "$ref": "#/components/schemas/Article"
           },
           "meta": {
             "type": "object"
           }
         }
       },
-      "SharedSliderComponent": {
+      "BlockSliderComponent": {
         "type": "object",
         "properties": {
           "id": {
@@ -3948,7 +3394,7 @@
           "__component": {
             "type": "string"
           },
-          "files": {
+          "images": {
             "type": "array",
             "items": {
               "type": "object",
@@ -4082,7 +3528,7 @@
           }
         }
       },
-      "SharedSeoComponent": {
+      "BlockSeoComponent": {
         "type": "object",
         "properties": {
           "id": {
@@ -4102,7 +3548,7 @@
           }
         }
       },
-      "SharedRichTextMdComponent": {
+      "BlockRichTextComponent": {
         "type": "object",
         "properties": {
           "id": {
@@ -4116,7 +3562,7 @@
           }
         }
       },
-      "SharedImageComponent": {
+      "BlockImageComponent": {
         "type": "object",
         "properties": {
           "id": {
@@ -4125,7 +3571,7 @@
           "__component": {
             "type": "string"
           },
-          "file": {
+          "image": {
             "type": "object",
             "properties": {
               "id": {
@@ -4256,19 +3702,7 @@
           }
         }
       },
-      "SharedRichTextComponent": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "number"
-          },
-          "__component": {
-            "type": "string"
-          },
-          "body": {}
-        }
-      },
-      "KategoriRequest": {
+      "CategoryRequest": {
         "type": "object",
         "required": [
           "data"
@@ -4276,26 +3710,32 @@
         "properties": {
           "data": {
             "required": [
-              "nama"
+              "name"
             ],
             "type": "object",
             "properties": {
-              "nama": {
+              "name": {
+                "type": "string"
+              },
+              "description": {
                 "type": "string"
               },
               "slug": {
                 "type": "string"
               },
-              "berita": {
-                "oneOf": [
-                  {
-                    "type": "integer"
-                  },
-                  {
-                    "type": "string"
-                  }
-                ],
-                "example": "string or id"
+              "articles": {
+                "type": "array",
+                "items": {
+                  "oneOf": [
+                    {
+                      "type": "integer"
+                    },
+                    {
+                      "type": "string"
+                    }
+                  ],
+                  "example": "string or id"
+                }
               },
               "locale": {
                 "type": "string"
@@ -4318,13 +3758,13 @@
           }
         }
       },
-      "KategoriListResponse": {
+      "CategoryListResponse": {
         "type": "object",
         "properties": {
           "data": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/Kategori"
+              "$ref": "#/components/schemas/Category"
             }
           },
           "meta": {
@@ -4353,10 +3793,10 @@
           }
         }
       },
-      "Kategori": {
+      "Category": {
         "type": "object",
         "required": [
-          "nama"
+          "name"
         ],
         "properties": {
           "id": {
@@ -4365,33 +3805,33 @@
           "documentId": {
             "type": "string"
           },
-          "nama": {
+          "name": {
+            "type": "string"
+          },
+          "description": {
             "type": "string"
           },
           "slug": {
             "type": "string"
           },
-          "berita": {
-            "type": "object",
-            "properties": {
-              "id": {
-                "type": "number"
-              },
-              "documentId": {
-                "type": "string"
-              },
-              "judul": {
-                "type": "string"
-              },
-              "deskripsi": {
-                "type": "string"
-              },
-              "slug": {
-                "type": "string"
-              },
-              "kategori": {
-                "type": "array",
-                "items": {
+          "articles": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "number"
+                },
+                "documentId": {
+                  "type": "string"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "slug": {
+                  "type": "string"
+                },
+                "category": {
                   "type": "object",
                   "properties": {
                     "id": {
@@ -4400,20 +3840,26 @@
                     "documentId": {
                       "type": "string"
                     },
-                    "nama": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "description": {
                       "type": "string"
                     },
                     "slug": {
                       "type": "string"
                     },
-                    "berita": {
-                      "type": "object",
-                      "properties": {
-                        "id": {
-                          "type": "number"
-                        },
-                        "documentId": {
-                          "type": "string"
+                    "articles": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "number"
+                          },
+                          "documentId": {
+                            "type": "string"
+                          }
                         }
                       }
                     },
@@ -4721,556 +4167,25 @@
                       }
                     }
                   }
-                }
-              },
-              "blocks": {
-                "type": "array",
-                "items": {
-                  "anyOf": [
-                    {
-                      "$ref": "#/components/schemas/SharedSliderComponent"
-                    },
-                    {
-                      "$ref": "#/components/schemas/SharedSeoComponent"
-                    },
-                    {
-                      "$ref": "#/components/schemas/SharedRichTextMdComponent"
-                    },
-                    {
-                      "$ref": "#/components/schemas/SharedImageComponent"
-                    },
-                    {
-                      "$ref": "#/components/schemas/SharedRichTextComponent"
-                    }
-                  ]
-                }
-              },
-              "metaTitle": {
-                "type": "string"
-              },
-              "metaDescription": {
-                "type": "string"
-              },
-              "shareImageUrl": {
-                "type": "string"
-              },
-              "createdAt": {
-                "type": "string",
-                "format": "date-time"
-              },
-              "updatedAt": {
-                "type": "string",
-                "format": "date-time"
-              },
-              "publishedAt": {
-                "type": "string",
-                "format": "date-time"
-              },
-              "createdBy": {
-                "type": "object",
-                "properties": {
-                  "id": {
-                    "type": "number"
-                  },
-                  "documentId": {
-                    "type": "string"
-                  }
-                }
-              },
-              "updatedBy": {
-                "type": "object",
-                "properties": {
-                  "id": {
-                    "type": "number"
-                  },
-                  "documentId": {
-                    "type": "string"
-                  }
-                }
-              },
-              "locale": {
-                "type": "string"
-              },
-              "localizations": {
-                "type": "array",
-                "items": {
-                  "type": "object",
-                  "properties": {
-                    "id": {
-                      "type": "number"
-                    },
-                    "documentId": {
-                      "type": "string"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "createdAt": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "updatedAt": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "publishedAt": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "createdBy": {
-            "type": "object",
-            "properties": {
-              "id": {
-                "type": "number"
-              },
-              "documentId": {
-                "type": "string"
-              }
-            }
-          },
-          "updatedBy": {
-            "type": "object",
-            "properties": {
-              "id": {
-                "type": "number"
-              },
-              "documentId": {
-                "type": "string"
-              }
-            }
-          },
-          "locale": {
-            "type": "string"
-          },
-          "localizations": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "properties": {
-                "id": {
-                  "type": "number"
                 },
-                "documentId": {
-                  "type": "string"
-                }
-              }
-            }
-          }
-        }
-      },
-      "KategoriResponse": {
-        "type": "object",
-        "properties": {
-          "data": {
-            "$ref": "#/components/schemas/Kategori"
-          },
-          "meta": {
-            "type": "object"
-          }
-        }
-      },
-      "OrganisasiRequest": {
-        "type": "object",
-        "required": [
-          "data"
-        ],
-        "properties": {
-          "data": {
-            "type": "object",
-            "properties": {
-              "nama": {
-                "type": "string"
-              },
-              "keterangan": {
-                "type": "string"
-              },
-              "aktif": {
-                "type": "boolean"
-              },
-              "locale": {
-                "type": "string"
-              },
-              "localizations": {
-                "type": "array",
-                "items": {
-                  "oneOf": [
-                    {
-                      "type": "integer"
-                    },
-                    {
-                      "type": "string"
-                    }
-                  ],
-                  "example": "string or id"
-                }
-              }
-            }
-          }
-        }
-      },
-      "OrganisasiListResponse": {
-        "type": "object",
-        "properties": {
-          "data": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Organisasi"
-            }
-          },
-          "meta": {
-            "type": "object",
-            "properties": {
-              "pagination": {
-                "type": "object",
-                "properties": {
-                  "page": {
-                    "type": "integer"
-                  },
-                  "pageSize": {
-                    "type": "integer",
-                    "minimum": 25
-                  },
-                  "pageCount": {
-                    "type": "integer",
-                    "maximum": 1
-                  },
-                  "total": {
-                    "type": "integer"
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "Organisasi": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "number"
-          },
-          "documentId": {
-            "type": "string"
-          },
-          "nama": {
-            "type": "string"
-          },
-          "keterangan": {
-            "type": "string"
-          },
-          "aktif": {
-            "type": "boolean"
-          },
-          "createdAt": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "updatedAt": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "publishedAt": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "createdBy": {
-            "type": "object",
-            "properties": {
-              "id": {
-                "type": "number"
-              },
-              "documentId": {
-                "type": "string"
-              },
-              "firstname": {
-                "type": "string"
-              },
-              "lastname": {
-                "type": "string"
-              },
-              "username": {
-                "type": "string"
-              },
-              "email": {
-                "type": "string",
-                "format": "email"
-              },
-              "resetPasswordToken": {
-                "type": "string"
-              },
-              "registrationToken": {
-                "type": "string"
-              },
-              "isActive": {
-                "type": "boolean"
-              },
-              "roles": {
-                "type": "array",
-                "items": {
-                  "type": "object",
-                  "properties": {
-                    "id": {
-                      "type": "number"
-                    },
-                    "documentId": {
-                      "type": "string"
-                    },
-                    "name": {
-                      "type": "string"
-                    },
-                    "code": {
-                      "type": "string"
-                    },
-                    "description": {
-                      "type": "string"
-                    },
-                    "users": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "id": {
-                            "type": "number"
-                          },
-                          "documentId": {
-                            "type": "string"
-                          }
-                        }
+                "blocks": {
+                  "type": "array",
+                  "items": {
+                    "anyOf": [
+                      {
+                        "$ref": "#/components/schemas/BlockSliderComponent"
+                      },
+                      {
+                        "$ref": "#/components/schemas/BlockSeoComponent"
+                      },
+                      {
+                        "$ref": "#/components/schemas/BlockRichTextComponent"
+                      },
+                      {
+                        "$ref": "#/components/schemas/BlockImageComponent"
                       }
-                    },
-                    "permissions": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "id": {
-                            "type": "number"
-                          },
-                          "documentId": {
-                            "type": "string"
-                          },
-                          "action": {
-                            "type": "string"
-                          },
-                          "actionParameters": {},
-                          "subject": {
-                            "type": "string"
-                          },
-                          "properties": {},
-                          "conditions": {},
-                          "role": {
-                            "type": "object",
-                            "properties": {
-                              "id": {
-                                "type": "number"
-                              },
-                              "documentId": {
-                                "type": "string"
-                              }
-                            }
-                          },
-                          "createdAt": {
-                            "type": "string",
-                            "format": "date-time"
-                          },
-                          "updatedAt": {
-                            "type": "string",
-                            "format": "date-time"
-                          },
-                          "publishedAt": {
-                            "type": "string",
-                            "format": "date-time"
-                          },
-                          "createdBy": {
-                            "type": "object",
-                            "properties": {
-                              "id": {
-                                "type": "number"
-                              },
-                              "documentId": {
-                                "type": "string"
-                              }
-                            }
-                          },
-                          "updatedBy": {
-                            "type": "object",
-                            "properties": {
-                              "id": {
-                                "type": "number"
-                              },
-                              "documentId": {
-                                "type": "string"
-                              }
-                            }
-                          },
-                          "locale": {
-                            "type": "string"
-                          },
-                          "localizations": {
-                            "type": "array",
-                            "items": {
-                              "type": "object",
-                              "properties": {
-                                "id": {
-                                  "type": "number"
-                                },
-                                "documentId": {
-                                  "type": "string"
-                                }
-                              }
-                            }
-                          }
-                        }
-                      }
-                    },
-                    "createdAt": {
-                      "type": "string",
-                      "format": "date-time"
-                    },
-                    "updatedAt": {
-                      "type": "string",
-                      "format": "date-time"
-                    },
-                    "publishedAt": {
-                      "type": "string",
-                      "format": "date-time"
-                    },
-                    "createdBy": {
-                      "type": "object",
-                      "properties": {
-                        "id": {
-                          "type": "number"
-                        },
-                        "documentId": {
-                          "type": "string"
-                        }
-                      }
-                    },
-                    "updatedBy": {
-                      "type": "object",
-                      "properties": {
-                        "id": {
-                          "type": "number"
-                        },
-                        "documentId": {
-                          "type": "string"
-                        }
-                      }
-                    },
-                    "locale": {
-                      "type": "string"
-                    },
-                    "localizations": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "id": {
-                            "type": "number"
-                          },
-                          "documentId": {
-                            "type": "string"
-                          }
-                        }
-                      }
-                    }
+                    ]
                   }
-                }
-              },
-              "blocked": {
-                "type": "boolean"
-              },
-              "preferedLanguage": {
-                "type": "string"
-              },
-              "createdAt": {
-                "type": "string",
-                "format": "date-time"
-              },
-              "updatedAt": {
-                "type": "string",
-                "format": "date-time"
-              },
-              "publishedAt": {
-                "type": "string",
-                "format": "date-time"
-              },
-              "createdBy": {
-                "type": "object",
-                "properties": {
-                  "id": {
-                    "type": "number"
-                  },
-                  "documentId": {
-                    "type": "string"
-                  }
-                }
-              },
-              "updatedBy": {
-                "type": "object",
-                "properties": {
-                  "id": {
-                    "type": "number"
-                  },
-                  "documentId": {
-                    "type": "string"
-                  }
-                }
-              },
-              "locale": {
-                "type": "string"
-              },
-              "localizations": {
-                "type": "array",
-                "items": {
-                  "type": "object",
-                  "properties": {
-                    "id": {
-                      "type": "number"
-                    },
-                    "documentId": {
-                      "type": "string"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "updatedBy": {
-            "type": "object",
-            "properties": {
-              "id": {
-                "type": "number"
-              },
-              "documentId": {
-                "type": "string"
-              }
-            }
-          },
-          "locale": {
-            "type": "string"
-          },
-          "localizations": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "properties": {
-                "id": {
-                  "type": "number"
-                },
-                "documentId": {
-                  "type": "string"
-                },
-                "nama": {
-                  "type": "string"
-                },
-                "keterangan": {
-                  "type": "string"
-                },
-                "aktif": {
-                  "type": "boolean"
                 },
                 "createdAt": {
                   "type": "string",
@@ -5325,14 +4240,65 @@
                 }
               }
             }
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "publishedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "createdBy": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "number"
+              },
+              "documentId": {
+                "type": "string"
+              }
+            }
+          },
+          "updatedBy": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "number"
+              },
+              "documentId": {
+                "type": "string"
+              }
+            }
+          },
+          "locale": {
+            "type": "string"
+          },
+          "localizations": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "number"
+                },
+                "documentId": {
+                  "type": "string"
+                }
+              }
+            }
           }
         }
       },
-      "OrganisasiResponse": {
+      "CategoryResponse": {
         "type": "object",
         "properties": {
           "data": {
-            "$ref": "#/components/schemas/Organisasi"
+            "$ref": "#/components/schemas/Category"
           },
           "meta": {
             "type": "object"
@@ -5347,11 +4313,14 @@
         "properties": {
           "data": {
             "required": [
-              "judul"
+              "title"
             ],
             "type": "object",
             "properties": {
-              "judul": {
+              "title": {
+                "type": "string"
+              },
+              "description": {
                 "type": "string"
               },
               "slug": {
@@ -5362,19 +4331,16 @@
                 "items": {
                   "anyOf": [
                     {
-                      "$ref": "#/components/schemas/SharedRichTextMdComponent"
+                      "$ref": "#/components/schemas/BlockSliderComponent"
                     },
                     {
-                      "$ref": "#/components/schemas/SharedSliderComponent"
+                      "$ref": "#/components/schemas/BlockSeoComponent"
                     },
                     {
-                      "$ref": "#/components/schemas/SharedSeoComponent"
+                      "$ref": "#/components/schemas/BlockRichTextComponent"
                     },
                     {
-                      "$ref": "#/components/schemas/SharedImageComponent"
-                    },
-                    {
-                      "$ref": "#/components/schemas/SharedRichTextComponent"
+                      "$ref": "#/components/schemas/BlockImageComponent"
                     }
                   ]
                 }
@@ -5438,7 +4404,7 @@
       "Static": {
         "type": "object",
         "required": [
-          "judul"
+          "title"
         ],
         "properties": {
           "id": {
@@ -5447,7 +4413,10 @@
           "documentId": {
             "type": "string"
           },
-          "judul": {
+          "title": {
+            "type": "string"
+          },
+          "description": {
             "type": "string"
           },
           "slug": {
@@ -5458,19 +4427,16 @@
             "items": {
               "anyOf": [
                 {
-                  "$ref": "#/components/schemas/SharedRichTextMdComponent"
+                  "$ref": "#/components/schemas/BlockSliderComponent"
                 },
                 {
-                  "$ref": "#/components/schemas/SharedSliderComponent"
+                  "$ref": "#/components/schemas/BlockSeoComponent"
                 },
                 {
-                  "$ref": "#/components/schemas/SharedSeoComponent"
+                  "$ref": "#/components/schemas/BlockRichTextComponent"
                 },
                 {
-                  "$ref": "#/components/schemas/SharedImageComponent"
-                },
-                {
-                  "$ref": "#/components/schemas/SharedRichTextComponent"
+                  "$ref": "#/components/schemas/BlockImageComponent"
                 }
               ]
             }
@@ -5523,7 +4489,10 @@
                 "documentId": {
                   "type": "string"
                 },
-                "judul": {
+                "title": {
+                  "type": "string"
+                },
+                "description": {
                   "type": "string"
                 },
                 "slug": {
@@ -5534,19 +4503,16 @@
                   "items": {
                     "anyOf": [
                       {
-                        "$ref": "#/components/schemas/SharedRichTextMdComponent"
+                        "$ref": "#/components/schemas/BlockSliderComponent"
                       },
                       {
-                        "$ref": "#/components/schemas/SharedSliderComponent"
+                        "$ref": "#/components/schemas/BlockSeoComponent"
                       },
                       {
-                        "$ref": "#/components/schemas/SharedSeoComponent"
+                        "$ref": "#/components/schemas/BlockRichTextComponent"
                       },
                       {
-                        "$ref": "#/components/schemas/SharedImageComponent"
-                      },
-                      {
-                        "$ref": "#/components/schemas/SharedRichTextComponent"
+                        "$ref": "#/components/schemas/BlockImageComponent"
                       }
                     ]
                   }

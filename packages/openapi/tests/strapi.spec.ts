@@ -1,13 +1,13 @@
-import { expect, it, describe } from "vitest";
-import { strapi } from "./helper";
+import { describe, expect, it } from "vitest";
+import { api } from "./mocks";
 
 describe("strapi", () => {
   it("should initialize plugins", () => {
-    expect(strapi).toBeDefined();
-    expect(strapi.berita).toBeDefined();
-    expect(strapi.berita.list).toBeTypeOf("function");
-    expect(strapi.berita.create).toBeTypeOf("function");
-    expect(strapi.berita.update).toBeTypeOf("function");
-    expect(strapi.berita.delete).toBeTypeOf("function");
+    expect(api).toBeDefined();
+    expect(api.article).toBeDefined();
+    expect(api.article.search).toBeTypeOf("function");
+    expect(api.article.create).toBeTypeOf("function");
+    expect(api.article.update).toBeTypeOf("function");
+    expect(api.article.delete).toBeTypeOf("function");
   });
 });

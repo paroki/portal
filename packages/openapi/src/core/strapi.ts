@@ -55,10 +55,25 @@ export class Strapi {
 
   fetch: Client<paths>;
   options: StrapiOptions;
+  fetchOptions: ClientOptions;
 
-  constructor(options: Required<StrapiOptions>) {
+  constructor(options: StrapiOptions) {
+    // apply plugins
+    // https://stackoverflow.com/a/16345172
+    const classConstructor = this.constructor as typeof Strapi;
+    for (let i = 0; i < classConstructor.plugins.length; ++i) {
+      // @ts-ignore
+      Object.assign(this, classConstructor.plugins[i](this, options));
+    }
+
     const fetchOptions: ClientOptions = {
       baseUrl: options.baseUrl + options.path,
+      fetch: options.fetch,
+      querySerializer(params) {
+        return qs.stringify(params, {
+          encodeValuesOnly: true, // prettify URL
+        });
+      },
     };
 
     if (options.token) {
@@ -67,23 +82,12 @@ export class Strapi {
       };
     }
 
-    this.fetch = createClient<paths>({
-      ...fetchOptions,
-      fetch: undefined,
-      querySerializer(params) {
-        return qs.stringify(params, {
-          encodeValuesOnly: true, // prettify URL
-        });
-      },
-    });
-    this.options = options;
-
-    // apply plugins
-    // https://stackoverflow.com/a/16345172
-    const classConstructor = this.constructor as typeof Strapi;
-    for (let i = 0; i < classConstructor.plugins.length; ++i) {
-      // @ts-ignore
-      Object.assign(this, classConstructor.plugins[i](this, options));
+    if (options.fetch) {
+      fetchOptions.fetch = options.fetch;
     }
+
+    this.fetch = createClient<paths>(fetchOptions);
+    this.options = options;
+    this.fetchOptions = fetchOptions;
   }
 }
