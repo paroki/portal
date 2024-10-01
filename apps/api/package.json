@@ -2,21 +2,19 @@
   "name": "@pkrbt/api",
   "version": "0.0.0-development",
   "private": true,
-  "description": "PKRBT Api",
+  "description": "A Strapi application",
   "scripts": {
     "build": "strapi build",
     "deploy": "strapi deploy",
-    "develop": "strapi develop",
+    "dev": "strapi develop",
     "start": "strapi start",
     "strapi": "strapi",
-    "seed:dev": "node ./scripts/seed-dev.js",
-    "dev": "strapi develop"
+    "seed:dev": "node ./scripts/seed-dev.js"
   },
   "dependencies": {
     "@strapi/plugin-cloud": "5.0.1",
-    "@strapi/plugin-documentation": "^5.0.0",
+    "@strapi/plugin-documentation": "^5.0.1",
     "@strapi/plugin-users-permissions": "5.0.1",
-    "@strapi/provider-upload-cloudinary": "^5.0.0",
     "@strapi/strapi": "5.0.1",
     "better-sqlite3": "9.4.3",
     "lodash": "^4.17.21",
@@ -27,18 +25,13 @@
     "styled-components": "^6.0.0"
   },
   "devDependencies": {
-    "@jest/globals": "^29.7.0",
+    "@types/lodash": "^4.17.9",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
-    "@types/supertest": "^6.0.2",
     "fs-extra": "^11.2.0",
-    "jest": "^29.7.0",
     "lorem-ipsum": "^2.0.8",
     "mime-types": "^2.1.35",
-    "strapi-plugin-init-admin-user": "^0.2.3",
-    "supertest": "^7.0.0",
-    "ts-jest": "^29.2.5",
     "typescript": "^5"
   },
   "engines": {
@@ -46,23 +39,6 @@
     "npm": ">=6.0.0"
   },
   "strapi": {
-    "uuid": "27142ef8-f9ff-4566-b748-d291392ed8f0"
-  },
-  "jest": {
-    "preset": "ts-jest",
-    "testPathIgnorePatterns": [
-      "/node_modules",
-      ".tmp",
-      ".cache",
-      "dist"
-    ],
-    "testEnvironment": "node",
-    "collectCoverageFrom": [
-      "src/**/*.ts"
-    ],
-    "coveragePathIgnorePatterns": [
-      "dist",
-      "tests"
-    ]
+    "uuid": "20eb4182-a6ad-4187-a079-b8261ff314ba"
   }
 }

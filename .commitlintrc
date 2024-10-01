@@ -13,7 +13,7 @@
         "api",
         "pwa",
         "test",
-	"web"
+        "web"
       ]
     ],
     "scope-empty": [
@@ -85,7 +85,7 @@
         "revert",
         "style",
         "test",
-	"perf",
+        "perf"
       ]
     ]
   }

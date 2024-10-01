@@ -4,65 +4,65 @@
  */
 
 export interface paths {
-    "/beritas": {
+    "/articles": {
         parameters: {
             query?: never;
             header?: never;
             path?: never;
             cookie?: never;
         };
-        get: operations["get/beritas"];
+        get: operations["get/articles"];
         put?: never;
-        post: operations["post/beritas"];
+        post: operations["post/articles"];
         delete?: never;
         options?: never;
         head?: never;
         patch?: never;
         trace?: never;
     };
-    "/beritas/{id}": {
+    "/articles/{id}": {
         parameters: {
             query?: never;
             header?: never;
             path?: never;
             cookie?: never;
         };
-        get: operations["get/beritas/{id}"];
-        put: operations["put/beritas/{id}"];
+        get: operations["get/articles/{id}"];
+        put: operations["put/articles/{id}"];
         post?: never;
-        delete: operations["delete/beritas/{id}"];
+        delete: operations["delete/articles/{id}"];
         options?: never;
         head?: never;
         patch?: never;
         trace?: never;
     };
-    "/kategories": {
+    "/categories": {
         parameters: {
             query?: never;
             header?: never;
             path?: never;
             cookie?: never;
         };
-        get: operations["get/kategories"];
+        get: operations["get/categories"];
         put?: never;
-        post: operations["post/kategories"];
+        post: operations["post/categories"];
         delete?: never;
         options?: never;
         head?: never;
         patch?: never;
         trace?: never;
     };
-    "/kategories/{id}": {
+    "/categories/{id}": {
         parameters: {
             query?: never;
             header?: never;
             path?: never;
             cookie?: never;
         };
-        get: operations["get/kategories/{id}"];
-        put: operations["put/kategories/{id}"];
+        get: operations["get/categories/{id}"];
+        put: operations["put/categories/{id}"];
         post?: never;
-        delete: operations["delete/kategories/{id}"];
+        delete: operations["delete/categories/{id}"];
         options?: never;
         head?: never;
         patch?: never;
@@ -1365,22 +1365,19 @@ export interface components {
                 details?: Record<string, never>;
             };
         };
-        BeritaRequest: {
+        ArticleRequest: {
             data: {
-                judul: string;
-                deskripsi?: string;
+                title: string;
                 slug?: string;
-                kategori?: (number | string)[];
-                blocks?: (components["schemas"]["SharedSliderComponent"] | components["schemas"]["SharedSeoComponent"] | components["schemas"]["SharedRichTextMdComponent"] | components["schemas"]["SharedImageComponent"] | components["schemas"]["SharedRichTextComponent"])[];
-                metaTitle?: string;
-                metaDescription?: string;
-                shareImageUrl?: string;
+                /** @example string or id */
+                category?: number | string;
+                blocks?: (components["schemas"]["BlockSliderComponent"] | components["schemas"]["BlockSeoComponent"] | components["schemas"]["BlockRichTextComponent"] | components["schemas"]["BlockImageComponent"])[];
                 locale?: string;
                 localizations?: (number | string)[];
             };
         };
-        BeritaListResponse: {
-            data?: components["schemas"]["Berita"][];
+        ArticleListResponse: {
+            data?: components["schemas"]["Article"][];
             meta?: {
                 pagination?: {
                     page?: number;
@@ -1390,31 +1387,27 @@ export interface components {
                 };
             };
         };
-        Berita: {
+        Article: {
             id?: number;
             documentId?: string;
-            judul: string;
-            deskripsi?: string;
+            title: string;
             slug?: string;
-            kategori?: {
+            category?: {
                 id?: number;
                 documentId?: string;
-                nama?: string;
+                name?: string;
+                description?: string;
                 slug?: string;
-                berita?: {
+                articles?: {
                     id?: number;
                     documentId?: string;
-                    judul?: string;
-                    deskripsi?: string;
+                    title?: string;
                     slug?: string;
-                    kategori?: {
+                    category?: {
                         id?: number;
                         documentId?: string;
-                    }[];
-                    blocks?: (components["schemas"]["SharedSliderComponent"] | components["schemas"]["SharedSeoComponent"] | components["schemas"]["SharedRichTextMdComponent"] | components["schemas"]["SharedImageComponent"] | components["schemas"]["SharedRichTextComponent"])[];
-                    metaTitle?: string;
-                    metaDescription?: string;
-                    shareImageUrl?: string;
+                    };
+                    blocks?: (components["schemas"]["BlockSliderComponent"] | components["schemas"]["BlockSeoComponent"] | components["schemas"]["BlockRichTextComponent"] | components["schemas"]["BlockImageComponent"])[];
                     /** Format: date-time */
                     createdAt?: string;
                     /** Format: date-time */
@@ -1434,7 +1427,7 @@ export interface components {
                         id?: number;
                         documentId?: string;
                     }[];
-                };
+                }[];
                 /** Format: date-time */
                 createdAt?: string;
                 /** Format: date-time */
@@ -1454,11 +1447,8 @@ export interface components {
                     id?: number;
                     documentId?: string;
                 }[];
-            }[];
-            blocks?: (components["schemas"]["SharedSliderComponent"] | components["schemas"]["SharedSeoComponent"] | components["schemas"]["SharedRichTextMdComponent"] | components["schemas"]["SharedImageComponent"] | components["schemas"]["SharedRichTextComponent"])[];
-            metaTitle?: string;
-            metaDescription?: string;
-            shareImageUrl?: string;
+            };
+            blocks?: (components["schemas"]["BlockSliderComponent"] | components["schemas"]["BlockSeoComponent"] | components["schemas"]["BlockRichTextComponent"] | components["schemas"]["BlockImageComponent"])[];
             /** Format: date-time */
             createdAt?: string;
             /** Format: date-time */
@@ -1479,14 +1469,14 @@ export interface components {
                 documentId?: string;
             }[];
         };
-        BeritaResponse: {
-            data?: components["schemas"]["Berita"];
+        ArticleResponse: {
+            data?: components["schemas"]["Article"];
             meta?: Record<string, never>;
         };
-        SharedSliderComponent: {
+        BlockSliderComponent: {
             id?: number;
             __component?: string;
-            files?: {
+            images?: {
                 id?: number;
                 documentId?: string;
                 name?: string;
@@ -1534,22 +1524,22 @@ export interface components {
                 }[];
             }[];
         };
-        SharedSeoComponent: {
+        BlockSeoComponent: {
             id?: number;
             __component?: string;
             metaTitle?: string;
             metaDescription?: string;
             shareImageUrl?: string;
         };
-        SharedRichTextMdComponent: {
+        BlockRichTextComponent: {
             id?: number;
             __component?: string;
             body?: string;
         };
-        SharedImageComponent: {
+        BlockImageComponent: {
             id?: number;
             __component?: string;
-            file?: {
+            image?: {
                 id?: number;
                 documentId?: string;
                 name?: string;
@@ -1597,23 +1587,18 @@ export interface components {
                 }[];
             };
         };
-        SharedRichTextComponent: {
-            id?: number;
-            __component?: string;
-            body?: unknown;
-        };
-        KategoriRequest: {
+        CategoryRequest: {
             data: {
-                nama: string;
+                name: string;
+                description?: string;
                 slug?: string;
-                /** @example string or id */
-                berita?: number | string;
+                articles?: (number | string)[];
                 locale?: string;
                 localizations?: (number | string)[];
             };
         };
-        KategoriListResponse: {
-            data?: components["schemas"]["Kategori"][];
+        CategoryListResponse: {
+            data?: components["schemas"]["Category"][];
             meta?: {
                 pagination?: {
                     page?: number;
@@ -1623,26 +1608,27 @@ export interface components {
                 };
             };
         };
-        Kategori: {
+        Category: {
             id?: number;
             documentId?: string;
-            nama: string;
+            name: string;
+            description?: string;
             slug?: string;
-            berita?: {
+            articles?: {
                 id?: number;
                 documentId?: string;
-                judul?: string;
-                deskripsi?: string;
+                title?: string;
                 slug?: string;
-                kategori?: {
+                category?: {
                     id?: number;
                     documentId?: string;
-                    nama?: string;
+                    name?: string;
+                    description?: string;
                     slug?: string;
-                    berita?: {
+                    articles?: {
                         id?: number;
                         documentId?: string;
-                    };
+                    }[];
                     /** Format: date-time */
                     createdAt?: string;
                     /** Format: date-time */
@@ -1753,11 +1739,8 @@ export interface components {
                         id?: number;
                         documentId?: string;
                     }[];
-                }[];
-                blocks?: (components["schemas"]["SharedSliderComponent"] | components["schemas"]["SharedSeoComponent"] | components["schemas"]["SharedRichTextMdComponent"] | components["schemas"]["SharedImageComponent"] | components["schemas"]["SharedRichTextComponent"])[];
-                metaTitle?: string;
-                metaDescription?: string;
-                shareImageUrl?: string;
+                };
+                blocks?: (components["schemas"]["BlockSliderComponent"] | components["schemas"]["BlockSeoComponent"] | components["schemas"]["BlockRichTextComponent"] | components["schemas"]["BlockImageComponent"])[];
                 /** Format: date-time */
                 createdAt?: string;
                 /** Format: date-time */
@@ -1777,7 +1760,7 @@ export interface components {
                     id?: number;
                     documentId?: string;
                 }[];
-            };
+            }[];
             /** Format: date-time */
             createdAt?: string;
             /** Format: date-time */
@@ -1798,15 +1781,16 @@ export interface components {
                 documentId?: string;
             }[];
         };
-        KategoriResponse: {
-            data?: components["schemas"]["Kategori"];
+        CategoryResponse: {
+            data?: components["schemas"]["Category"];
             meta?: Record<string, never>;
         };
         StaticRequest: {
             data: {
-                judul: string;
+                title: string;
+                description?: string;
                 slug?: string;
-                blocks?: (components["schemas"]["SharedRichTextMdComponent"] | components["schemas"]["SharedSliderComponent"] | components["schemas"]["SharedSeoComponent"] | components["schemas"]["SharedImageComponent"] | components["schemas"]["SharedRichTextComponent"])[];
+                blocks?: (components["schemas"]["BlockSliderComponent"] | components["schemas"]["BlockSeoComponent"] | components["schemas"]["BlockRichTextComponent"] | components["schemas"]["BlockImageComponent"])[];
                 locale?: string;
                 localizations?: (number | string)[];
             };
@@ -1825,9 +1809,10 @@ export interface components {
         Static: {
             id?: number;
             documentId?: string;
-            judul: string;
+            title: string;
+            description?: string;
             slug?: string;
-            blocks?: (components["schemas"]["SharedRichTextMdComponent"] | components["schemas"]["SharedSliderComponent"] | components["schemas"]["SharedSeoComponent"] | components["schemas"]["SharedImageComponent"] | components["schemas"]["SharedRichTextComponent"])[];
+            blocks?: (components["schemas"]["BlockSliderComponent"] | components["schemas"]["BlockSeoComponent"] | components["schemas"]["BlockRichTextComponent"] | components["schemas"]["BlockImageComponent"])[];
             /** Format: date-time */
             createdAt?: string;
             /** Format: date-time */
@@ -1846,9 +1831,10 @@ export interface components {
             localizations?: {
                 id?: number;
                 documentId?: string;
-                judul?: string;
+                title?: string;
+                description?: string;
                 slug?: string;
-                blocks?: (components["schemas"]["SharedRichTextMdComponent"] | components["schemas"]["SharedSliderComponent"] | components["schemas"]["SharedSeoComponent"] | components["schemas"]["SharedImageComponent"] | components["schemas"]["SharedRichTextComponent"])[];
+                blocks?: (components["schemas"]["BlockSliderComponent"] | components["schemas"]["BlockSeoComponent"] | components["schemas"]["BlockRichTextComponent"] | components["schemas"]["BlockImageComponent"])[];
                 /** Format: date-time */
                 createdAt?: string;
                 /** Format: date-time */
@@ -1985,7 +1971,7 @@ export interface components {
 }
 export type $defs = Record<string, never>;
 export interface operations {
-    "get/beritas": {
+    "get/articles": {
         parameters: {
             query?: {
                 /** @description Sort by attributes ascending (asc) or descending (desc) */
@@ -2023,7 +2009,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["BeritaListResponse"];
+                    "application/json": components["schemas"]["ArticleListResponse"];
                 };
             };
             /** @description Bad Request */
@@ -2073,7 +2059,7 @@ export interface operations {
             };
         };
     };
-    "post/beritas": {
+    "post/articles": {
         parameters: {
             query?: never;
             header?: never;
@@ -2082,7 +2068,7 @@ export interface operations {
         };
         requestBody: {
             content: {
-                "application/json": components["schemas"]["BeritaRequest"];
+                "application/json": components["schemas"]["ArticleRequest"];
             };
         };
         responses: {
@@ -2092,7 +2078,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["BeritaResponse"];
+                    "application/json": components["schemas"]["ArticleResponse"];
                 };
             };
             /** @description Bad Request */
@@ -2142,7 +2128,7 @@ export interface operations {
             };
         };
     };
-    "get/beritas/{id}": {
+    "get/articles/{id}": {
         parameters: {
             query?: never;
             header?: never;
@@ -2159,7 +2145,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["BeritaResponse"];
+                    "application/json": components["schemas"]["ArticleResponse"];
                 };
             };
             /** @description Bad Request */
@@ -2209,7 +2195,7 @@ export interface operations {
             };
         };
     };
-    "put/beritas/{id}": {
+    "put/articles/{id}": {
         parameters: {
             query?: never;
             header?: never;
@@ -2220,7 +2206,7 @@ export interface operations {
         };
         requestBody: {
             content: {
-                "application/json": components["schemas"]["BeritaRequest"];
+                "application/json": components["schemas"]["ArticleRequest"];
             };
         };
         responses: {
@@ -2230,7 +2216,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["BeritaResponse"];
+                    "application/json": components["schemas"]["ArticleResponse"];
                 };
             };
             /** @description Bad Request */
@@ -2280,7 +2266,7 @@ export interface operations {
             };
         };
     };
-    "delete/beritas/{id}": {
+    "delete/articles/{id}": {
         parameters: {
             query?: never;
             header?: never;
@@ -2347,7 +2333,7 @@ export interface operations {
             };
         };
     };
-    "get/kategories": {
+    "get/categories": {
         parameters: {
             query?: {
                 /** @description Sort by attributes ascending (asc) or descending (desc) */
@@ -2385,7 +2371,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["KategoriListResponse"];
+                    "application/json": components["schemas"]["CategoryListResponse"];
                 };
             };
             /** @description Bad Request */
@@ -2435,7 +2421,7 @@ export interface operations {
             };
         };
     };
-    "post/kategories": {
+    "post/categories": {
         parameters: {
             query?: never;
             header?: never;
@@ -2444,7 +2430,7 @@ export interface operations {
         };
         requestBody: {
             content: {
-                "application/json": components["schemas"]["KategoriRequest"];
+                "application/json": components["schemas"]["CategoryRequest"];
             };
         };
         responses: {
@@ -2454,7 +2440,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["KategoriResponse"];
+                    "application/json": components["schemas"]["CategoryResponse"];
                 };
             };
             /** @description Bad Request */
@@ -2504,7 +2490,7 @@ export interface operations {
             };
         };
     };
-    "get/kategories/{id}": {
+    "get/categories/{id}": {
         parameters: {
             query?: never;
             header?: never;
@@ -2521,7 +2507,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["KategoriResponse"];
+                    "application/json": components["schemas"]["CategoryResponse"];
                 };
             };
             /** @description Bad Request */
@@ -2571,7 +2557,7 @@ export interface operations {
             };
         };
     };
-    "put/kategories/{id}": {
+    "put/categories/{id}": {
         parameters: {
             query?: never;
             header?: never;
@@ -2582,7 +2568,7 @@ export interface operations {
         };
         requestBody: {
             content: {
-                "application/json": components["schemas"]["KategoriRequest"];
+                "application/json": components["schemas"]["CategoryRequest"];
             };
         };
         responses: {
@@ -2592,7 +2578,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["KategoriResponse"];
+                    "application/json": components["schemas"]["CategoryResponse"];
                 };
             };
             /** @description Bad Request */
@@ -2642,7 +2628,7 @@ export interface operations {
             };
         };
     };
-    "delete/kategories/{id}": {
+    "delete/categories/{id}": {
         parameters: {
             query?: never;
             header?: never;

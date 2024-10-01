@@ -1,19 +1,19 @@
 import type { Struct, Schema } from '@strapi/strapi';
 
-export interface SharedSlider extends Struct.ComponentSchema {
-  collectionName: 'components_shared_sliders';
+export interface BlockSlider extends Struct.ComponentSchema {
+  collectionName: 'components_block_sliders';
   info: {
     displayName: 'Slider';
     icon: 'address-book';
     description: '';
   };
   attributes: {
-    files: Schema.Attribute.Media<'images', true>;
+    images: Schema.Attribute.Media<'images', true>;
   };
 }
 
-export interface SharedSeo extends Struct.ComponentSchema {
-  collectionName: 'components_shared_seos';
+export interface BlockSeo extends Struct.ComponentSchema {
+  collectionName: 'components_block_seos';
   info: {
     name: 'Seo';
     icon: 'allergies';
@@ -27,18 +27,8 @@ export interface SharedSeo extends Struct.ComponentSchema {
   };
 }
 
-export interface SharedRichText extends Struct.ComponentSchema {
-  collectionName: 'components_shared_rich_texts';
-  info: {
-    displayName: 'Rich Text';
-  };
-  attributes: {
-    body: Schema.Attribute.Blocks;
-  };
-}
-
-export interface SharedRichTextMd extends Struct.ComponentSchema {
-  collectionName: 'components_shared_rich_text_md';
+export interface BlockRichText extends Struct.ComponentSchema {
+  collectionName: 'components_block_rich_text_md';
   info: {
     displayName: 'Rich Text (Markdown)';
     icon: 'align-justify';
@@ -49,25 +39,24 @@ export interface SharedRichTextMd extends Struct.ComponentSchema {
   };
 }
 
-export interface SharedImage extends Struct.ComponentSchema {
-  collectionName: 'components_shared_image';
+export interface BlockImage extends Struct.ComponentSchema {
+  collectionName: 'components_block_image';
   info: {
     displayName: 'Image';
     icon: 'file-video';
   };
   attributes: {
-    file: Schema.Attribute.Media<'images'>;
+    image: Schema.Attribute.Media<'images'>;
   };
 }
 
 declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
-      'shared.slider': SharedSlider;
-      'shared.seo': SharedSeo;
-      'shared.rich-text': SharedRichText;
-      'shared.rich-text-md': SharedRichTextMd;
-      'shared.image': SharedImage;
+      'block.slider': BlockSlider;
+      'block.seo': BlockSeo;
+      'block.rich-text': BlockRichText;
+      'block.image': BlockImage;
     }
   }
 }

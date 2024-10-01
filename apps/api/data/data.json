@@ -1,21 +1,21 @@
 {
-  "kategories": [
+  "categories": [
     {
-      "nama": "kegiatan",
+      "name": "kegiatan",
       "slug": "kegiatan"
     },
     {
-      "nama": "pewartaan",
+      "name": "pewartaan",
       "slug": "pewartaan"
     },
     {
-      "nama": "liturgi",
+      "name": "liturgi",
       "slug": "liturgi"
     }
   ],
   "statics": [
     {
-      "judul": "Sejarah",
+      "title": "Sejarah",
       "slug": "sejarah",
       "blocks": [
         {
@@ -37,9 +37,9 @@
       ]
     }
   ],
-  "beritas": [
+  "articles": [
     {
-      "judul": "Obviously Failed",
+      "title": "Obviously Failed",
       "deskripsi": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores est voluptate.",
       "blocks": [
         {
@@ -53,7 +53,7 @@
       ]
     },
     {
-      "judul": "Obviously Good",
+      "title": "Obviously Good",
       "blocks": [
         {
           "__component": "shared.image",
@@ -66,7 +66,7 @@
       ]
     },
     {
-      "judul": "Obviously Randomly",
+      "title": "Obviously Randomly",
       "blocks": [
         {
           "__component": "shared.image",
@@ -79,7 +79,7 @@
       ]
     },
     {
-      "judul": "Obviously Confusing",
+      "title": "Obviously Confusing",
       "blocks": [
         {
           "__component": "shared.image",
@@ -92,7 +92,7 @@
       ]
     },
     {
-      "judul": "Obviously Peaceful",
+      "title": "Obviously Peaceful",
       "blocks": [
         {
           "__component": "shared.image",
@@ -105,9 +105,9 @@
       ]
     },
     {
-      "judul": "Pelantikan Pengurus DPP 2024-2027",
+      "title": "Pelantikan Pengurus DPP 2024-2027",
       "slug": "pelantikan-pengurus-dpp-2024-2027",
-      "kategori": [{ "id": 1 }],
+      "category": [{ "id": 1 }],
       "blocks": [
         {
           "__component": "shared.slider",

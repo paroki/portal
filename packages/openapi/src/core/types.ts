@@ -4,7 +4,6 @@ import type { StrapiCore as Strapi } from ".";
 export interface StrapiOptions {
   baseUrl?: string;
   path?: string;
-  token?: string;
 }
 
 export type Constructor<T> = new (...args: any[]) => T;

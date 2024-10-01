@@ -1,7 +1,9 @@
 import { Strapi } from "../src";
 
-export const strapi = new Strapi({
-  baseUrl: "http://127.0.0.1:1337",
-  path: "/api",
-  token: "",
-});
+export function createStrapi() {
+  const withDefaults = {
+    baseUrl: "http://localhost:1337",
+    fetch: {},
+  };
+  return new Strapi(withDefaults);
+}
