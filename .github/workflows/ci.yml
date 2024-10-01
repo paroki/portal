@@ -26,5 +26,6 @@ jobs:
   gitlab:
     name: GitLab
     needs: ["testing"]
+    if: github.event_name != 'pull_request'
     uses: paroki/portal/.github/workflows/gitlab.yml@main
     secrets: inherit
