@@ -6,6 +6,11 @@ export default defineConfig({
     include: ["./tests/**/*.{test,spec}.{ts,tsx}"],
     exclude: [],
     globals: true,
+    coverage: {
+      provider: "v8",
+      reporter: ["html", "clover", "json"],
+      include: ["src"],
+    },
   },
   resolve: {
     alias: {

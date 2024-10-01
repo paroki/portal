@@ -12,7 +12,7 @@ jobs:
         include:
           - name: api
             prefix: ghcr.io/paroki/api
-            dockefile: ./apps/api/Dockerfile
+            dockerfile: ./apps/api/Dockerfile
             target: prod
             goss_file: ./docker/api.yaml
 
@@ -61,7 +61,7 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           context: .
-          file: ${{ matrix.dockefile }}
+          file: ${{ matrix.dockerfile }}
           target: ${{ matrix.target }}
           platforms: linux/amd64
           load: true
@@ -110,7 +110,7 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           context: .
-          file: ${{ matrix.dockefile }}
+          file: ${{ matrix.dockerfile }}
           target: ${{ matrix.target }}
           platforms: linux/amd64
           tags: ${{ steps.vars.outputs.tags }}

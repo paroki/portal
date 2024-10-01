@@ -25,6 +25,6 @@ jobs:
 
   gitlab:
     name: GitLab
-    needs: ["testing", "image"]
+    needs: ["testing"]
     uses: paroki/portal/.github/workflows/gitlab.yml@main
     secrets: inherit
