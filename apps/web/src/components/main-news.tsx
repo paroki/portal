@@ -1,47 +1,32 @@
-"use client";
+'use client';
 
-import * as React from "react";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-} from "@/components/ui/carousel";
-import Autoplay from "embla-carousel-autoplay";
-import { Box, Card, Inset, Text } from "@radix-ui/themes";
-import { EyeIcon } from "lucide-react";
-import LinkBtn from "./link";
-import Image from "next/image";
-import { newsAll } from "@/util/news";
-import Link from "next/link";
+import * as React from 'react';
+import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel';
+import Autoplay from 'embla-carousel-autoplay';
+import { Box, Card, Inset, Text } from '@radix-ui/themes';
+import { EyeIcon } from 'lucide-react';
+import LinkBtn from './link';
+import Image from 'next/image';
+import { newsAll } from '@/util/news';
+import Link from 'next/link';
 
 export default function MainNews() {
-  const plugin = React.useRef(
-    Autoplay({ delay: 6000, stopOnInteraction: false }),
-  );
+  const plugin = React.useRef(Autoplay({ delay: 6000, stopOnInteraction: false }));
   return (
     <>
       <Carousel
         opts={{
-          align: "start",
+          align: 'start'
         }}
         plugins={[plugin.current]}
-        className="w-full"
-      >
+        className="w-full">
         <CarouselContent>
           {newsAll.map((news, index) => (
-            <CarouselItem
-              key={index}
-              className="md:basis-1/2 lg:basis-1/4 group "
-            >
+            <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/4 group ">
               <Link href={`/berita/${news.id}`}>
                 <Box maxWidth="240px">
                   <Card size="2">
-                    <Inset
-                      clip="padding-box"
-                      side="top"
-                      pb="current"
-                      className="relative rounded overflow-hidden"
-                    >
+                    <Inset clip="padding-box" side="top" pb="current" className="relative rounded overflow-hidden">
                       <div className="absolute w-full h-full bg-primary-400 opacity-0 group-hover:opacity-50 top-0 flex justify-center items-center transition-all">
                         <EyeIcon className="text-white w-9 h-9" />
                       </div>
@@ -51,11 +36,11 @@ export default function MainNews() {
                         src={news.thumb}
                         alt="Bold typography"
                         style={{
-                          display: "block",
-                          objectFit: "cover",
-                          width: "100%",
+                          display: 'block',
+                          objectFit: 'cover',
+                          width: '100%',
                           height: 140,
-                          backgroundColor: "var(--gray-5)",
+                          backgroundColor: 'var(--gray-5)'
                         }}
                       />
                     </Inset>
