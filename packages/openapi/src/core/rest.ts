@@ -69,7 +69,7 @@ export function rest<T extends Item>(strapi: Strapi, path: any) {
         console.log(error);
         return Promise.reject(error);
       }
-
+      console.log(rdata);
       const { data: items, meta } = rdata;
       return { items, meta };
     },
