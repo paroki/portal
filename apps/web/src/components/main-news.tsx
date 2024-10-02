@@ -3,7 +3,7 @@
 import * as React from 'react';
 import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel';
 import Autoplay from 'embla-carousel-autoplay';
-import { Box, Card, Inset, Strong, Text } from '@radix-ui/themes';
+import { Box, Card, Inset, Text } from '@radix-ui/themes';
 import { EyeIcon } from 'lucide-react';
 import LinkBtn from './link';
 import Image from 'next/image';

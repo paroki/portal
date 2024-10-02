@@ -1,30 +1,26 @@
-import BeritaItem from "@/components/berita/view";
-import Container from "@/components/ui/container";
-import { strapi } from "@/util/strapi";
-import { Berita } from "@pkrbt/openapi";
-import { notFound } from "next/navigation";
+/* eslint-disable react-hooks/exhaustive-deps */
+'use client';
 
-export default async function Page({ params }: { params: { slug: string } }) {
-  let berita: Berita | undefined = undefined;
-  const listBerita = await strapi.berita.list({
-    params: {
-      query: {
-        filters: {
-          slug: {
-            $eq: params.slug,
-          },
-        },
-      },
-    },
-  });
+import { getNewsByIdPromise, News } from '@/util/news';
+import React, { useEffect, useState } from 'react';
 
-  if (listBerita.items) {
-    berita = listBerita.items[0];
-  }
+export default function NewsDetail({ params }: { params: { slug: string } }) {
+  const [newsDetail, setNewsDetail] = useState<News>();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const fetched = await getNewsByIdPromise(Number(params.slug));
+      setNewsDetail(fetched);
+    };
+
+    fetchData().catch((err) => {
+      console.log(err);
+    });
+  }, []);
 
   return (
-    <Container className="max-w-screen-lg">
-      {berita ? <BeritaItem item={berita} /> : notFound()}
-    </Container>
+    <div>
+      <h3>{newsDetail?.title}</h3>
+    </div>
   );
 }
