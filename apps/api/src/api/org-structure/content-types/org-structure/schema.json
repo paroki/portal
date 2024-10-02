@@ -1,0 +1,48 @@
+{
+  "kind": "collectionType",
+  "collectionName": "org_structures",
+  "info": {
+    "singularName": "org-structure",
+    "pluralName": "org-structures",
+    "displayName": "Org.Structure",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "active": {
+      "type": "boolean",
+      "required": true,
+      "default": true
+    },
+    "parent": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::org-structure.org-structure",
+      "inversedBy": "childs"
+    },
+    "childs": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::org-structure.org-structure",
+      "mappedBy": "parent"
+    },
+    "organization": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::organization.organization",
+      "inversedBy": "structures"
+    },
+    "position": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::org-position.org-position",
+      "mappedBy": "structure"
+    }
+  }
+}

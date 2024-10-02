@@ -64,6 +64,12 @@
       "target": "plugin::users-permissions.role",
       "inversedBy": "users",
       "configurable": false
+    },
+    "membersOf": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::org-member.org-member",
+      "mappedBy": "user"
     }
   }
 }

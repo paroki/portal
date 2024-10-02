@@ -1,0 +1,37 @@
+{
+  "kind": "collectionType",
+  "collectionName": "org_positions",
+  "info": {
+    "singularName": "org-position",
+    "pluralName": "org-positions",
+    "displayName": "Org.Position",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "active": {
+      "type": "boolean",
+      "required": true,
+      "default": true
+    },
+    "structure": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::org-structure.org-structure",
+      "inversedBy": "position"
+    },
+    "heldBy": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::org-member.org-member",
+      "inversedBy": "position"
+    }
+  }
+}
