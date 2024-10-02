@@ -546,6 +546,7 @@ export interface ApiArticleArticle extends Struct.CollectionTypeSchema {
           localized: true;
         };
       }>;
+    description: Schema.Attribute.String;
     slug: Schema.Attribute.UID<'title'> &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
@@ -762,6 +763,7 @@ export interface ApiOrganizationOrganization
     singularName: 'organization';
     pluralName: 'organizations';
     displayName: 'Organization';
+    description: '';
   };
   options: {
     draftAndPublish: false;
@@ -776,6 +778,7 @@ export interface ApiOrganizationOrganization
       'oneToMany',
       'api::org-structure.org-structure'
     >;
+    shortName: Schema.Attribute.String;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
