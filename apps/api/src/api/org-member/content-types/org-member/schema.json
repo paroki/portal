@@ -1,0 +1,57 @@
+{
+  "kind": "collectionType",
+  "collectionName": "org_members",
+  "info": {
+    "singularName": "org-member",
+    "pluralName": "org-members",
+    "displayName": "Org.Member",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": false
+    },
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "handphone": {
+      "type": "string"
+    },
+    "email": {
+      "type": "email"
+    },
+    "photo": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": ["images"]
+    },
+    "active": {
+      "type": "boolean"
+    },
+    "startFrom": {
+      "type": "date"
+    },
+    "startTo": {
+      "type": "date"
+    },
+    "user": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "membersOf"
+    },
+    "position": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::org-position.org-position",
+      "mappedBy": "heldBy"
+    }
+  }
+}
