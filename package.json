@@ -24,8 +24,18 @@
     "turbo": "^2.1.2",
     "typescript": "^5.4.5"
   },
+  "pnpm": {
+    "peerDependenciesRules": {
+      "allowedVersions": {
+        "eslint": "8"
+      }
+    }
+  },
   "packageManager": "pnpm@9.11.0",
   "engines": {
     "node": "20.x"
+  },
+  "dependencies": {
+    "eslint": "8"
   }
 }

@@ -1,0 +1,40 @@
+{
+  "kind": "collectionType",
+  "collectionName": "an_marriages",
+  "info": {
+    "singularName": "an-marriage",
+    "pluralName": "an-marriages",
+    "displayName": "An.Marriage",
+    "description": "Marriage Anouncement"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "groomName": {
+      "type": "string",
+      "required": true
+    },
+    "groomFrom": {
+      "type": "string",
+      "required": true
+    },
+    "brideName": {
+      "type": "string",
+      "required": true
+    },
+    "brideFrom": {
+      "type": "string",
+      "required": true
+    },
+    "startAt": {
+      "type": "date",
+      "required": true
+    },
+    "endAt": {
+      "type": "date",
+      "required": true
+    }
+  }
+}
