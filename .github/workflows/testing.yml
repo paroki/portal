@@ -62,13 +62,24 @@ jobs:
       - name: test with coverage
         run: pnpm coverage
 
-      - uses: codecov/codecov-action@v4
+      - name: upload web coverage
+        uses: codecov/codecov-action@v4
         with:
           flags: web # optional
           name: web # optional
-          files: apps/web/coverage/clover.xml
+          files: ./clover.xml
           token: ${{ secrets.CODECOV_TOKEN }} # required
           verbose: true
+          directory: ./apps/web/coverage
+
+      - uses: codecov/codecov-action@v4
+        with:
+          flags: openapi # optional
+          name: openapi # optional
+          files: ./clover.xml
+          token: ${{ secrets.CODECOV_TOKEN }} # required
+          verbose: true
+          directory: ./packages/openapi/coverage
 
   e2e:
     name: E2E

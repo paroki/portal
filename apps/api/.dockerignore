@@ -1,5 +1,0 @@
-.dockerignore
-.strapi
-.env
-dist
-node_modules

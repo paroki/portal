@@ -1,125 +1,125 @@
 {
-  "kategories": [
+  "categories": [
     {
-      "nama": "kegiatan",
+      "name": "kegiatan",
       "slug": "kegiatan"
     },
     {
-      "nama": "pewartaan",
+      "name": "pewartaan",
       "slug": "pewartaan"
     },
     {
-      "nama": "liturgi",
+      "name": "liturgi",
       "slug": "liturgi"
     }
   ],
   "statics": [
     {
-      "judul": "Sejarah",
+      "title": "Sejarah",
       "slug": "sejarah",
       "blocks": [
         {
-          "__component": "shared.image",
-          "file": "coffee-art.jpg"
+          "__component": "block.image",
+          "image": "coffee-art.jpg"
         },
         {
-          "__component": "shared.rich-text-md",
+          "__component": "block.rich-text",
           "body": "paragraphs.1"
         },
         {
-          "__component": "shared.image",
-          "file": "coffee-beans.jpg"
+          "__component": "block.image",
+          "image": "coffee-beans.jpg"
         },
         {
-          "__component": "shared.rich-text-md",
+          "__component": "block.rich-text",
           "body": "paragraphs.4"
         }
       ]
     }
   ],
-  "beritas": [
+  "articles": [
     {
-      "judul": "Obviously Failed",
+      "title": "Obviously Failed",
       "deskripsi": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores est voluptate.",
       "blocks": [
         {
-          "__component": "shared.image",
-          "file": "obviously-failed.png"
+          "__component": "block.image",
+          "image": "obviously-failed.png"
         },
         {
-          "__component": "shared.rich-text-md",
+          "__component": "block.rich-text",
           "body": "paragraphs.1"
         }
       ]
     },
     {
-      "judul": "Obviously Good",
+      "title": "Obviously Good",
       "blocks": [
         {
-          "__component": "shared.image",
-          "file": "obviously-good.png"
+          "__component": "block.image",
+          "image": "obviously-good.png"
         },
         {
-          "__component": "shared.rich-text-md",
+          "__component": "block.rich-text",
           "body": "paragraphs.1"
         }
       ]
     },
     {
-      "judul": "Obviously Randomly",
+      "title": "Obviously Randomly",
       "blocks": [
         {
-          "__component": "shared.image",
-          "file": "obviously-randomly.png"
+          "__component": "block.image",
+          "image": "obviously-randomly.png"
         },
         {
-          "__component": "shared.rich-text-md",
+          "__component": "block.rich-text",
           "body": "paragraphs.1"
         }
       ]
     },
     {
-      "judul": "Obviously Confusing",
+      "title": "Obviously Confusing",
       "blocks": [
         {
-          "__component": "shared.image",
-          "file": "obviously-confusing.png"
+          "__component": "block.image",
+          "image": "obviously-confusing.png"
         },
         {
-          "__component": "shared.rich-text-md",
+          "__component": "block.rich-text",
           "body": "paragraphs.1"
         }
       ]
     },
     {
-      "judul": "Obviously Peaceful",
+      "title": "Obviously Peaceful",
       "blocks": [
         {
-          "__component": "shared.image",
-          "file": "obviously-peaceful.png"
+          "__component": "block.image",
+          "image": "obviously-peaceful.png"
         },
         {
-          "__component": "shared.rich-text-md",
+          "__component": "block.rich-text",
           "body": "paragraphs.1"
         }
       ]
     },
     {
-      "judul": "Pelantikan Pengurus DPP 2024-2027",
+      "title": "Pelantikan Pengurus DPP 2024-2027",
       "slug": "pelantikan-pengurus-dpp-2024-2027",
-      "kategori": [{ "id": 1 }],
+      "category": [{ "id": 1 }],
       "blocks": [
         {
-          "__component": "shared.slider",
-          "files": ["coffee-art.jpg", "coffee-beans.jpg"]
+          "__component": "block.slider",
+          "images": ["coffee-art.jpg", "coffee-beans.jpg"]
         },
         {
-          "__component": "shared.rich-text-md",
+          "__component": "block.rich-text",
           "body": "paragraphs.1"
         },
         {
-          "__component": "shared.image",
-          "file": "coffee-art.jpg"
+          "__component": "block.image",
+          "image": "coffee-art.jpg"
         }
       ]
     }

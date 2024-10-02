@@ -13,18 +13,19 @@ on:
 jobs:
   testing:
     name: Testing
-    uses: paroki/portal/.github/workflows/testing.yml@ci
+    uses: paroki/portal/.github/workflows/testing.yml@main
     secrets: inherit
 
   image:
     name: Image
     needs: ["testing"]
     if: github.event_name != 'pull_request'
-    uses: paroki/portal/.github/workflows/image.yml@ci
+    uses: paroki/portal/.github/workflows/image.yml@main
     secrets: inherit
 
   gitlab:
     name: GitLab
-    needs: ["testing", "image"]
-    uses: paroki/portal/.github/workflows/gitlab.yml@ci
+    needs: ["testing"]
+    if: github.event_name != 'pull_request'
+    uses: paroki/portal/.github/workflows/gitlab.yml@main
     secrets: inherit

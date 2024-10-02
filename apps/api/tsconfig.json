@@ -39,7 +39,5 @@
     "**/*.test.*",
     // Do not include plugins in the server compilation
     "src/plugins/**"
-    // do not include generated types
-    // "src/types/generated"
   ]
 }

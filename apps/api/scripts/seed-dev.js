@@ -5,7 +5,8 @@ const path = require("path");
 const mime = require("mime-types");
 const _ = require("lodash");
 const LoremIpsum = require("lorem-ipsum").LoremIpsum;
-const { kategories, statics, beritas } = require("../data/data.json");
+const { categories, statics, articles } = require("../data/data.json");
+const { fakerID_ID: faker } = require("@faker-js/faker");
 
 const lipsum = new LoremIpsum({
   sentencesPerParagraph: {
@@ -121,7 +122,11 @@ async function createEntry({ model, entry }) {
       data: entry,
     });
   } catch (error) {
-    console.error({ model, entry, error });
+    if (Object.hasOwn(error, "details")) {
+      console.log(error.details);
+    } else {
+      console.error({ model, entry, error });
+    }
   }
 }
 
@@ -167,33 +172,48 @@ ${lipsum.generateParagraphs(5)}
 async function updateBlocks(blocks) {
   const updatedBlocks = [];
   for (const block of blocks) {
-    if (block.__component === "shared.image") {
-      const uploadedFiles = await checkFileExistsBeforeUpload([block.file]);
+    if (block.__component === "block.image") {
+      const uploadedFiles = await checkFileExistsBeforeUpload([block.image]);
       // Copy the block to not mutate directly
       const blockCopy = { ...block };
       // Replace the file name on the block with the actual file
-      blockCopy.file = uploadedFiles;
+      blockCopy.image = uploadedFiles;
       updatedBlocks.push(blockCopy);
-    } else if (block.__component === "shared.slider") {
+    } else if (block.__component === "block.slider") {
       // Get files already uploaded to Strapi or upload new files
       const existingAndUploadedFiles = await checkFileExistsBeforeUpload(
-        block.files,
+        block.images,
       );
       // Copy the block to not mutate directly
       const blockCopy = { ...block };
       // Replace the file names on the block with the actual files
-      blockCopy.files = existingAndUploadedFiles;
+      blockCopy.images = existingAndUploadedFiles;
       // Push the updated block
       updatedBlocks.push(blockCopy);
-    } else if (block.__component === "shared.rich-text-md") {
-      const exp = block.body.split(".");
-      if (exp[0] === "paragraphs") {
-        const blockCopy = { ...block };
-        blockCopy.body = generateContent();
-        updatedBlocks.push(blockCopy);
-      } else {
-        updatedBlocks.push(block);
-      }
+    } else if (block.__component === "block.rich-text") {
+      const blockCopy = { ...block };
+      blockCopy.body = `
+
+# ${faker.lorem.sentence({ min: 2, max: 3 })}
+
+${faker.lorem.paragraph({ min: 2, max: 4 })}
+
+## ${faker.lorem.sentence({ min: 2, max: 3 })}
+
+${faker.lorem.paragraph({ min: 2, max: 4 })}
+
+${faker.lorem.paragraph({ min: 2, max: 4 })}
+
+### ${faker.lorem.sentence({ min: 2, max: 3 })}
+
+${faker.lorem.paragraph({ min: 2, max: 4 })}
+
+${faker.lorem.paragraph({ min: 2, max: 4 })}
+
+${faker.lorem.paragraph({ min: 2, max: 4 })}
+
+`;
+      updatedBlocks.push(blockCopy);
     } else {
       // Just push the block as is
       updatedBlocks.push(block);
@@ -206,7 +226,7 @@ async function updateBlocks(blocks) {
 async function importStatics() {
   for (const content of statics) {
     const updatedBlocks = await updateBlocks(content.blocks);
-    content.slug = _.kebabCase(content.judul);
+    content.slug = _.kebabCase(content.title);
     await createEntry({
       model: "static",
       entry: {
@@ -218,38 +238,39 @@ async function importStatics() {
   }
 }
 
-async function importKategories() {
-  for (const kategori of kategories) {
-    await createEntry({ model: "kategori", entry: kategori });
+async function importCategories() {
+  for (const category of categories) {
+    category.slug = _.kebabCase(category.name);
+    await createEntry({ model: "category", entry: category });
   }
 }
 
-async function importBeritas() {
-  for (const berita of beritas) {
-    const updatedBlocks = await updateBlocks(berita.blocks);
-    berita.slug = _.kebabCase(berita.judul);
-    (berita.deskripsi = lipsum.generateParagraphs(1)),
-      await createEntry({
-        model: "berita",
-        entry: {
-          ...berita,
-          blocks: updatedBlocks,
-          publishedAt: Date.now(),
-        },
-      });
+async function importArticles() {
+  for (const article of articles) {
+    const updatedBlocks = await updateBlocks(article.blocks);
+    article.slug = _.kebabCase(article.title);
+    article.deskripsi = faker.lorem.paragraph(1);
+    await createEntry({
+      model: "article",
+      entry: {
+        ...article,
+        blocks: updatedBlocks,
+        publishedAt: Date.now(),
+      },
+    });
   }
 }
 
 async function importSeedData() {
   await setPublicPermissions({
-    kategori: ["find", "findOne"],
+    category: ["find", "findOne"],
     static: ["find", "findOne"],
-    berita: ["find", "findOne"],
+    article: ["find", "findOne"],
   });
 
-  await importKategories();
+  await importCategories();
   await importStatics();
-  await importBeritas();
+  await importArticles();
 }
 
 async function cleanupTempDir() {

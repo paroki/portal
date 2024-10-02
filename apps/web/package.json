@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "test": "vitest",
-    "coverage:ui": "vitest --coverage",
+    "coverage": "vitest --coverage",
     "e2e": "pnpm exec playwright test"
   },
   "dependencies": {

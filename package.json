@@ -2,7 +2,7 @@
   "name": "portal",
   "private": true,
   "scripts": {
-    "prepare": "husky install",
+    "prepare": "node .husky/install.mjs",
     "build": "turbo build",
     "dev": "turbo dev",
     "lint": "turbo lint",
@@ -24,8 +24,18 @@
     "turbo": "^2.1.2",
     "typescript": "^5.4.5"
   },
+  "pnpm": {
+    "peerDependenciesRules": {
+      "allowedVersions": {
+        "eslint": "8"
+      }
+    }
+  },
   "packageManager": "pnpm@9.11.0",
   "engines": {
     "node": "20.x"
+  },
+  "dependencies": {
+    "eslint": "8"
   }
 }

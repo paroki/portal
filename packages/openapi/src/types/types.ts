@@ -1,9 +1,5 @@
 import { components } from "./openapi";
 
-export type FetchOptions = {
-  headers: any;
-};
-
 export type Pagination = {
   page?: number;
   pageSize?: number;
@@ -20,26 +16,21 @@ export interface PagedCollection<T> {
   meta: PagedCollectionMeta;
 }
 
+export type SearchParams = {
+  page?: number;
+  limit?: number;
+  sort?: string[];
+  filters?: {
+    [key: string]: number | string | object;
+  };
+};
+
 export interface Item {
   id?: number;
   documentId?: string;
 }
-export type SharedImage = components["schemas"]["SharedImageComponent"];
-export type SharedSlider = components["schemas"]["SharedSliderComponent"];
-export type SharedRichText = components["schemas"]["SharedRichTextComponent"];
-export type SharedRichTextMd =
-  components["schemas"]["SharedRichTextMdComponent"];
-export type SharedSeo = components["schemas"]["SharedSeoComponent"];
-
-export type BlockComponent =
-  | SharedImage
-  | SharedSlider
-  | SharedRichText
-  | SharedRichTextMd
-  | SharedSeo;
-
-export type Blocks = BlockComponent[];
 
 /* Blog Type Section */
-export type Berita = components["schemas"]["Berita"] & Item;
+export type Category = components["schemas"]["Category"] & Item;
+export type Article = components["schemas"]["Article"] & Item;
 export type Static = components["schemas"]["Static"] & Item;
