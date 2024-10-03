@@ -36,7 +36,7 @@ function ArticleItem({ article }: { article: Article }) {
               width={200}
               height={140}
               src={seo.shareImageUrl ?? noimg}
-              alt="Bold typography"
+              alt={`image for ${article.title}`}
               style={{
                 display: "block",
                 objectFit: "cover",
@@ -48,7 +48,7 @@ function ArticleItem({ article }: { article: Article }) {
           </Inset>
           <Text as="div" size="3">
             <h3 className="my-1 text-base">{article.title}</h3>
-            <p className="text-sm">{article.slug}</p>
+            <p className="text-sm">{article.description?.substring(0, 100)}</p>
           </Text>
         </Card>
       </Box>

@@ -15,6 +15,8 @@ function BlockItem({ block }: { block: BlockContent }) {
     return BlockSliderView({ block });
   } else if ("block.rich-text" === block.__component) {
     return BlockMarkdownView({ block });
+  } else if ("block.seo" === block.__component) {
+    return <></>;
   }
   throw Error("Unsupported block type");
 }

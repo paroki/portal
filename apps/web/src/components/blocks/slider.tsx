@@ -6,6 +6,7 @@ import { Card } from "@radix-ui/themes";
 import { CardContent } from "../ui/card";
 import { useRef } from "react";
 import Autoplay from "embla-carousel-autoplay";
+import { STRAPI_URL } from "@/utils/strapi";
 
 export default function BlockSliderView({ block }: { block: BlockSlider }) {
   const plugin = useRef(Autoplay({ delay: 2000, stopOnInteraction: true }));
@@ -26,7 +27,7 @@ export default function BlockSliderView({ block }: { block: BlockSlider }) {
                   <CardContent className="flex aspect-square items-center justify-center p-6">
                     <h1>{item.id}</h1>
                     <Image
-                      src={`https://localhost:1337${item.url}`}
+                      src={`${STRAPI_URL}${item.url}`}
                       alt={item.alternativeText ?? "article image"}
                     />
                   </CardContent>

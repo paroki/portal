@@ -11,6 +11,13 @@ const nextConfig = {
         hostname: "img.freepik.com",
       },
       {
+        hostname: "api-dev.itstoni.com",
+        protocol: "https",
+      },
+      {
+        hostname: "api.itstoni.com",
+      },
+      {
         protocol: "http",
         port: "1337",
         hostname: "localhost",

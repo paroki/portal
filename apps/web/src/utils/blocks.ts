@@ -6,6 +6,7 @@ import {
   BlockRichText,
   BlockImage,
 } from "@pkrbt/openapi";
+import { STRAPI_URL } from "./strapi";
 
 type BlogContent = Article | Static;
 
@@ -26,7 +27,7 @@ export function extractSeo(item: BlogContent): BlockSeo {
       seo.metaDescription = blockCopy.body;
     } else if ("block.image" === block.__component && !seo.shareImageUrl) {
       const blockCopy = block as BlockImage;
-      seo.shareImageUrl = `http://localhost:1337${blockCopy.image?.url}`;
+      seo.shareImageUrl = `${STRAPI_URL}${blockCopy.image?.url}`;
     }
   });
 

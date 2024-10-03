@@ -9,6 +9,9 @@ type Props = {
   };
 };
 
+// TODO: find a way to remove the line below
+export const dynamic = "force-dynamic";
+
 export default async function Page({ params }: Props) {
   const { slug } = params;
 
