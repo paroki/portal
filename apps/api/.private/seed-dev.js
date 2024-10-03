@@ -4,19 +4,49 @@ const fs = require("fs-extra");
 const path = require("path");
 const mime = require("mime-types");
 const _ = require("lodash");
-const data = require("./fixtures/data.json");
+const LoremIpsum = require("lorem-ipsum").LoremIpsum;
+const { categories, statics, articles } = require("../data/data.json");
 const { fakerID_ID: faker } = require("@faker-js/faker");
-let images = [];
-let categories = [];
+
+const lipsum = new LoremIpsum({
+  sentencesPerParagraph: {
+    max: 5,
+    min: 3,
+  },
+  wordsPerSentence: {
+    max: 8,
+    min: 4,
+  },
+  suffix: "\n\n",
+});
+
+async function isFirstRun() {
+  const pluginStore = strapi.store({
+    environment: strapi.config.environment,
+    type: "type",
+    name: "setup",
+  });
+  const initHasRun = await pluginStore.get({ key: "initHasRun" });
+  await pluginStore.set({ key: "initHasRun", value: true });
+  return !initHasRun;
+}
 
 async function seedData() {
-  try {
-    console.log("Setting up the template...");
-    await importSeedData();
-    console.log("Ready to go");
-  } catch (error) {
-    console.log("Could not import seed data");
-    console.error(error);
+  const shouldImportSeedData = await isFirstRun();
+
+  if (shouldImportSeedData) {
+    try {
+      console.log("Setting up the template...");
+      await importSeedData();
+      console.log("Ready to go");
+    } catch (error) {
+      console.log("Could not import seed data");
+      console.error(error);
+    }
+  } else {
+    console.log(
+      "Seed data has already been imported. We cannot reimport unless you clear your database first.",
+    );
   }
 }
 
@@ -54,7 +84,7 @@ function getFileSizeInBytes(filePath) {
 }
 
 function getFileData(fileName) {
-  const filePath = path.join("scripts", "fixtures", "img", fileName);
+  const filePath = path.join("data", "test", fileName);
   // Parse the file metadata
   const size = getFileSizeInBytes(filePath);
   const ext = fileName.split(".").pop();
@@ -129,167 +159,108 @@ async function checkFileExistsBeforeUpload(files) {
   return allFiles.length === 1 ? allFiles[0] : allFiles;
 }
 
+function generateContent() {
+  const contents = `
+# ${lipsum.generateWords(4)}
+
+${lipsum.generateParagraphs(5)}
+`;
+
+  return contents;
+}
+
+async function updateBlocks(blocks) {
+  const updatedBlocks = [];
+  for (const block of blocks) {
+    if (block.__component === "block.image") {
+      const uploadedFiles = await checkFileExistsBeforeUpload([block.image]);
+      // Copy the block to not mutate directly
+      const blockCopy = { ...block };
+      // Replace the file name on the block with the actual file
+      blockCopy.image = uploadedFiles;
+      updatedBlocks.push(blockCopy);
+    } else if (block.__component === "block.slider") {
+      // Get files already uploaded to Strapi or upload new files
+      const existingAndUploadedFiles = await checkFileExistsBeforeUpload(
+        block.images,
+      );
+      // Copy the block to not mutate directly
+      const blockCopy = { ...block };
+      // Replace the file names on the block with the actual files
+      blockCopy.images = existingAndUploadedFiles;
+      // Push the updated block
+      updatedBlocks.push(blockCopy);
+    } else if (block.__component === "block.rich-text") {
+      const blockCopy = { ...block };
+      blockCopy.body = `
+
+# ${faker.lorem.sentence({ min: 2, max: 3 })}
+
+${faker.lorem.paragraph({ min: 2, max: 4 })}
+
+## ${faker.lorem.sentence({ min: 2, max: 3 })}
+
+${faker.lorem.paragraph({ min: 2, max: 4 })}
+
+${faker.lorem.paragraph({ min: 2, max: 4 })}
+
+### ${faker.lorem.sentence({ min: 2, max: 3 })}
+
+${faker.lorem.paragraph({ min: 2, max: 4 })}
+
+${faker.lorem.paragraph({ min: 2, max: 4 })}
+
+${faker.lorem.paragraph({ min: 2, max: 4 })}
+
+`;
+      updatedBlocks.push(blockCopy);
+    } else {
+      // Just push the block as is
+      updatedBlocks.push(block);
+    }
+  }
+
+  return updatedBlocks;
+}
+
+async function importStatics() {
+  for (const content of statics) {
+    const updatedBlocks = await updateBlocks(content.blocks);
+    content.slug = _.kebabCase(content.title);
+    await createEntry({
+      model: "static",
+      entry: {
+        ...content,
+        blocks: updatedBlocks,
+        publishedAt: Date.now(),
+      },
+    });
+  }
+}
+
 async function importCategories() {
-  for (const name of data.categories) {
-    const entry = {
-      name,
-      slug: _.kebabCase(name),
-    };
-    const entity = await createEntry({ model: "category", entry });
-    categories.push(entity);
+  for (const category of categories) {
+    category.slug = _.kebabCase(category.name);
+    await createEntry({ model: "category", entry: category });
   }
-}
-
-function generateCategory() {
-  const rand = faker.number.int({ min: 0, max: categories.length - 1 });
-  return {
-    id: categories[rand].id,
-  };
-}
-
-function genTitle() {
-  return _.startCase(faker.lorem.words({ min: 2, max: 3 }));
-}
-/**
- * generates markdown blocks
- */
-function generateMarkdown() {
-  let contents = [];
-  const heading = genTitle();
-  contents.push(`# ${heading}`);
-
-  const rand1 = faker.number.int({ min: 1, max: 3 });
-  for (let i = 1; i <= rand1; i++) {
-    if (i > 1) {
-      contents.push(`## ${genTitle()}`);
-    }
-    const rand2 = faker.number.int({ min: 1, max: 3 });
-    for (let j = 1; j <= rand2; j++) {
-      contents.push(`${faker.lorem.paragraphs(1)}`);
-    }
-  }
-
-  return {
-    __component: "block.rich-text",
-    body: contents.join("\n\n"),
-  };
-}
-
-/**
- * generates image blocks
- */
-function generateImage() {
-  const rand = faker.number.int({ min: 0, max: images.length - 1 });
-  return {
-    __component: "block.image",
-    image: images[rand],
-  };
-}
-
-/**
- * generates slider blocks
- */
-function generateSlider() {
-  const rand = faker.number.int({ min: 0, max: images.length - 1 });
-  let entries = [];
-  for (let i = 1; i <= rand; i++) {
-    entries.push(images[i]);
-  }
-
-  return {
-    __component: "block.slider",
-    images: entries,
-  };
 }
 
 async function importArticles() {
-  for (let i = 0; i < 50; i++) {
-    const title = _.startCase(faker.lorem.words({ min: 2, max: 4 }));
-    const description = faker.lorem.sentence();
-    const image = generateImage();
-    const shareImageUrl = image.image.formats.thumbnail.url;
-    const article = {
-      title,
-      slug: _.kebabCase(title),
-      description,
-      category: generateCategory(),
-      blocks: [
-        generateSlider(),
-        generateMarkdown(),
-        image,
-        generateMarkdown(),
-        {
-          __component: "block.seo",
-          metaTitle: title,
-          metaDescription: description,
-          shareImageUrl,
-        },
-      ],
-    };
-
+  for (const article of articles) {
+    const updatedBlocks = await updateBlocks(article.blocks);
+    article.slug = _.kebabCase(article.title);
+    article.deskripsi = faker.lorem.paragraph(1);
     await createEntry({
       model: "article",
-      entry: article,
-    });
-  }
-}
-
-async function importImages() {
-  // empty dir before uploads
-  fs.emptyDirSync("public/uploads");
-  fs.ensureFileSync("public/uploads/.gitkeep");
-
-  images = await checkFileExistsBeforeUpload(data.images);
-}
-
-async function importOrganization() {
-  let organizations = [];
-
-  for (const o of data.organizations) {
-    const entry = await createEntry({
-      model: "organization",
       entry: {
-        name: o.name,
-      },
-    });
-    organizations.push(entry);
-  }
-
-  let structures = [];
-  for (const s of data.structures) {
-    const entry = await createEntry({
-      model: "org-structure",
-      entry: {
-        name: s.name,
-        organization: { id: 1 },
-      },
-    });
-    structures.push(entry);
-  }
-
-  let positions = [];
-  for (const p of data.positions) {
-    const item = await createEntry({
-      model: "org-position",
-      entry: {
-        name: p.name,
-        structure: { id: 1 },
-      },
-    });
-
-    positions.push(item);
-  }
-
-  for (const m of data.members) {
-    const item = await createEntry({
-      model: "org-member",
-      entry: {
-        ...m,
-        name: faker.person.fullName(),
+        ...article,
+        blocks: updatedBlocks,
+        publishedAt: Date.now(),
       },
     });
   }
 }
+
 async function importSeedData() {
   await setPublicPermissions({
     category: ["find", "findOne"],
@@ -297,9 +268,8 @@ async function importSeedData() {
     article: ["find", "findOne"],
   });
 
-  await importOrganization();
   await importCategories();
-  await importImages();
+  await importStatics();
   await importArticles();
 }
 
