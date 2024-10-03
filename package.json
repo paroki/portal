@@ -1,5 +1,5 @@
 {
-  "name": "portal",
+  "name": "pkrbt",
   "private": true,
   "scripts": {
     "prepare": "node .husky/install.mjs",

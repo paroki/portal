@@ -9,7 +9,8 @@
     "dev": "strapi develop",
     "start": "strapi start",
     "strapi": "strapi",
-    "seed:dev": "node ./scripts/seed-dev.js"
+    "seed:dev": "node ./scripts/seed-dev.js",
+    "token:full": "node ./scripts/token.js --full"
   },
   "dependencies": {
     "@strapi/plugin-cloud": "5.0.1",
