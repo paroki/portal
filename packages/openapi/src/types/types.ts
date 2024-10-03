@@ -34,3 +34,10 @@ export interface Item {
 export type Category = components["schemas"]["Category"] & Item;
 export type Article = components["schemas"]["Article"] & Item;
 export type Static = components["schemas"]["Static"] & Item;
+export type Marriages = components["schemas"]["AnMarriage"] & Item;
+
+/* Organization Section */
+export type Organization = components["schemas"]["Organization"] & Item;
+export type OrgStructure = components["schemas"]["OrgStructure"] & Item;
+export type OrgPosition = components["schemas"]["OrgPosition"] & Item;
+export type OrgMember = components["schemas"]["OrgMember"] & Item;

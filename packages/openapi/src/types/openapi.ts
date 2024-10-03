@@ -1706,6 +1706,7 @@ export interface components {
         ArticleRequest: {
             data: {
                 title: string;
+                description?: string;
                 slug?: string;
                 /** @example string or id */
                 category?: number | string;
@@ -1729,6 +1730,7 @@ export interface components {
             id?: number;
             documentId?: string;
             title: string;
+            description?: string;
             slug?: string;
             category?: {
                 id?: number;
@@ -1740,6 +1742,7 @@ export interface components {
                     id?: number;
                     documentId?: string;
                     title?: string;
+                    description?: string;
                     slug?: string;
                     category?: {
                         id?: number;
@@ -1956,6 +1959,7 @@ export interface components {
                 id?: number;
                 documentId?: string;
                 title?: string;
+                description?: string;
                 slug?: string;
                 category?: {
                     id?: number;
@@ -2545,6 +2549,7 @@ export interface components {
                                     id?: number;
                                     documentId?: string;
                                 }[];
+                                shortName?: string;
                                 /** Format: date-time */
                                 createdAt?: string;
                                 /** Format: date-time */
@@ -2732,6 +2737,7 @@ export interface components {
                         id?: number;
                         documentId?: string;
                     }[];
+                    shortName?: string;
                     /** Format: date-time */
                     createdAt?: string;
                     /** Format: date-time */
@@ -3228,6 +3234,7 @@ export interface components {
                         id?: number;
                         documentId?: string;
                     }[];
+                    shortName?: string;
                     /** Format: date-time */
                     createdAt?: string;
                     /** Format: date-time */
@@ -3684,6 +3691,7 @@ export interface components {
                 description?: string;
                 active: boolean;
                 structures?: (number | string)[];
+                shortName?: string;
                 locale?: string;
                 localizations?: (number | string)[];
             };
@@ -3728,6 +3736,7 @@ export interface components {
                         id?: number;
                         documentId?: string;
                     }[];
+                    shortName?: string;
                     /** Format: date-time */
                     createdAt?: string;
                     /** Format: date-time */
@@ -4142,6 +4151,7 @@ export interface components {
                     documentId?: string;
                 }[];
             }[];
+            shortName?: string;
             /** Format: date-time */
             createdAt?: string;
             /** Format: date-time */
