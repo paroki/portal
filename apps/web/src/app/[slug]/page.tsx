@@ -1,6 +1,7 @@
 import BlocksView from "@/components/blocks/blocks";
 import Container from "@/components/ui/container";
 import api from "@/utils/strapi";
+import { notFound } from "next/navigation";
 
 type Props = {
   params: {
@@ -12,6 +13,9 @@ export default async function Page({ params }: Props) {
   const { slug } = params;
 
   const item = await api.article.read(slug);
+  if (!item) {
+    return notFound();
+  }
 
   return (
     <Container>
