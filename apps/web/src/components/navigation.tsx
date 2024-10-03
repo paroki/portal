@@ -1,17 +1,14 @@
-'use client';
+"use client";
 
-import type { Session } from 'next-auth';
+import * as React from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { LucideChevronDown, Menu, X } from "lucide-react";
+import Image from "next/image";
 
-import * as React from 'react';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { LucideChevronDown, Menu, X } from 'lucide-react';
-import { SignIn, SignOut } from './auth';
-import Image from 'next/image';
+import logo from "@/assets/logo.png";
 
-import logo from '@/assets/logo.png';
-
-export function Navigation({ session }: { session: Session }) {
+export function Navigation() {
   interface MenuItems {
     name: string;
     path: string;
@@ -20,39 +17,41 @@ export function Navigation({ session }: { session: Session }) {
 
   const menus: MenuItems[] = [
     {
-      name: 'Beranda',
-      path: '/'
+      name: "Beranda",
+      path: "/",
     },
     {
-      name: 'Berita',
-      path: '/berita'
+      name: "Berita",
+      path: "/berita",
     },
     {
-      name: 'Sejarah',
-      path: '/sejarah'
+      name: "DPP",
+      path: "/dpp",
+    },
+    /*
+    {
+      name: "Sejarah",
+      path: "/sejarah",
     },
     {
-      name: 'DPP',
-      path: '/dpp'
+      name: "Formulir",
+      path: "/formulir",
     },
     {
-      name: 'Formulir',
-      path: '/formulir'
-    },
-    {
-      name: 'Dropdown',
-      path: '#',
+      name: "Dropdown",
+      path: "#",
       children: [
         {
-          name: 'Drop 1',
-          path: '#'
+          name: "Drop 1",
+          path: "#",
         },
         {
-          name: 'Drop 2',
-          path: '#'
-        }
-      ]
-    }
+          name: "Drop 2",
+          path: "#",
+        },
+      ],
+    },
+    */
   ];
 
   const containerNav = React.useRef<HTMLDivElement>(null);
@@ -60,7 +59,9 @@ export function Navigation({ session }: { session: Session }) {
 
   const toggleVisibility = (): void => {
     const containerEl = containerNav.current;
-    containerEl?.className.includes('show') ? containerEl.classList.remove('show') : containerEl?.classList.add('show');
+    containerEl?.className.includes("show")
+      ? containerEl.classList.remove("show")
+      : containerEl?.classList.add("show");
   };
   return (
     <div className="sticky top-0 bg-white shadow-sm z-50 md:border-b flex items-center md:block justify-between w-full">
@@ -75,7 +76,8 @@ export function Navigation({ session }: { session: Session }) {
           <div className="absolute w-full top-4 block md:hidden">
             <button
               className="p-3 hover:bg-primary-300 rounded-full active:scale-110 active:bg-primary-400"
-              onClick={toggleVisibility}>
+              onClick={toggleVisibility}
+            >
               <X className="text-center w-9 h-9" />
             </button>
           </div>
@@ -84,7 +86,8 @@ export function Navigation({ session }: { session: Session }) {
               (menu.children?.length ?? 0 > 0) ? (
                 <li className="parent-nav" key={index}>
                   <Link href="#">
-                    <span>{menu.name}</span> <LucideChevronDown className="inline w-4 h-4" />
+                    <span>{menu.name}</span>{" "}
+                    <LucideChevronDown className="inline w-4 h-4" />
                   </Link>
                   <ul className="subnav">
                     {menu.children?.map((submenu, subindex) => (
@@ -93,7 +96,8 @@ export function Navigation({ session }: { session: Session }) {
                           onClick={() => {
                             toggleVisibility();
                           }}
-                          href={submenu.path}>
+                          href={submenu.path}
+                        >
                           {submenu.name}
                         </Link>
                       </li>
@@ -107,20 +111,21 @@ export function Navigation({ session }: { session: Session }) {
                       toggleVisibility();
                     }}
                     href={menu.path}
-                    className={`${pathname === menu.path ? 'link-active' : ''}`}>
+                    className={`${pathname === menu.path ? "link-active" : ""}`}
+                  >
                     {menu.name}
                   </Link>
                 </li>
-              )
+              ),
             )}
-            <li>{session ? <SignOut /> : <SignIn />}</li>
           </ul>
         </div>
       </nav>
       <div className="flex w-full justify-end md:hidden p-2 px-8">
         <button
           className="p-3 hover:bg-gray-50 rounded-full active:scale-110 active:bg-gray-100"
-          onClick={toggleVisibility}>
+          onClick={toggleVisibility}
+        >
           <Menu className="text-center w-8 h-8" />
         </button>
       </div>

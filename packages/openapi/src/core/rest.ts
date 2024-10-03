@@ -11,7 +11,7 @@ export function rest<T extends Item>(strapi: Strapi, path: any) {
         body: {
           data: item,
         },
-        cache: "no-store",
+        cache: "no-cache",
       });
 
       if (error) {
@@ -24,7 +24,7 @@ export function rest<T extends Item>(strapi: Strapi, path: any) {
     read: async (documentId: string, init = {}): Promise<T> => {
       const url: any = `${path}/${documentId}`;
       const { data: rdata, error } = await strapi.fetch.GET(url, {
-        cache: "no-store",
+        cache: "no-cache",
         ...init,
       });
 
@@ -43,7 +43,7 @@ export function rest<T extends Item>(strapi: Strapi, path: any) {
             ...item,
           },
         },
-        cache: "no-store",
+        cache: "no-cache",
       });
 
       if (error) {
@@ -56,7 +56,7 @@ export function rest<T extends Item>(strapi: Strapi, path: any) {
     delete: async (item: T, init?: {}): Promise<T> => {
       const url: any = `${path}/${item.documentId}`;
       const { data, error } = await strapi.fetch.DELETE(url, {
-        cache: "no-store",
+        cache: "no-cache",
         ...init,
       });
 

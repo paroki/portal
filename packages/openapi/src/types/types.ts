@@ -25,9 +25,18 @@ export type SearchParams = {
   };
 };
 
+export type Blocks = components["schemas"]["Article"]["blocks"];
+export type BlockImage = components["schemas"]["BlockImageComponent"];
+export type BlockSeo = components["schemas"]["BlockSeoComponent"];
+export type BlockSlider = components["schemas"]["BlockSliderComponent"];
+export type BlockRichText = components["schemas"]["BlockRichTextComponent"];
+
+export type BlockContent = BlockImage | BlockSeo | BlockSlider | BlockRichText;
+
 export interface Item {
   id?: number;
   documentId?: string;
+  blocks?: Blocks;
 }
 
 /* Blog Type Section */

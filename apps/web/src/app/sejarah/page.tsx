@@ -1,4 +1,4 @@
-import lipsum from "@/util/lipsum";
+import lipsum from "@/utils/lipsum";
 
 export default function Page() {
   return (
