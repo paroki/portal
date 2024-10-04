@@ -1,21 +1,9 @@
+/* eslint-disable jsx-a11y/alt-text */
 "use client";
 
-import { STRAPI_URL } from "@/utils/strapi";
 import { BlockImage } from "@pkrbt/openapi";
-import Image from "next/image";
+import Image from "@/components/ui/image";
 
 export default function BlockImageView({ block }: { block: BlockImage }) {
-  return (
-    <div>
-      <Image
-        src={`${STRAPI_URL}${block.image?.url}`}
-        width={block.image?.width}
-        height={block.image?.height}
-        alt={block.image?.alternativeText ?? "article image"}
-        style={{
-          maxWidth: "600px",
-        }}
-      />
-    </div>
-  );
+  return <Image image={block.image} size="medium" />;
 }

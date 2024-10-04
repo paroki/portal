@@ -25,12 +25,30 @@ export type SearchParams = {
   };
 };
 
+export type Image = Omit<components["schemas"]["UploadFile"], "formats"> & {
+  formats: {
+    thumbnail: ImageFormat;
+    medium: ImageFormat;
+    small: ImageFormat;
+    large: ImageFormat;
+  };
+};
+
+export type ImageFormat = Pick<
+  Image,
+  "name" | "hash" | "ext" | "mime" | "width" | "height" | "size" | "url"
+> & {
+  path: string;
+  sizeInBytes: number;
+};
+
 export type Blocks = components["schemas"]["Article"]["blocks"];
-export type BlockImage = components["schemas"]["BlockImageComponent"];
+export type BlockImage = components["schemas"]["BlockImageComponent"] & {
+  image: Image;
+};
 export type BlockSeo = components["schemas"]["BlockSeoComponent"];
 export type BlockSlider = components["schemas"]["BlockSliderComponent"];
 export type BlockRichText = components["schemas"]["BlockRichTextComponent"];
-
 export type BlockContent = BlockImage | BlockSeo | BlockSlider | BlockRichText;
 
 export interface Item {

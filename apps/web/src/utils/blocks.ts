@@ -27,9 +27,12 @@ export function extractSeo(item: BlogContent): BlockSeo {
       seo.metaDescription = blockCopy.body;
     } else if ("block.image" === block.__component && !seo.shareImageUrl) {
       const blockCopy = block as BlockImage;
-      seo.shareImageUrl = `${STRAPI_URL}${blockCopy.image?.url}`;
+      seo.shareImageUrl = `${blockCopy.image.formats.thumbnail.url}`;
     }
   });
 
+  if (seo.shareImageUrl && !seo.shareImageUrl.includes(STRAPI_URL)) {
+    seo.shareImageUrl = `${STRAPI_URL}${seo.shareImageUrl}`;
+  }
   return seo;
 }
