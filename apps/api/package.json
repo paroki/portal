@@ -9,8 +9,7 @@
     "dev": "strapi develop",
     "start": "strapi start",
     "strapi": "strapi",
-    "seed:dev": "node ./scripts/seed-dev.js",
-    "token:full": "node ./scripts/token.js --full"
+    "seed:dev": "node ./scripts/seed-dev.js"
   },
   "dependencies": {
     "@strapi/plugin-cloud": "5.0.1",
@@ -34,6 +33,7 @@
     "fs-extra": "^11.2.0",
     "lorem-ipsum": "^2.0.8",
     "mime-types": "^2.1.35",
+    "moment": "^2.30.1",
     "typescript": "^5"
   },
   "engines": {

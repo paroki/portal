@@ -4,49 +4,21 @@ const fs = require("fs-extra");
 const path = require("path");
 const mime = require("mime-types");
 const _ = require("lodash");
-const LoremIpsum = require("lorem-ipsum").LoremIpsum;
-const { categories, statics, articles } = require("../data/data.json");
+const moment = require("moment");
+const data = require("./fixtures/data.json");
 const { fakerID_ID: faker } = require("@faker-js/faker");
-
-const lipsum = new LoremIpsum({
-  sentencesPerParagraph: {
-    max: 5,
-    min: 3,
-  },
-  wordsPerSentence: {
-    max: 8,
-    min: 4,
-  },
-  suffix: "\n\n",
-});
-
-async function isFirstRun() {
-  const pluginStore = strapi.store({
-    environment: strapi.config.environment,
-    type: "type",
-    name: "setup",
-  });
-  const initHasRun = await pluginStore.get({ key: "initHasRun" });
-  await pluginStore.set({ key: "initHasRun", value: true });
-  return !initHasRun;
-}
+let superuser = undefined;
+let images = [];
+let categories = [];
 
 async function seedData() {
-  const shouldImportSeedData = await isFirstRun();
-
-  if (shouldImportSeedData) {
-    try {
-      console.log("Setting up the template...");
-      await importSeedData();
-      console.log("Ready to go");
-    } catch (error) {
-      console.log("Could not import seed data");
-      console.error(error);
-    }
-  } else {
-    console.log(
-      "Seed data has already been imported. We cannot reimport unless you clear your database first.",
-    );
+  try {
+    console.log("Setting up the template...");
+    await importSeedData();
+    console.log("Ready to go");
+  } catch (error) {
+    console.log("Could not import seed data");
+    console.error(error);
   }
 }
 
@@ -84,7 +56,7 @@ function getFileSizeInBytes(filePath) {
 }
 
 function getFileData(fileName) {
-  const filePath = path.join("data", "test", fileName);
+  const filePath = path.join("scripts", "fixtures", "img", fileName);
   // Parse the file metadata
   const size = getFileSizeInBytes(filePath);
   const ext = fileName.split(".").pop();
@@ -118,7 +90,7 @@ async function uploadFile(file, name) {
 async function createEntry({ model, entry }) {
   try {
     // Actually create the entry in Strapi
-    await strapi.documents(`api::${model}.${model}`).create({
+    return await strapi.documents(`api::${model}.${model}`).create({
       data: entry,
     });
   } catch (error) {
@@ -159,103 +131,226 @@ async function checkFileExistsBeforeUpload(files) {
   return allFiles.length === 1 ? allFiles[0] : allFiles;
 }
 
-function generateContent() {
-  const contents = `
-# ${lipsum.generateWords(4)}
-
-${lipsum.generateParagraphs(5)}
-`;
-
-  return contents;
+async function importCategories() {
+  for (const name of data.categories) {
+    const entry = {
+      name,
+      slug: _.kebabCase(name),
+    };
+    const entity = await createEntry({ model: "category", entry });
+    categories.push(entity);
+  }
 }
 
-async function updateBlocks(blocks) {
-  const updatedBlocks = [];
-  for (const block of blocks) {
-    if (block.__component === "block.image") {
-      const uploadedFiles = await checkFileExistsBeforeUpload([block.image]);
-      // Copy the block to not mutate directly
-      const blockCopy = { ...block };
-      // Replace the file name on the block with the actual file
-      blockCopy.image = uploadedFiles;
-      updatedBlocks.push(blockCopy);
-    } else if (block.__component === "block.slider") {
-      // Get files already uploaded to Strapi or upload new files
-      const existingAndUploadedFiles = await checkFileExistsBeforeUpload(
-        block.images,
-      );
-      // Copy the block to not mutate directly
-      const blockCopy = { ...block };
-      // Replace the file names on the block with the actual files
-      blockCopy.images = existingAndUploadedFiles;
-      // Push the updated block
-      updatedBlocks.push(blockCopy);
-    } else if (block.__component === "block.rich-text") {
-      const blockCopy = { ...block };
-      blockCopy.body = `
+function generateCategory() {
+  const rand = faker.number.int({ min: 0, max: categories.length - 1 });
+  return {
+    id: categories[rand].id,
+  };
+}
 
-# ${faker.lorem.sentence({ min: 2, max: 3 })}
+function genTitle() {
+  return _.startCase(faker.lorem.words({ min: 2, max: 3 }));
+}
 
-${faker.lorem.paragraph({ min: 2, max: 4 })}
+/**
+ * generates markdown blocks
+ */
+function generateMarkdown() {
+  let contents = [];
+  const heading = genTitle();
+  contents.push(`# ${heading}`);
 
-## ${faker.lorem.sentence({ min: 2, max: 3 })}
-
-${faker.lorem.paragraph({ min: 2, max: 4 })}
-
-${faker.lorem.paragraph({ min: 2, max: 4 })}
-
-### ${faker.lorem.sentence({ min: 2, max: 3 })}
-
-${faker.lorem.paragraph({ min: 2, max: 4 })}
-
-${faker.lorem.paragraph({ min: 2, max: 4 })}
-
-${faker.lorem.paragraph({ min: 2, max: 4 })}
-
-`;
-      updatedBlocks.push(blockCopy);
-    } else {
-      // Just push the block as is
-      updatedBlocks.push(block);
+  const rand1 = faker.number.int({ min: 1, max: 3 });
+  for (let i = 1; i <= rand1; i++) {
+    if (i > 1) {
+      contents.push(`## ${genTitle()}`);
+    }
+    const rand2 = faker.number.int({ min: 1, max: 3 });
+    for (let j = 1; j <= rand2; j++) {
+      contents.push(`${faker.lorem.paragraphs(1)}`);
     }
   }
 
-  return updatedBlocks;
+  return {
+    __component: "block.rich-text",
+    body: contents.join("\n\n"),
+  };
 }
 
-async function importStatics() {
-  for (const content of statics) {
-    const updatedBlocks = await updateBlocks(content.blocks);
-    content.slug = _.kebabCase(content.title);
-    await createEntry({
-      model: "static",
+/**
+ * generates image blocks
+ */
+function generateImage() {
+  const rand = faker.number.int({ min: 0, max: images.length - 1 });
+  return {
+    __component: "block.image",
+    image: images[rand],
+  };
+}
+
+/**
+ * generates slider blocks
+ */
+function generateSlider() {
+  const rand = faker.number.int({ min: 0, max: images.length - 1 });
+  let entries = [];
+  for (let i = 1; i <= rand; i++) {
+    entries.push(images[i]);
+  }
+
+  return {
+    __component: "block.slider",
+    images: entries,
+  };
+}
+
+async function importArticles() {
+  for (let i = 0; i < 50; i++) {
+    const title = _.startCase(faker.lorem.words({ min: 2, max: 4 }));
+    const description = faker.lorem.sentences(4);
+    const image = generateImage();
+    const shareImageUrl = image.image.formats.thumbnail.url;
+    const article = {
+      title,
+      slug: _.kebabCase(title),
+      description,
+      category: generateCategory(),
+      blocks: [
+        generateSlider(),
+        generateMarkdown(),
+        image,
+        generateMarkdown(),
+        {
+          __component: "block.seo",
+          metaTitle: title,
+          metaDescription: description,
+          shareImageUrl,
+        },
+      ],
+      publishedAt: Date.now(),
+      updatedAt: Date.now(),
+      createdBy: { id: superuser.id },
+      updatedBy: { id: superuser.id },
+    };
+
+    const item = await createEntry({
+      model: "article",
+      entry: article,
+    });
+
+    await strapi.documents("api::article.article").publish({
+      documentId: item.documentId,
+    });
+  }
+
+  const markdown = fs.readFileSync(
+    process.cwd() + "/scripts/fixtures/markdown/typography.md",
+    {
+      encoding: "utf8",
+    },
+  );
+  const title = "Typography Testing";
+  const item = await createEntry({
+    model: "article",
+    entry: {
+      title,
+      slug: _.kebabCase(title),
+      description: faker.lorem.sentences(4),
+      category: generateCategory(),
+      publishedAt: Date.now(),
+      updatedAt: Date.now(),
+      createdBy: { id: superuser.id },
+      updatedBy: { id: superuser.id },
+      blocks: [
+        {
+          __component: "block.rich-text",
+          body: markdown,
+        },
+      ],
+    },
+  });
+  await strapi.documents("api::article.article").publish({
+    documentId: item.documentId,
+  });
+}
+
+async function importImages() {
+  // empty dir before uploads
+  fs.emptyDirSync("public/uploads");
+  fs.ensureFileSync("public/uploads/.gitkeep");
+
+  images = await checkFileExistsBeforeUpload(data.images);
+}
+
+async function importOrganization() {
+  let organizations = [];
+
+  for (const o of data.organizations) {
+    const entry = await createEntry({
+      model: "organization",
       entry: {
-        ...content,
-        blocks: updatedBlocks,
-        publishedAt: Date.now(),
+        name: o.name,
+      },
+    });
+    organizations.push(entry);
+  }
+
+  let structures = [];
+  for (const s of data.structures) {
+    const entry = await createEntry({
+      model: "org-structure",
+      entry: {
+        name: s.name,
+        organization: { id: 1 },
+      },
+    });
+    structures.push(entry);
+  }
+
+  let positions = [];
+  for (const p of data.positions) {
+    const item = await createEntry({
+      model: "org-position",
+      entry: p,
+    });
+
+    positions.push(item);
+  }
+
+  for (const p of positions) {
+    const sex = faker.person.sex();
+    await createEntry({
+      model: "org-member",
+      entry: {
+        name: faker.person.firstName(sex) + " " + faker.person.lastName(sex),
+        position: { documentId: p.documentId },
       },
     });
   }
 }
 
-async function importCategories() {
-  for (const category of categories) {
-    category.slug = _.kebabCase(category.name);
-    await createEntry({ model: "category", entry: category });
-  }
-}
-
-async function importArticles() {
-  for (const article of articles) {
-    const updatedBlocks = await updateBlocks(article.blocks);
-    article.slug = _.kebabCase(article.title);
-    article.deskripsi = faker.lorem.paragraph(1);
+async function importMarriages() {
+  for (let i = 0; i < 30; i++) {
+    const tdate = faker.date.between({
+      from: moment().subtract(60, "days"),
+      to: moment.now(),
+    });
+    const startAt = moment(tdate).day("Sunday").toDate();
+    const endAt = moment(startAt).add(21, "days").toDate();
     await createEntry({
-      model: "article",
+      model: "an-marriage",
       entry: {
-        ...article,
-        blocks: updatedBlocks,
-        publishedAt: Date.now(),
+        groomName:
+          faker.person.firstName("male") + " " + faker.person.lastName("male"),
+        groomFrom: `${faker.location.city()}`,
+        brideName:
+          faker.person.firstName("female") +
+          " " +
+          faker.person.lastName("female"),
+        brideFrom: `${faker.location.city()}`,
+        startAt,
+        endAt,
       },
     });
   }
@@ -267,9 +362,10 @@ async function importSeedData() {
     static: ["find", "findOne"],
     article: ["find", "findOne"],
   });
-
+  await importMarriages();
+  await importOrganization();
   await importCategories();
-  await importStatics();
+  await importImages();
   await importArticles();
 }
 
@@ -296,7 +392,64 @@ async function createSuperUser() {
     ...userData,
   });
 
+  superuser = ret;
   console.log(`created user with email: ${ret.email} password: admin`);
+}
+
+const FULL_NAME = "full-token";
+
+async function createToken(full = false) {
+  const tokenService = strapi.service("admin::api-token");
+
+  const tokenExists = await tokenService.exists({
+    name: FULL_NAME,
+  });
+
+  let token = "";
+  if (!tokenExists) {
+    const { accessKey } = await tokenService.create({
+      name: FULL_NAME,
+      type: "full-access",
+      lifespan: null,
+    });
+    token = accessKey;
+  } else {
+    /// regenerate access token
+    const exists = await tokenService.getByName(FULL_NAME);
+
+    const { accessKey } = await tokenService.regenerate(exists.id);
+    token = accessKey;
+  }
+
+  return token;
+}
+
+async function writeToken(token, envDir) {
+  const envFile = envDir + "/.env";
+  if (!fs.existsSync(envFile)) {
+    fs.copyFileSync(envDir + "/.env.default", envFile);
+  }
+
+  const contents = fs.readFileSync(envFile, {
+    encoding: "utf8",
+  });
+
+  const replaced = contents.replace(
+    /^STRAPI_TOKEN.+/gm,
+    `STRAPI_TOKEN=${token}`,
+  );
+  fs.writeFileSync(envFile, replaced);
+}
+
+async function generateToken() {
+  // const token = "some-token";
+  const token = await createToken(true);
+
+  console.log("write token to web/.env");
+  await writeToken(token, path.join(process.cwd() + "/../web"));
+
+  console.log("write token to pwa/.env");
+  await writeToken(token, path.join(process.cwd() + "/../pwa"));
 }
 
 async function main() {
@@ -310,6 +463,7 @@ async function main() {
   app.log.level = "error";
 
   await createSuperUser();
+  await generateToken();
   await seedData();
   await app.destroy();
 

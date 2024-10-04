@@ -21,17 +21,17 @@
       "required": true,
       "default": true
     },
-    "structure": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::org-structure.org-structure",
-      "inversedBy": "position"
-    },
     "heldBy": {
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::org-member.org-member",
       "inversedBy": "position"
+    },
+    "structure": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::org-structure.org-structure",
+      "inversedBy": "positions"
     }
   }
 }
