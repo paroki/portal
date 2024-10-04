@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 
 import * as React from "react";
@@ -10,11 +11,9 @@ import Autoplay from "embla-carousel-autoplay";
 import { Box, Card, Inset, Text } from "@radix-ui/themes";
 import { EyeIcon } from "lucide-react";
 import LinkBtn from "./link";
-import Image from "next/image";
 import Link from "next/link";
 import { Article } from "@pkrbt/openapi";
 import { extractSeo } from "@/utils/blocks";
-import noimg from "@/assets/noimg.jpg";
 
 function ArticleItem({ article }: { article: Article }) {
   const seo = extractSeo(article);
@@ -32,10 +31,10 @@ function ArticleItem({ article }: { article: Article }) {
             <div className="absolute w-full h-full bg-primary-400 opacity-0 group-hover:opacity-50 top-0 flex justify-center items-center transition-all">
               <EyeIcon className="text-white w-9 h-9" />
             </div>
-            <Image
+            <img
               width={200}
               height={140}
-              src={seo.shareImageUrl ?? noimg}
+              src={seo.shareImageUrl ?? "/static/noimg.jpg"}
               alt={`image for ${article.title}`}
               style={{
                 display: "block",

@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 
 import Container from "@/components/ui/container";
@@ -5,14 +6,12 @@ import { useEffect, useState } from "react";
 import { Box, Inset, Text, Card } from "@radix-ui/themes";
 import Loading from "@/components/loading";
 import Link from "next/link";
-import Image from "next/image";
 import { Article } from "@pkrbt/openapi";
-import noimg from "@/assets/noimg.jpg";
 import { extractSeo } from "@/utils/blocks";
 
 const ListView = ({ article }: { article: Article }) => {
   const seo = extractSeo(article);
-
+  console.log(seo.shareImageUrl);
   return (
     <Box
       maxWidth="240px"
@@ -20,8 +19,8 @@ const ListView = ({ article }: { article: Article }) => {
     >
       <Card size="2">
         <Inset clip="padding-box" side="top" pb="current">
-          <Image
-            src={seo.shareImageUrl ?? noimg}
+          <img
+            src={seo.shareImageUrl ?? "/static/noimg.jpg"}
             alt="Bold typography"
             width="200"
             height="140"
