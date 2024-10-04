@@ -1,6 +1,4 @@
 /* eslint-disable jsx-a11y/alt-text */
-"use client";
-
 import { BlockImage } from "@pkrbt/openapi";
 import Image from "@/components/ui/image";
 
