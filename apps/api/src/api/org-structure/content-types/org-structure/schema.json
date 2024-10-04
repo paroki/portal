@@ -38,9 +38,9 @@
       "target": "api::organization.organization",
       "inversedBy": "structures"
     },
-    "position": {
+    "positions": {
       "type": "relation",
-      "relation": "oneToOne",
+      "relation": "oneToMany",
       "target": "api::org-position.org-position",
       "mappedBy": "structure"
     }

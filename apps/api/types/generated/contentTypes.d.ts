@@ -498,7 +498,7 @@ export interface ApiAnMarriageAnMarriage extends Struct.CollectionTypeSchema {
     description: 'Marriage Anouncement';
   };
   options: {
-    draftAndPublish: true;
+    draftAndPublish: false;
   };
   attributes: {
     groomName: Schema.Attribute.String & Schema.Attribute.Required;
@@ -641,8 +641,12 @@ export interface ApiOrgMemberOrgMember extends Struct.CollectionTypeSchema {
     draftAndPublish: false;
   };
   attributes: {
-    title: Schema.Attribute.String;
     name: Schema.Attribute.String & Schema.Attribute.Required;
+    position: Schema.Attribute.Relation<
+      'oneToOne',
+      'api::org-position.org-position'
+    >;
+    title: Schema.Attribute.String;
     handphone: Schema.Attribute.String;
     email: Schema.Attribute.Email;
     photo: Schema.Attribute.Media<'images'>;
@@ -652,10 +656,6 @@ export interface ApiOrgMemberOrgMember extends Struct.CollectionTypeSchema {
     user: Schema.Attribute.Relation<
       'manyToOne',
       'plugin::users-permissions.user'
-    >;
-    position: Schema.Attribute.Relation<
-      'oneToOne',
-      'api::org-position.org-position'
     >;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
@@ -688,11 +688,11 @@ export interface ApiOrgPositionOrgPosition extends Struct.CollectionTypeSchema {
     active: Schema.Attribute.Boolean &
       Schema.Attribute.Required &
       Schema.Attribute.DefaultTo<true>;
+    heldBy: Schema.Attribute.Relation<'oneToOne', 'api::org-member.org-member'>;
     structure: Schema.Attribute.Relation<
-      'oneToOne',
+      'manyToOne',
       'api::org-structure.org-structure'
     >;
-    heldBy: Schema.Attribute.Relation<'oneToOne', 'api::org-member.org-member'>;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
@@ -737,8 +737,8 @@ export interface ApiOrgStructureOrgStructure
       'manyToOne',
       'api::organization.organization'
     >;
-    position: Schema.Attribute.Relation<
-      'oneToOne',
+    positions: Schema.Attribute.Relation<
+      'oneToMany',
       'api::org-position.org-position'
     >;
     createdAt: Schema.Attribute.DateTime;

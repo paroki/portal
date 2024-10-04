@@ -25,11 +25,48 @@
       "structure": {
         "id": 1
       }
-    }
-  ],
-  "members": [
+    },
     {
-      "position": { "id": 1 }
+      "name": "Wakil Ketua I",
+      "structure": {
+        "id": 1
+      }
+    },
+    {
+      "name": "Wakil Ketua II",
+      "structure": {
+        "id": 1
+      }
+    },
+    {
+      "name": "Sekretaris I",
+      "structure": {
+        "id": 1
+      }
+    },
+    {
+      "name": "Sekretaris II",
+      "structure": {
+        "id": 1
+      }
+    },
+    {
+      "name": "Bendahara I",
+      "structure": {
+        "id": 1
+      }
+    },
+    {
+      "name": "Bendahara II",
+      "structure": {
+        "id": 1
+      }
+    },
+    {
+      "name": "Bendahara III",
+      "structure": {
+        "id": 1
+      }
     }
   ]
 }

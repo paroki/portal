@@ -12,13 +12,19 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "title": {
-      "type": "string",
-      "required": false
-    },
     "name": {
       "type": "string",
       "required": true
+    },
+    "position": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::org-position.org-position",
+      "mappedBy": "heldBy"
+    },
+    "title": {
+      "type": "string",
+      "required": false
     },
     "handphone": {
       "type": "string"
@@ -46,12 +52,6 @@
       "relation": "manyToOne",
       "target": "plugin::users-permissions.user",
       "inversedBy": "membersOf"
-    },
-    "position": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::org-position.org-position",
-      "mappedBy": "heldBy"
     }
   }
 }
