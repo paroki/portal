@@ -562,6 +562,9 @@ export interface ApiArticleArticle extends Struct.CollectionTypeSchema {
           localized: true;
         };
       }>;
+    metaTitle: Schema.Attribute.String;
+    metaDescription: Schema.Attribute.String;
+    metaShareImageUrl: Schema.Attribute.String;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
