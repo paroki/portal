@@ -12,11 +12,17 @@ permissions:
   issues: write # to be able to comment on released issues
   pull-requests: write # to be able to comment on released pull requests
   id-token: write # to enable use of OIDC for npm provenance
+  packages: write
+
+env:
+  GITHUB_TOKEN: ${{ secrets.PAT }}
 
 jobs:
   release:
     name: release
     runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.release.outputs.version }}
     steps:
       - uses: actions/checkout@v4
 
@@ -25,6 +31,32 @@ jobs:
         with:
           node-version: 20
 
+      - uses: pnpm/action-setup@v4
+        name: Install pnpm
+        with:
+          run_install: false
+
+      - run: npm install -g semantic-release
+      - run: pnpm add -D @semantic-release/changelog @semantic-release/git @semantic-release/exec --workspace-root
+
       - run: npx semantic-release
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.PAT }}
+        id: release
+
+  image:
+    name: Image
+    needs: ["release"]
+    uses: paroki/pkrbt/.github/workflows/image.yml@main
+    secrets: inherit
+    with:
+      ref_name: ${{ needs.release.outputs.version }}
+
+  deploy:
+    name: Deploy
+    needs: ["image"]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to Coolify
+        run: |
+          curl --request GET '${{ secrets.COOLIFY_WEBHOOK }}' --header 'Authorization: Bearer ${{ secrets.COOLIFY_TOKEN }}'

@@ -2,6 +2,12 @@ name: Image
 
 on:
   workflow_call:
+    inputs:
+      ref_name:
+        description: ref name
+        default: ${{ github.ref_name }}
+        type: string
+        required: false
 
 jobs:
   build:
@@ -25,13 +31,17 @@ jobs:
         shell: bash
         run: |
           date_version=$(date +'%Y%m%d%H%M%S')
-          tag_version="${{ github.ref_name }}-${date_version}"
+          tag_version="${{ inputs.ref_name }}-${date_version}"
           tags="${{ matrix.prefix }}:${tag_version},${{ matrix.prefix }}:${{ github.ref_name}}"
 
-          ref="${{ github.ref_name }}"
+          ref="${{ inputs.ref_name }}"
           if [[ $ref == v* ]]; then
-            tag_version="${{ github.ref_name }}"
-            tags="${{ matrix.prefix }}:${{ github.ref_name }},${{matrix.prefix}}:latest"
+            tag_version="${{ inputs.ref_name }}"
+            tags="${{ matrix.prefix }}:${{ inputs.ref_name }}"
+
+            if [[ $ref != *"beta"* ]]; then
+              tags="${tags},${{matrix.prefix}}:latest"
+            fi
           fi
 
           echo "tags=${tags}" >> $GITHUB_OUTPUT
