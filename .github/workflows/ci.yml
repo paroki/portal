@@ -32,3 +32,13 @@ jobs:
     if: github.event_name != 'pull_request'
     uses: paroki/pkrbt/.github/workflows/gitlab.yml@main
     secrets: inherit
+
+  deploy:
+    name: Deploy
+    needs: ["testing", "image"]
+    runs-on: ubuntu-latest
+    if: startsWith(github.event.ref, 'refs/tags/v')
+    steps:
+      - name: Deploy to Coolify
+        run: |
+          curl --request GET '${{ secrets.COOLIFY_WEBHOOK }}' --header 'Authorization: Bearer ${{ secrets.COOLIFY_TOKEN }}'
