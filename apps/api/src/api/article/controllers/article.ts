@@ -10,6 +10,7 @@ export default factories.createCoreController(
     async findOne(ctx) {
       let response = await super.findOne(ctx);
 
+      // find article with slug
       if (!response) {
         const id = ctx.params.id;
         const entity = await strapi.db.query("api::article.article").findOne({
