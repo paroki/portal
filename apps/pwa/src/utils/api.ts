@@ -1,16 +1,8 @@
 import { Strapi } from "@pkrbt/openapi";
+import { API_URL } from "@/config/common";
 
 const api = new Strapi({
-  baseUrl: process.env.STRAPI_URL ?? "http://localhost:1337",
-  path: "/api",
-});
-
-const accessToken = process.env.STRAPI_TOKEN ?? "token";
-api.fetch.use({
-  onRequest({ request }) {
-    request.headers.set("Authorization", `Bearer ${accessToken}`);
-    return request;
-  },
+  baseUrl: API_URL,
 });
 
 export default api;

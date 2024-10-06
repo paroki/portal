@@ -40,7 +40,6 @@ export default function ArticleForm({ article, context }: Props) {
   });
 
   const onSubmit = async (data: z.infer<typeof FormSchema>) => {
-    console.log(context);
     if ("create" == context) {
       await create(data);
     } else {
@@ -50,6 +49,7 @@ export default function ArticleForm({ article, context }: Props) {
 
     return false;
   };
+
   return (
     <div>
       <h1>{article.title}</h1>

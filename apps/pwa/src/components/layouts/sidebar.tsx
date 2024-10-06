@@ -1,3 +1,4 @@
+"use server";
 import { menus } from "@/config/menu";
 import { auth, signIn, signOut } from "@/utils/auth";
 import Link from "next/link";
