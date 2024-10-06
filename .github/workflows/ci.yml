@@ -3,7 +3,7 @@ name: CI
 on:
   push:
     branches:
-      - naxt
+      - next
       - main
   pull_request:
     branches:
@@ -16,19 +16,19 @@ env:
 jobs:
   testing:
     name: Testing
-    uses: paroki/pkrbt/.github/workflows/testing.yml@main
+    uses: paroki/pkrbt/.github/workflows/testing.yml@next
     secrets: inherit
 
   image:
     name: Image
     needs: ["testing"]
     if: github.event_name != 'pull_request'
-    uses: paroki/pkrbt/.github/workflows/image.yml@main
+    uses: paroki/pkrbt/.github/workflows/image.yml@next
     secrets: inherit
 
   gitlab:
     name: GitLab
     needs: ["testing"]
     if: github.event_name != 'pull_request'
-    uses: paroki/pkrbt/.github/workflows/gitlab.yml@main
+    uses: paroki/pkrbt/.github/workflows/gitlab.yml@next
     secrets: inherit
