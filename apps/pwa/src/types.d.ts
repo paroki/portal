@@ -1,3 +1,5 @@
+export type UserRole = components["schemas"]["Users-Permissions-Role"];
+
 export type StrapiUserSession = {
   id: number;
   documentId: string;
@@ -19,9 +21,11 @@ declare module "next-auth" {
     id?: string;
     user?: User;
     strapi?: StrapiUserSession;
+    role?: UserRole;
   }
 }
 
+import { components } from "@pkrbt/openapi";
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { JWT } from "next-auth/jwt";
 

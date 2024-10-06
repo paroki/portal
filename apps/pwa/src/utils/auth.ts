@@ -2,6 +2,7 @@ import { API_URL } from "@/config/common";
 import NextAuth from "next-auth";
 import Google from "next-auth/providers/google";
 import api from "./api";
+import { UserRole } from "@/types";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   providers: [Google],
@@ -28,14 +29,18 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       return token;
     },
     async session({ token, session }) {
-      session.strapi = token.strapi;
-      console.log(session);
-      api.fetch.use({
-        onRequest({ request }) {
-          request.headers.set("Authorization", `Bearer ${token.strapiToken}`);
-          return request;
+      api.options.token = token.strapiToken;
+
+      const r = await fetch(`${API_URL}/users/me?populate=role`, {
+        headers: {
+          Authorization: `Bearer ${token.strapiToken}`,
         },
       });
+      const data = await r.json();
+      const role = data.role as UserRole;
+      session.strapi = token.strapi;
+      session.role = role;
+
       return session;
     },
   },
