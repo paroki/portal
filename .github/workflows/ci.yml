@@ -3,11 +3,11 @@ name: CI
 on:
   push:
     branches:
+      - naxt
       - main
-    tags:
-      - "v*"
   pull_request:
     branches:
+      - next
       - main
 
 env:
@@ -32,4 +32,3 @@ jobs:
     if: github.event_name != 'pull_request'
     uses: paroki/pkrbt/.github/workflows/gitlab.yml@main
     secrets: inherit
-

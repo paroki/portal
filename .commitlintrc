@@ -9,7 +9,6 @@
         "ci",
         "tools",
         "openapi",
-        "strapi",
         "api",
         "pwa",
         "test",
@@ -84,8 +83,7 @@
         "refactor",
         "revert",
         "style",
-        "test",
-        "perf"
+        "test"
       ]
     ]
   }
