@@ -18,7 +18,6 @@ export async function create(payload: Article) {
 
 export async function update(documentId: string, payload: Article) {
   try {
-    console.log(payload);
     await api.article.update(documentId, {
       ...payload,
     });

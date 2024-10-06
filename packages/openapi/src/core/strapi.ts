@@ -58,11 +58,19 @@ export class Strapi {
 
   constructor(options: StrapiOptions) {
     this.fetch = createClient<paths>({
-      baseUrl: options.baseUrl + "/api",
+      baseUrl: options.baseUrl + options.path,
       querySerializer(params) {
         return qs.stringify(params, {
           encodeValuesOnly: true, // prettify URL
         });
+      },
+    });
+
+    this.fetch.use({
+      async onRequest({ request }) {
+        if (options.token) {
+          request.headers.set("Authorization", `Bearer ${options.token}`);
+        }
       },
     });
     this.options = options;
