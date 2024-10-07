@@ -5,10 +5,12 @@ on:
     branches:
       - next
       - main
+      - debug
   pull_request:
     branches:
       - next
       - main
+      - debug
 
 env:
   STRAPI_URL: http://localhost:1337
