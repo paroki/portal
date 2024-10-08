@@ -1,9 +1,10 @@
-import api from "@/utils/strapi";
-import ArticleList from "../../components/article/list";
+import api from '@/utils/strapi';
+import ArticleList from '../../components/article/list';
 
 type SearchParams = {
+  search?: string;
   page?: number;
-  pageSize?: number;
+  limit?: number;
   category?: string;
   sort?: string[];
   filters?: {
@@ -15,21 +16,43 @@ type Props = {
   searchParams: SearchParams;
 };
 
-const defaults: SearchParams = {
-  page: 1,
-  pageSize: 10,
-  sort: ["publishedAt:desc"],
-};
-
 // TODO: find a way to remove the line below
-export const dynamic = "force-dynamic";
+export const dynamic = 'force-dynamic';
 
 export default async function Page({ searchParams }: Props) {
   const withDefaults = {
-    ...defaults,
-    ...searchParams,
+    page: searchParams.page ?? 1,
+    limit: 9,
+    sort: ['publishedAt:desc'],
+    filters: {
+      $or: [
+        {
+          title: {
+            $containsi: searchParams.search ?? ''
+          }
+        },
+        {
+          category: {
+            name: {
+              $containsi: searchParams.search ?? ''
+            }
+          }
+        }
+      ]
+    }
   };
 
-  const { items } = await api.article.search(withDefaults);
-  return <div>{items && <ArticleList articles={items} />}</div>;
+  const { items, meta } = await api.article.search(withDefaults);
+
+  const pageMeta = {
+    size: meta.pagination.pageCount ?? 0,
+    page: withDefaults.page,
+    search: searchParams.search
+  };
+
+  return (
+    <>
+      <ArticleList articles={items} pageMeta={pageMeta} />
+    </>
+  );
 }

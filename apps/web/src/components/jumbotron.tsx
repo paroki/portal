@@ -1,15 +1,19 @@
 import Image from 'next/image';
+import jumboImg from '@/assets/jumboimg.jpg';
 
 export default function Home() {
   return (
     <div className="flex space-x-5 flex-col md:flex-row">
       <div className="flex-[1]">
         <Image
-          className="rounded"
+          placeholder="blur"
+          priority
+          className="rounded w-full md:w-auto"
           width={500}
           height={300}
           alt="side"
-          src="https://img.freepik.com/free-photo/spirituality-religion-hands-folded-prayer-holy-bible-church-concept-faith_1150-12945.jpg"></Image>
+          src={jumboImg}
+          blurDataURL={String(jumboImg)}></Image>
       </div>
       <div className="py-4 flex-[1]">
         <h2 className="uppercase font-semibold mb-4 tracking-widest text-xs">Melihat dengan mata</h2>

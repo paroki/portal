@@ -1,4 +1,4 @@
-export default function Page() {
+export default function DPPPage() {
   return (
     <div>
       <h1>Pengurus Harian DPP</h1>

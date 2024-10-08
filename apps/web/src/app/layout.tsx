@@ -3,10 +3,15 @@ import '../assets/globals.css';
 import Navigation from '@/components/nav-server';
 import { Footer } from '@/components/layouts/footer';
 import { Montserrat } from 'next/font/google';
+import { Toaster } from '@/components/ui/toaster';
 
 export const metadata: Metadata = {
   title: 'Paroki Kristus Raja Barong Tongkok',
-  description: 'Portal Paroki Kristus Raja Barong Tongkok'
+  description: 'Portal Paroki Kristus Raja Barong Tongkok',
+  openGraph: {
+    title: 'Paroki Kristus Raja Barong Tongkok',
+    description: 'Portal informasi digital Paroki Kristus Raja Barong Tongkok.'
+  }
 };
 
 const montserrat = Montserrat({
@@ -29,6 +34,7 @@ export default function RootLayout({
         <Navigation />
         {/* <Header /> */}
         <main className="mx-auto min-h-[90vh]">{children}</main>
+        <Toaster />
         <Footer />
       </body>
     </html>
