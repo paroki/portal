@@ -53,7 +53,7 @@ describe("blocks", () => {
 
     // metaShareImageUrl expectation
     expect(item.metaShareImageUrl).not.toBeNull();
-    expect(item.metaShareImageUrl).toBe(image.formats.thumbnail.url);
+    expect(item.metaShareImageUrl).toBe(image.url);
   });
 
   it("shoud generate metaShareImageUrl from slider block", async () => {
@@ -72,6 +72,6 @@ describe("blocks", () => {
 
     // metaShareImageUrl expectation
     expect(item.metaShareImageUrl).not.toBeNull();
-    expect(item.metaShareImageUrl).toBe(image.formats.thumbnail.url);
+    expect(item.metaShareImageUrl).toBe(image.url);
   });
 });
