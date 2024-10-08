@@ -470,10 +470,6 @@ export interface PluginUsersPermissionsUser
       'manyToOne',
       'plugin::users-permissions.role'
     >;
-    membersOf: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::org-member.org-member'
-    >;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
@@ -494,8 +490,8 @@ export interface ApiAnMarriageAnMarriage extends Struct.CollectionTypeSchema {
   info: {
     singularName: 'an-marriage';
     pluralName: 'an-marriages';
-    displayName: 'An.Marriage';
-    description: 'Marriage Anouncement';
+    displayName: 'Pengumuman - Pernikahan';
+    description: 'Data pengumuman pernikahan';
   };
   options: {
     draftAndPublish: false;
@@ -522,13 +518,44 @@ export interface ApiAnMarriageAnMarriage extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiAnnouncementAnnouncement
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'announcements';
+  info: {
+    singularName: 'announcement';
+    pluralName: 'announcements';
+    displayName: 'Pengumuman';
+    description: '';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    title: Schema.Attribute.String;
+    slug: Schema.Attribute.UID<'title'>;
+    content: Schema.Attribute.RichText;
+    createdAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    publishedAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::announcement.announcement'
+    >;
+  };
+}
+
 export interface ApiArticleArticle extends Struct.CollectionTypeSchema {
   collectionName: 'articles';
   info: {
     singularName: 'article';
     pluralName: 'articles';
-    displayName: 'Blog.Article';
-    description: '';
+    displayName: 'Berita - Artikel';
+    description: 'Data artikel website';
   };
   options: {
     draftAndPublish: true;
@@ -546,25 +573,40 @@ export interface ApiArticleArticle extends Struct.CollectionTypeSchema {
           localized: true;
         };
       }>;
-    description: Schema.Attribute.String;
-    slug: Schema.Attribute.UID<'title'> &
+    description: Schema.Attribute.String &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
           localized: true;
         };
       }>;
+    slug: Schema.Attribute.UID<'title'>;
     category: Schema.Attribute.Relation<'manyToOne', 'api::category.category'>;
     blocks: Schema.Attribute.DynamicZone<
-      ['block.slider', 'block.seo', 'block.rich-text', 'block.image']
+      ['block.slider', 'block.rich-text', 'block.image']
     > &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
           localized: true;
         };
       }>;
-    metaTitle: Schema.Attribute.String;
-    metaDescription: Schema.Attribute.String;
-    metaShareImageUrl: Schema.Attribute.String;
+    metaTitle: Schema.Attribute.String &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    metaDescription: Schema.Attribute.String &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    metaShareImageUrl: Schema.Attribute.String &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
@@ -585,8 +627,8 @@ export interface ApiCategoryCategory extends Struct.CollectionTypeSchema {
   info: {
     singularName: 'category';
     pluralName: 'categories';
-    displayName: 'Blog.Category';
-    description: '';
+    displayName: 'Berita - Kategori';
+    description: 'Kategori berita';
   };
   options: {
     draftAndPublish: false;
@@ -632,177 +674,13 @@ export interface ApiCategoryCategory extends Struct.CollectionTypeSchema {
   };
 }
 
-export interface ApiOrgMemberOrgMember extends Struct.CollectionTypeSchema {
-  collectionName: 'org_members';
-  info: {
-    singularName: 'org-member';
-    pluralName: 'org-members';
-    displayName: 'Org.Member';
-    description: '';
-  };
-  options: {
-    draftAndPublish: false;
-  };
-  attributes: {
-    name: Schema.Attribute.String & Schema.Attribute.Required;
-    position: Schema.Attribute.Relation<
-      'oneToOne',
-      'api::org-position.org-position'
-    >;
-    title: Schema.Attribute.String;
-    handphone: Schema.Attribute.String;
-    email: Schema.Attribute.Email;
-    photo: Schema.Attribute.Media<'images'>;
-    active: Schema.Attribute.Boolean;
-    startFrom: Schema.Attribute.Date;
-    startTo: Schema.Attribute.Date;
-    user: Schema.Attribute.Relation<
-      'manyToOne',
-      'plugin::users-permissions.user'
-    >;
-    createdAt: Schema.Attribute.DateTime;
-    updatedAt: Schema.Attribute.DateTime;
-    publishedAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    locale: Schema.Attribute.String;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::org-member.org-member'
-    >;
-  };
-}
-
-export interface ApiOrgPositionOrgPosition extends Struct.CollectionTypeSchema {
-  collectionName: 'org_positions';
-  info: {
-    singularName: 'org-position';
-    pluralName: 'org-positions';
-    displayName: 'Org.Position';
-    description: '';
-  };
-  options: {
-    draftAndPublish: false;
-  };
-  attributes: {
-    name: Schema.Attribute.String & Schema.Attribute.Required;
-    active: Schema.Attribute.Boolean &
-      Schema.Attribute.Required &
-      Schema.Attribute.DefaultTo<true>;
-    heldBy: Schema.Attribute.Relation<'oneToOne', 'api::org-member.org-member'>;
-    structure: Schema.Attribute.Relation<
-      'manyToOne',
-      'api::org-structure.org-structure'
-    >;
-    createdAt: Schema.Attribute.DateTime;
-    updatedAt: Schema.Attribute.DateTime;
-    publishedAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    locale: Schema.Attribute.String;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::org-position.org-position'
-    >;
-  };
-}
-
-export interface ApiOrgStructureOrgStructure
-  extends Struct.CollectionTypeSchema {
-  collectionName: 'org_structures';
-  info: {
-    singularName: 'org-structure';
-    pluralName: 'org-structures';
-    displayName: 'Org.Structure';
-    description: '';
-  };
-  options: {
-    draftAndPublish: false;
-  };
-  attributes: {
-    name: Schema.Attribute.String;
-    active: Schema.Attribute.Boolean &
-      Schema.Attribute.Required &
-      Schema.Attribute.DefaultTo<true>;
-    parent: Schema.Attribute.Relation<
-      'manyToOne',
-      'api::org-structure.org-structure'
-    >;
-    childs: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::org-structure.org-structure'
-    >;
-    organization: Schema.Attribute.Relation<
-      'manyToOne',
-      'api::organization.organization'
-    >;
-    positions: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::org-position.org-position'
-    >;
-    createdAt: Schema.Attribute.DateTime;
-    updatedAt: Schema.Attribute.DateTime;
-    publishedAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    locale: Schema.Attribute.String;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::org-structure.org-structure'
-    >;
-  };
-}
-
-export interface ApiOrganizationOrganization
-  extends Struct.CollectionTypeSchema {
-  collectionName: 'organizations';
-  info: {
-    singularName: 'organization';
-    pluralName: 'organizations';
-    displayName: 'Organization';
-    description: '';
-  };
-  options: {
-    draftAndPublish: false;
-  };
-  attributes: {
-    name: Schema.Attribute.String & Schema.Attribute.Required;
-    description: Schema.Attribute.String;
-    active: Schema.Attribute.Boolean &
-      Schema.Attribute.Required &
-      Schema.Attribute.DefaultTo<true>;
-    structures: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::org-structure.org-structure'
-    >;
-    shortName: Schema.Attribute.String;
-    createdAt: Schema.Attribute.DateTime;
-    updatedAt: Schema.Attribute.DateTime;
-    publishedAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    locale: Schema.Attribute.String;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::organization.organization'
-    >;
-  };
-}
-
 export interface ApiStaticStatic extends Struct.CollectionTypeSchema {
   collectionName: 'statics';
   info: {
     singularName: 'static';
     pluralName: 'statics';
-    displayName: 'Blog.Static';
+    displayName: 'Berita - Halaman';
+    description: '';
   };
   options: {
     draftAndPublish: false;
@@ -1228,12 +1106,9 @@ declare module '@strapi/strapi' {
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'api::an-marriage.an-marriage': ApiAnMarriageAnMarriage;
+      'api::announcement.announcement': ApiAnnouncementAnnouncement;
       'api::article.article': ApiArticleArticle;
       'api::category.category': ApiCategoryCategory;
-      'api::org-member.org-member': ApiOrgMemberOrgMember;
-      'api::org-position.org-position': ApiOrgPositionOrgPosition;
-      'api::org-structure.org-structure': ApiOrgStructureOrgStructure;
-      'api::organization.organization': ApiOrganizationOrganization;
       'api::static.static': ApiStaticStatic;
       'admin::permission': AdminPermission;
       'admin::user': AdminUser;

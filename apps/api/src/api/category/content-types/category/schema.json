@@ -4,8 +4,8 @@
   "info": {
     "singularName": "category",
     "pluralName": "categories",
-    "displayName": "Blog.Category",
-    "description": ""
+    "displayName": "Berita - Kategori",
+    "description": "Kategori berita"
   },
   "options": {
     "draftAndPublish": false

@@ -1,7 +1,0 @@
-/**
- * org-structure router
- */
-
-import { factories } from '@strapi/strapi';
-
-export default factories.createCoreRouter('api::org-structure.org-structure');
