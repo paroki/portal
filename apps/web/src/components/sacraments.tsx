@@ -1,28 +1,16 @@
 import { Frank_Ruhl_Libre as Frank } from 'next/font/google';
 import { Text } from '@radix-ui/themes';
-import api from '@/utils/strapi';
 import DateReadable from './date';
+import { MarriagesProps } from '@/utils/api';
 
 const frank = Frank({
   subsets: ['latin']
 });
 
-export default async function Sacraments() {
-  const { data: datas } = await api.fetch.GET('/an-marriages', {
-    params: {
-      query: {
-        'pagination[limit]': 4
-      }
-    }
-  });
-
-  if (!datas) {
-    throw new Error();
-  }
-
+export default async function Sacraments({ datas }: { datas: MarriagesProps[] }) {
   return (
     <>
-      {datas.data?.map((data, index) => (
+      {datas.map((data, index) => (
         <div className="marriage-el-children-container" key={index}>
           <div className="marriage-el-children">
             <div className="w-64">
