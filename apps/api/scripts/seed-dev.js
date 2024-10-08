@@ -448,8 +448,8 @@ async function generateToken() {
   console.log("write token to web/.env");
   await writeToken(token, path.join(process.cwd() + "/../web"));
 
-  console.log("write token to pwa/.env");
-  await writeToken(token, path.join(process.cwd() + "/../pwa"));
+  // console.log("write token to pwa/.env");
+  // await writeToken(token, path.join(process.cwd() + "/../pwa"));
 }
 
 async function main() {
