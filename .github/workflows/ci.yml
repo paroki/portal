@@ -10,6 +10,9 @@ on:
     branches:
       - main
 
+env:
+  STRAPI_URL: http://localhost:1337
+
 jobs:
   testing:
     name: Testing
@@ -29,3 +32,4 @@ jobs:
     if: github.event_name != 'pull_request'
     uses: paroki/pkrbt/.github/workflows/gitlab.yml@main
     secrets: inherit
+

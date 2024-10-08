@@ -1,7 +1,7 @@
 export default ({ env }) => ({
   upload: {
     config: (() => {
-      if ("development" == process.env.NODE_ENV) {
+      if ("production" != process.env.NODE_ENV) {
         return {};
       }
 

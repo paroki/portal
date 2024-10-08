@@ -58,6 +58,18 @@
         "block.rich-text",
         "block.image"
       ]
+    },
+    "metaTitle": {
+      "type": "string",
+      "required": false
+    },
+    "metaDescription": {
+      "type": "string",
+      "required": false
+    },
+    "metaShareImageUrl": {
+      "type": "string",
+      "required": false
     }
   }
 }

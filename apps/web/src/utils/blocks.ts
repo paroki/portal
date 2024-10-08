@@ -31,7 +31,7 @@ export function extractSeo(item: BlogContent): BlockSeo {
     }
   });
 
-  if (seo.shareImageUrl && !seo.shareImageUrl.includes(STRAPI_URL)) {
+  if (seo.shareImageUrl && !seo.shareImageUrl.includes("http")) {
     seo.shareImageUrl = `${STRAPI_URL}${seo.shareImageUrl}`;
   }
   return seo;
