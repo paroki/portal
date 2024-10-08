@@ -8,6 +8,7 @@ import { extractSeo } from '@/utils/blocks';
 import { Search } from '../ui/search';
 import PaginationCustom from '../pagination';
 import DateReadable from '../date';
+import { addPrefix } from '@/utils/prefix';
 
 interface ArticleElProps {
   articles: Article[];
@@ -18,14 +19,14 @@ interface ArticleElProps {
   };
 }
 
-const ListView = ({ article }: { article: Article }) => {
+export const ListView = ({ article }: { article: Article }) => {
   const seo = extractSeo(article);
   return (
     <Box maxWidth="240px" className="rounded overflow-hidden group transition-all hover:scale-[1.01]">
       <Card size="2" className="relative">
         <Inset clip="padding-box" side="top" pb="current">
           <img
-            src={seo.shareImageUrl ?? '/static/noimg.jpg'}
+            src={seo.shareImageUrl ? addPrefix(String(seo.shareImageUrl)) : '/static/noimg.jpg'}
             alt="Bold typography"
             width="200"
             height="140"

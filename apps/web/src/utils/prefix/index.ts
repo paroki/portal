@@ -1,9 +1,6 @@
 export function addPrefix(path: string): string {
-  const prefix = process.env.NEXT_PUBLIC_STRAPI_URL;
+  const defaultPrefix = process.env.NEXT_PUBLIC_STRAPI_URL;
+  const isPrefixed = /^(https?:\/\/)/;
 
-  if (!prefix) {
-    throw new Error('NEXT_PUBLIC_STRAPI_URL is not provided');
-  }
-
-  return path.includes(prefix) ? path : `${prefix}${path}`;
+  return isPrefixed.test(path) ? path : `${defaultPrefix}${path}`;
 }
