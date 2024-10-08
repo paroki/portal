@@ -4,8 +4,8 @@
   "info": {
     "singularName": "an-marriage",
     "pluralName": "an-marriages",
-    "displayName": "An.Marriage",
-    "description": "Marriage Anouncement"
+    "displayName": "Pengumuman - Pernikahan",
+    "description": "Data pengumuman pernikahan"
   },
   "options": {
     "draftAndPublish": false
@@ -14,27 +14,33 @@
   "attributes": {
     "groomName": {
       "type": "string",
-      "required": true
+      "required": true,
+      "pluginOptions": {}
     },
     "groomFrom": {
       "type": "string",
-      "required": true
+      "required": true,
+      "pluginOptions": {}
     },
     "brideName": {
       "type": "string",
-      "required": true
+      "required": true,
+      "pluginOptions": {}
     },
     "brideFrom": {
       "type": "string",
-      "required": true
+      "required": true,
+      "pluginOptions": {}
     },
     "startAt": {
       "type": "date",
-      "required": true
+      "required": true,
+      "pluginOptions": {}
     },
     "endAt": {
       "type": "date",
-      "required": true
+      "required": true,
+      "pluginOptions": {}
     }
   }
 }

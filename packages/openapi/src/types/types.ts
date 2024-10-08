@@ -54,17 +54,15 @@ export type BlockContent = BlockImage | BlockSeo | BlockSlider | BlockRichText;
 export interface Item {
   id?: number;
   documentId?: string;
-  blocks?: Blocks;
 }
 
 /* Blog Type Section */
 export type Category = components["schemas"]["Category"] & Item;
-export type Article = components["schemas"]["Article"] & Item;
-export type Static = components["schemas"]["Static"] & Item;
-export type Marriages = components["schemas"]["AnMarriage"] & Item;
+export type Article = components["schemas"]["Article"] &
+  Item & { blocks?: Blocks };
+export type Static = components["schemas"]["Static"] &
+  Item & { blocks?: Blocks };
 
-/* Organization Section */
-export type Organization = components["schemas"]["Organization"] & Item;
-export type OrgStructure = components["schemas"]["OrgStructure"] & Item;
-export type OrgPosition = components["schemas"]["OrgPosition"] & Item;
-export type OrgMember = components["schemas"]["OrgMember"] & Item;
+/* Announcement Section */
+export type Marriage = components["schemas"]["AnMarriage"] & Item;
+export type Announcement = components["schemas"]["Announcement"] & Item;

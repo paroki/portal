@@ -4,8 +4,8 @@
   "info": {
     "singularName": "article",
     "pluralName": "articles",
-    "displayName": "Blog.Article",
-    "description": ""
+    "displayName": "Berita - Artikel",
+    "description": "Data artikel website"
   },
   "options": {
     "draftAndPublish": true
@@ -27,14 +27,15 @@
     },
     "description": {
       "type": "string",
-      "required": false
-    },
-    "slug": {
+      "required": false,
       "pluginOptions": {
         "i18n": {
           "localized": true
         }
-      },
+      }
+    },
+    "slug": {
+      "pluginOptions": {},
       "type": "uid",
       "targetField": "title",
       "required": false
@@ -54,22 +55,36 @@
       "type": "dynamiczone",
       "components": [
         "block.slider",
-        "block.seo",
         "block.rich-text",
         "block.image"
       ]
     },
     "metaTitle": {
       "type": "string",
-      "required": false
+      "required": false,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     },
     "metaDescription": {
       "type": "string",
-      "required": false
+      "required": false,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     },
     "metaShareImageUrl": {
       "type": "string",
-      "required": false
+      "required": false,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     }
   }
 }

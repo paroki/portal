@@ -4,7 +4,8 @@
   "info": {
     "singularName": "static",
     "pluralName": "statics",
-    "displayName": "Blog.Static"
+    "displayName": "Berita - Halaman",
+    "description": ""
   },
   "options": {
     "draftAndPublish": false
