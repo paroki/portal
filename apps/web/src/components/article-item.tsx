@@ -5,6 +5,7 @@ import { Box, Card, Inset } from '@radix-ui/themes';
 import { EyeIcon } from 'lucide-react';
 import Link from 'next/link';
 import DateReadable from './date';
+import { addPrefix } from '@/utils/prefix';
 
 export function ArticleItem({ article }: { article: Article }) {
   const seo = extractSeo(article);
@@ -20,7 +21,7 @@ export function ArticleItem({ article }: { article: Article }) {
             <img
               width={200}
               height={140}
-              src={seo.shareImageUrl ?? '/static/noimg.jpg'}
+              src={seo.shareImageUrl ? addPrefix(String(seo.shareImageUrl)) : '/static/noimg.jpg'}
               alt={`image for ${article.title}`}
               style={{
                 display: 'block',
