@@ -1,7 +1,7 @@
 import { StrapiCore } from "./core";
-import { blog, organization } from "./plugins";
+import { plugins } from "./plugins";
 
-export const Strapi = StrapiCore.plugin(blog, organization).defaults({
+export const Strapi = StrapiCore.plugin(plugins).defaults({
   baseUrl: "http://localhost:1337",
   path: "/api",
 });

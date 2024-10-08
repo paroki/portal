@@ -36,6 +36,38 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/announcements": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["get/announcements"];
+        put?: never;
+        post: operations["post/announcements"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/announcements/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["get/announcements/{id}"];
+        put: operations["put/announcements/{id}"];
+        post?: never;
+        delete: operations["delete/announcements/{id}"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/articles": {
         parameters: {
             query?: never;
@@ -95,134 +127,6 @@ export interface paths {
         put: operations["put/categories/{id}"];
         post?: never;
         delete: operations["delete/categories/{id}"];
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/org-members": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get: operations["get/org-members"];
-        put?: never;
-        post: operations["post/org-members"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/org-members/{id}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get: operations["get/org-members/{id}"];
-        put: operations["put/org-members/{id}"];
-        post?: never;
-        delete: operations["delete/org-members/{id}"];
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/org-positions": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get: operations["get/org-positions"];
-        put?: never;
-        post: operations["post/org-positions"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/org-positions/{id}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get: operations["get/org-positions/{id}"];
-        put: operations["put/org-positions/{id}"];
-        post?: never;
-        delete: operations["delete/org-positions/{id}"];
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/org-structures": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get: operations["get/org-structures"];
-        put?: never;
-        post: operations["post/org-structures"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/org-structures/{id}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get: operations["get/org-structures/{id}"];
-        put: operations["put/org-structures/{id}"];
-        post?: never;
-        delete: operations["delete/org-structures/{id}"];
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/organizations": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get: operations["get/organizations"];
-        put?: never;
-        post: operations["post/organizations"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/organizations/{id}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get: operations["get/organizations/{id}"];
-        put: operations["put/organizations/{id}"];
-        post?: never;
-        delete: operations["delete/organizations/{id}"];
         options?: never;
         head?: never;
         patch?: never;
@@ -1703,6 +1607,169 @@ export interface components {
             data?: components["schemas"]["AnMarriage"];
             meta?: Record<string, never>;
         };
+        AnnouncementRequest: {
+            data: {
+                title?: string;
+                slug?: string;
+                content?: string;
+                locale?: string;
+                localizations?: (number | string)[];
+            };
+        };
+        AnnouncementListResponse: {
+            data?: components["schemas"]["Announcement"][];
+            meta?: {
+                pagination?: {
+                    page?: number;
+                    pageSize?: number;
+                    pageCount?: number;
+                    total?: number;
+                };
+            };
+        };
+        Announcement: {
+            id?: number;
+            documentId?: string;
+            title?: string;
+            slug?: string;
+            content?: string;
+            /** Format: date-time */
+            createdAt?: string;
+            /** Format: date-time */
+            updatedAt?: string;
+            /** Format: date-time */
+            publishedAt?: string;
+            createdBy?: {
+                id?: number;
+                documentId?: string;
+                firstname?: string;
+                lastname?: string;
+                username?: string;
+                /** Format: email */
+                email?: string;
+                resetPasswordToken?: string;
+                registrationToken?: string;
+                isActive?: boolean;
+                roles?: {
+                    id?: number;
+                    documentId?: string;
+                    name?: string;
+                    code?: string;
+                    description?: string;
+                    users?: {
+                        id?: number;
+                        documentId?: string;
+                    }[];
+                    permissions?: {
+                        id?: number;
+                        documentId?: string;
+                        action?: string;
+                        actionParameters?: unknown;
+                        subject?: string;
+                        properties?: unknown;
+                        conditions?: unknown;
+                        role?: {
+                            id?: number;
+                            documentId?: string;
+                        };
+                        /** Format: date-time */
+                        createdAt?: string;
+                        /** Format: date-time */
+                        updatedAt?: string;
+                        /** Format: date-time */
+                        publishedAt?: string;
+                        createdBy?: {
+                            id?: number;
+                            documentId?: string;
+                        };
+                        updatedBy?: {
+                            id?: number;
+                            documentId?: string;
+                        };
+                        locale?: string;
+                        localizations?: {
+                            id?: number;
+                            documentId?: string;
+                        }[];
+                    }[];
+                    /** Format: date-time */
+                    createdAt?: string;
+                    /** Format: date-time */
+                    updatedAt?: string;
+                    /** Format: date-time */
+                    publishedAt?: string;
+                    createdBy?: {
+                        id?: number;
+                        documentId?: string;
+                    };
+                    updatedBy?: {
+                        id?: number;
+                        documentId?: string;
+                    };
+                    locale?: string;
+                    localizations?: {
+                        id?: number;
+                        documentId?: string;
+                    }[];
+                }[];
+                blocked?: boolean;
+                preferedLanguage?: string;
+                /** Format: date-time */
+                createdAt?: string;
+                /** Format: date-time */
+                updatedAt?: string;
+                /** Format: date-time */
+                publishedAt?: string;
+                createdBy?: {
+                    id?: number;
+                    documentId?: string;
+                };
+                updatedBy?: {
+                    id?: number;
+                    documentId?: string;
+                };
+                locale?: string;
+                localizations?: {
+                    id?: number;
+                    documentId?: string;
+                }[];
+            };
+            updatedBy?: {
+                id?: number;
+                documentId?: string;
+            };
+            locale?: string;
+            localizations?: {
+                id?: number;
+                documentId?: string;
+                title?: string;
+                slug?: string;
+                content?: string;
+                /** Format: date-time */
+                createdAt?: string;
+                /** Format: date-time */
+                updatedAt?: string;
+                /** Format: date-time */
+                publishedAt?: string;
+                createdBy?: {
+                    id?: number;
+                    documentId?: string;
+                };
+                updatedBy?: {
+                    id?: number;
+                    documentId?: string;
+                };
+                locale?: string;
+                localizations?: {
+                    id?: number;
+                    documentId?: string;
+                }[];
+            }[];
+        };
+        AnnouncementResponse: {
+            data?: components["schemas"]["Announcement"];
+            meta?: Record<string, never>;
+        };
         ArticleRequest: {
             data: {
                 title: string;
@@ -1710,7 +1777,10 @@ export interface components {
                 slug?: string;
                 /** @example string or id */
                 category?: number | string;
-                blocks?: (components["schemas"]["BlockSliderComponent"] | components["schemas"]["BlockSeoComponent"] | components["schemas"]["BlockRichTextComponent"] | components["schemas"]["BlockImageComponent"])[];
+                blocks?: (components["schemas"]["BlockSliderComponent"] | components["schemas"]["BlockRichTextComponent"] | components["schemas"]["BlockImageComponent"])[];
+                metaTitle?: string;
+                metaDescription?: string;
+                metaShareImageUrl?: string;
                 locale?: string;
                 localizations?: (number | string)[];
             };
@@ -1748,7 +1818,10 @@ export interface components {
                         id?: number;
                         documentId?: string;
                     };
-                    blocks?: (components["schemas"]["BlockSliderComponent"] | components["schemas"]["BlockSeoComponent"] | components["schemas"]["BlockRichTextComponent"] | components["schemas"]["BlockImageComponent"])[];
+                    blocks?: (components["schemas"]["BlockSliderComponent"] | components["schemas"]["BlockRichTextComponent"] | components["schemas"]["BlockImageComponent"])[];
+                    metaTitle?: string;
+                    metaDescription?: string;
+                    metaShareImageUrl?: string;
                     /** Format: date-time */
                     createdAt?: string;
                     /** Format: date-time */
@@ -1789,7 +1862,10 @@ export interface components {
                     documentId?: string;
                 }[];
             };
-            blocks?: (components["schemas"]["BlockSliderComponent"] | components["schemas"]["BlockSeoComponent"] | components["schemas"]["BlockRichTextComponent"] | components["schemas"]["BlockImageComponent"])[];
+            blocks?: (components["schemas"]["BlockSliderComponent"] | components["schemas"]["BlockRichTextComponent"] | components["schemas"]["BlockImageComponent"])[];
+            metaTitle?: string;
+            metaDescription?: string;
+            metaShareImageUrl?: string;
             /** Format: date-time */
             createdAt?: string;
             /** Format: date-time */
@@ -1864,13 +1940,6 @@ export interface components {
                     documentId?: string;
                 }[];
             }[];
-        };
-        BlockSeoComponent: {
-            id?: number;
-            __component?: string;
-            metaTitle?: string;
-            metaDescription?: string;
-            shareImageUrl?: string;
         };
         BlockRichTextComponent: {
             id?: number;
@@ -2082,7 +2151,10 @@ export interface components {
                         documentId?: string;
                     }[];
                 };
-                blocks?: (components["schemas"]["BlockSliderComponent"] | components["schemas"]["BlockSeoComponent"] | components["schemas"]["BlockRichTextComponent"] | components["schemas"]["BlockImageComponent"])[];
+                blocks?: (components["schemas"]["BlockSliderComponent"] | components["schemas"]["BlockRichTextComponent"] | components["schemas"]["BlockImageComponent"])[];
+                metaTitle?: string;
+                metaDescription?: string;
+                metaShareImageUrl?: string;
                 /** Format: date-time */
                 createdAt?: string;
                 /** Format: date-time */
@@ -2125,2054 +2197,6 @@ export interface components {
         };
         CategoryResponse: {
             data?: components["schemas"]["Category"];
-            meta?: Record<string, never>;
-        };
-        OrgMemberRequest: {
-            data: {
-                name: string;
-                /** @example string or id */
-                position?: number | string;
-                title?: string;
-                handphone?: string;
-                /** Format: email */
-                email?: string;
-                /** @example string or id */
-                photo?: number | string;
-                active?: boolean;
-                /** Format: date */
-                startFrom?: string;
-                /** Format: date */
-                startTo?: string;
-                /** @example string or id */
-                user?: number | string;
-                locale?: string;
-                localizations?: (number | string)[];
-            };
-        };
-        OrgMemberListResponse: {
-            data?: components["schemas"]["OrgMember"][];
-            meta?: {
-                pagination?: {
-                    page?: number;
-                    pageSize?: number;
-                    pageCount?: number;
-                    total?: number;
-                };
-            };
-        };
-        OrgMember: {
-            id?: number;
-            documentId?: string;
-            name: string;
-            position?: {
-                id?: number;
-                documentId?: string;
-                name?: string;
-                active?: boolean;
-                heldBy?: {
-                    id?: number;
-                    documentId?: string;
-                    name?: string;
-                    position?: {
-                        id?: number;
-                        documentId?: string;
-                    };
-                    title?: string;
-                    handphone?: string;
-                    /** Format: email */
-                    email?: string;
-                    photo?: {
-                        id?: number;
-                        documentId?: string;
-                        name?: string;
-                        alternativeText?: string;
-                        caption?: string;
-                        width?: number;
-                        height?: number;
-                        formats?: unknown;
-                        hash?: string;
-                        ext?: string;
-                        mime?: string;
-                        /** Format: float */
-                        size?: number;
-                        url?: string;
-                        previewUrl?: string;
-                        provider?: string;
-                        provider_metadata?: unknown;
-                        related?: {
-                            id?: number;
-                            documentId?: string;
-                        }[];
-                        folder?: {
-                            id?: number;
-                            documentId?: string;
-                            name?: string;
-                            pathId?: number;
-                            parent?: {
-                                id?: number;
-                                documentId?: string;
-                            };
-                            children?: {
-                                id?: number;
-                                documentId?: string;
-                            }[];
-                            files?: {
-                                id?: number;
-                                documentId?: string;
-                                name?: string;
-                                alternativeText?: string;
-                                caption?: string;
-                                width?: number;
-                                height?: number;
-                                formats?: unknown;
-                                hash?: string;
-                                ext?: string;
-                                mime?: string;
-                                /** Format: float */
-                                size?: number;
-                                url?: string;
-                                previewUrl?: string;
-                                provider?: string;
-                                provider_metadata?: unknown;
-                                related?: {
-                                    id?: number;
-                                    documentId?: string;
-                                }[];
-                                folder?: {
-                                    id?: number;
-                                    documentId?: string;
-                                };
-                                folderPath?: string;
-                                /** Format: date-time */
-                                createdAt?: string;
-                                /** Format: date-time */
-                                updatedAt?: string;
-                                /** Format: date-time */
-                                publishedAt?: string;
-                                createdBy?: {
-                                    id?: number;
-                                    documentId?: string;
-                                    firstname?: string;
-                                    lastname?: string;
-                                    username?: string;
-                                    /** Format: email */
-                                    email?: string;
-                                    resetPasswordToken?: string;
-                                    registrationToken?: string;
-                                    isActive?: boolean;
-                                    roles?: {
-                                        id?: number;
-                                        documentId?: string;
-                                        name?: string;
-                                        code?: string;
-                                        description?: string;
-                                        users?: {
-                                            id?: number;
-                                            documentId?: string;
-                                        }[];
-                                        permissions?: {
-                                            id?: number;
-                                            documentId?: string;
-                                            action?: string;
-                                            actionParameters?: unknown;
-                                            subject?: string;
-                                            properties?: unknown;
-                                            conditions?: unknown;
-                                            role?: {
-                                                id?: number;
-                                                documentId?: string;
-                                            };
-                                            /** Format: date-time */
-                                            createdAt?: string;
-                                            /** Format: date-time */
-                                            updatedAt?: string;
-                                            /** Format: date-time */
-                                            publishedAt?: string;
-                                            createdBy?: {
-                                                id?: number;
-                                                documentId?: string;
-                                            };
-                                            updatedBy?: {
-                                                id?: number;
-                                                documentId?: string;
-                                            };
-                                            locale?: string;
-                                            localizations?: {
-                                                id?: number;
-                                                documentId?: string;
-                                            }[];
-                                        }[];
-                                        /** Format: date-time */
-                                        createdAt?: string;
-                                        /** Format: date-time */
-                                        updatedAt?: string;
-                                        /** Format: date-time */
-                                        publishedAt?: string;
-                                        createdBy?: {
-                                            id?: number;
-                                            documentId?: string;
-                                        };
-                                        updatedBy?: {
-                                            id?: number;
-                                            documentId?: string;
-                                        };
-                                        locale?: string;
-                                        localizations?: {
-                                            id?: number;
-                                            documentId?: string;
-                                        }[];
-                                    }[];
-                                    blocked?: boolean;
-                                    preferedLanguage?: string;
-                                    /** Format: date-time */
-                                    createdAt?: string;
-                                    /** Format: date-time */
-                                    updatedAt?: string;
-                                    /** Format: date-time */
-                                    publishedAt?: string;
-                                    createdBy?: {
-                                        id?: number;
-                                        documentId?: string;
-                                    };
-                                    updatedBy?: {
-                                        id?: number;
-                                        documentId?: string;
-                                    };
-                                    locale?: string;
-                                    localizations?: {
-                                        id?: number;
-                                        documentId?: string;
-                                    }[];
-                                };
-                                updatedBy?: {
-                                    id?: number;
-                                    documentId?: string;
-                                };
-                                locale?: string;
-                                localizations?: {
-                                    id?: number;
-                                    documentId?: string;
-                                }[];
-                            }[];
-                            path?: string;
-                            /** Format: date-time */
-                            createdAt?: string;
-                            /** Format: date-time */
-                            updatedAt?: string;
-                            /** Format: date-time */
-                            publishedAt?: string;
-                            createdBy?: {
-                                id?: number;
-                                documentId?: string;
-                            };
-                            updatedBy?: {
-                                id?: number;
-                                documentId?: string;
-                            };
-                            locale?: string;
-                            localizations?: {
-                                id?: number;
-                                documentId?: string;
-                            }[];
-                        };
-                        folderPath?: string;
-                        /** Format: date-time */
-                        createdAt?: string;
-                        /** Format: date-time */
-                        updatedAt?: string;
-                        /** Format: date-time */
-                        publishedAt?: string;
-                        createdBy?: {
-                            id?: number;
-                            documentId?: string;
-                        };
-                        updatedBy?: {
-                            id?: number;
-                            documentId?: string;
-                        };
-                        locale?: string;
-                        localizations?: {
-                            id?: number;
-                            documentId?: string;
-                        }[];
-                    };
-                    active?: boolean;
-                    /** Format: date */
-                    startFrom?: string;
-                    /** Format: date */
-                    startTo?: string;
-                    user?: {
-                        id?: number;
-                        documentId?: string;
-                        username?: string;
-                        /** Format: email */
-                        email?: string;
-                        provider?: string;
-                        resetPasswordToken?: string;
-                        confirmationToken?: string;
-                        confirmed?: boolean;
-                        blocked?: boolean;
-                        role?: {
-                            id?: number;
-                            documentId?: string;
-                            name?: string;
-                            description?: string;
-                            type?: string;
-                            permissions?: {
-                                id?: number;
-                                documentId?: string;
-                                action?: string;
-                                role?: {
-                                    id?: number;
-                                    documentId?: string;
-                                };
-                                /** Format: date-time */
-                                createdAt?: string;
-                                /** Format: date-time */
-                                updatedAt?: string;
-                                /** Format: date-time */
-                                publishedAt?: string;
-                                createdBy?: {
-                                    id?: number;
-                                    documentId?: string;
-                                };
-                                updatedBy?: {
-                                    id?: number;
-                                    documentId?: string;
-                                };
-                                locale?: string;
-                                localizations?: {
-                                    id?: number;
-                                    documentId?: string;
-                                }[];
-                            }[];
-                            users?: {
-                                id?: number;
-                                documentId?: string;
-                            }[];
-                            /** Format: date-time */
-                            createdAt?: string;
-                            /** Format: date-time */
-                            updatedAt?: string;
-                            /** Format: date-time */
-                            publishedAt?: string;
-                            createdBy?: {
-                                id?: number;
-                                documentId?: string;
-                            };
-                            updatedBy?: {
-                                id?: number;
-                                documentId?: string;
-                            };
-                            locale?: string;
-                            localizations?: {
-                                id?: number;
-                                documentId?: string;
-                            }[];
-                        };
-                        membersOf?: {
-                            id?: number;
-                            documentId?: string;
-                        }[];
-                        /** Format: date-time */
-                        createdAt?: string;
-                        /** Format: date-time */
-                        updatedAt?: string;
-                        /** Format: date-time */
-                        publishedAt?: string;
-                        createdBy?: {
-                            id?: number;
-                            documentId?: string;
-                        };
-                        updatedBy?: {
-                            id?: number;
-                            documentId?: string;
-                        };
-                        locale?: string;
-                        localizations?: {
-                            id?: number;
-                            documentId?: string;
-                        }[];
-                    };
-                    /** Format: date-time */
-                    createdAt?: string;
-                    /** Format: date-time */
-                    updatedAt?: string;
-                    /** Format: date-time */
-                    publishedAt?: string;
-                    createdBy?: {
-                        id?: number;
-                        documentId?: string;
-                    };
-                    updatedBy?: {
-                        id?: number;
-                        documentId?: string;
-                    };
-                    locale?: string;
-                    localizations?: {
-                        id?: number;
-                        documentId?: string;
-                    }[];
-                };
-                structure?: {
-                    id?: number;
-                    documentId?: string;
-                    name?: string;
-                    active?: boolean;
-                    parent?: {
-                        id?: number;
-                        documentId?: string;
-                    };
-                    childs?: {
-                        id?: number;
-                        documentId?: string;
-                    }[];
-                    organization?: {
-                        id?: number;
-                        documentId?: string;
-                        name?: string;
-                        description?: string;
-                        active?: boolean;
-                        structures?: {
-                            id?: number;
-                            documentId?: string;
-                        }[];
-                        shortName?: string;
-                        /** Format: date-time */
-                        createdAt?: string;
-                        /** Format: date-time */
-                        updatedAt?: string;
-                        /** Format: date-time */
-                        publishedAt?: string;
-                        createdBy?: {
-                            id?: number;
-                            documentId?: string;
-                        };
-                        updatedBy?: {
-                            id?: number;
-                            documentId?: string;
-                        };
-                        locale?: string;
-                        localizations?: {
-                            id?: number;
-                            documentId?: string;
-                        }[];
-                    };
-                    positions?: {
-                        id?: number;
-                        documentId?: string;
-                    }[];
-                    /** Format: date-time */
-                    createdAt?: string;
-                    /** Format: date-time */
-                    updatedAt?: string;
-                    /** Format: date-time */
-                    publishedAt?: string;
-                    createdBy?: {
-                        id?: number;
-                        documentId?: string;
-                    };
-                    updatedBy?: {
-                        id?: number;
-                        documentId?: string;
-                    };
-                    locale?: string;
-                    localizations?: {
-                        id?: number;
-                        documentId?: string;
-                    }[];
-                };
-                /** Format: date-time */
-                createdAt?: string;
-                /** Format: date-time */
-                updatedAt?: string;
-                /** Format: date-time */
-                publishedAt?: string;
-                createdBy?: {
-                    id?: number;
-                    documentId?: string;
-                };
-                updatedBy?: {
-                    id?: number;
-                    documentId?: string;
-                };
-                locale?: string;
-                localizations?: {
-                    id?: number;
-                    documentId?: string;
-                }[];
-            };
-            title?: string;
-            handphone?: string;
-            /** Format: email */
-            email?: string;
-            photo?: {
-                id?: number;
-                documentId?: string;
-                name?: string;
-                alternativeText?: string;
-                caption?: string;
-                width?: number;
-                height?: number;
-                formats?: unknown;
-                hash?: string;
-                ext?: string;
-                mime?: string;
-                /** Format: float */
-                size?: number;
-                url?: string;
-                previewUrl?: string;
-                provider?: string;
-                provider_metadata?: unknown;
-                related?: {
-                    id?: number;
-                    documentId?: string;
-                }[];
-                folder?: {
-                    id?: number;
-                    documentId?: string;
-                };
-                folderPath?: string;
-                /** Format: date-time */
-                createdAt?: string;
-                /** Format: date-time */
-                updatedAt?: string;
-                /** Format: date-time */
-                publishedAt?: string;
-                createdBy?: {
-                    id?: number;
-                    documentId?: string;
-                };
-                updatedBy?: {
-                    id?: number;
-                    documentId?: string;
-                };
-                locale?: string;
-                localizations?: {
-                    id?: number;
-                    documentId?: string;
-                }[];
-            };
-            active?: boolean;
-            /** Format: date */
-            startFrom?: string;
-            /** Format: date */
-            startTo?: string;
-            user?: {
-                id?: number;
-                documentId?: string;
-            };
-            /** Format: date-time */
-            createdAt?: string;
-            /** Format: date-time */
-            updatedAt?: string;
-            /** Format: date-time */
-            publishedAt?: string;
-            createdBy?: {
-                id?: number;
-                documentId?: string;
-            };
-            updatedBy?: {
-                id?: number;
-                documentId?: string;
-            };
-            locale?: string;
-            localizations?: {
-                id?: number;
-                documentId?: string;
-            }[];
-        };
-        OrgMemberResponse: {
-            data?: components["schemas"]["OrgMember"];
-            meta?: Record<string, never>;
-        };
-        OrgPositionRequest: {
-            data: {
-                name: string;
-                active: boolean;
-                /** @example string or id */
-                heldBy?: number | string;
-                /** @example string or id */
-                structure?: number | string;
-                locale?: string;
-                localizations?: (number | string)[];
-            };
-        };
-        OrgPositionListResponse: {
-            data?: components["schemas"]["OrgPosition"][];
-            meta?: {
-                pagination?: {
-                    page?: number;
-                    pageSize?: number;
-                    pageCount?: number;
-                    total?: number;
-                };
-            };
-        };
-        OrgPosition: {
-            id?: number;
-            documentId?: string;
-            name: string;
-            active: boolean;
-            heldBy?: {
-                id?: number;
-                documentId?: string;
-                name?: string;
-                position?: {
-                    id?: number;
-                    documentId?: string;
-                    name?: string;
-                    active?: boolean;
-                    heldBy?: {
-                        id?: number;
-                        documentId?: string;
-                    };
-                    structure?: {
-                        id?: number;
-                        documentId?: string;
-                        name?: string;
-                        active?: boolean;
-                        parent?: {
-                            id?: number;
-                            documentId?: string;
-                        };
-                        childs?: {
-                            id?: number;
-                            documentId?: string;
-                        }[];
-                        organization?: {
-                            id?: number;
-                            documentId?: string;
-                            name?: string;
-                            description?: string;
-                            active?: boolean;
-                            structures?: {
-                                id?: number;
-                                documentId?: string;
-                            }[];
-                            shortName?: string;
-                            /** Format: date-time */
-                            createdAt?: string;
-                            /** Format: date-time */
-                            updatedAt?: string;
-                            /** Format: date-time */
-                            publishedAt?: string;
-                            createdBy?: {
-                                id?: number;
-                                documentId?: string;
-                                firstname?: string;
-                                lastname?: string;
-                                username?: string;
-                                /** Format: email */
-                                email?: string;
-                                resetPasswordToken?: string;
-                                registrationToken?: string;
-                                isActive?: boolean;
-                                roles?: {
-                                    id?: number;
-                                    documentId?: string;
-                                    name?: string;
-                                    code?: string;
-                                    description?: string;
-                                    users?: {
-                                        id?: number;
-                                        documentId?: string;
-                                    }[];
-                                    permissions?: {
-                                        id?: number;
-                                        documentId?: string;
-                                        action?: string;
-                                        actionParameters?: unknown;
-                                        subject?: string;
-                                        properties?: unknown;
-                                        conditions?: unknown;
-                                        role?: {
-                                            id?: number;
-                                            documentId?: string;
-                                        };
-                                        /** Format: date-time */
-                                        createdAt?: string;
-                                        /** Format: date-time */
-                                        updatedAt?: string;
-                                        /** Format: date-time */
-                                        publishedAt?: string;
-                                        createdBy?: {
-                                            id?: number;
-                                            documentId?: string;
-                                        };
-                                        updatedBy?: {
-                                            id?: number;
-                                            documentId?: string;
-                                        };
-                                        locale?: string;
-                                        localizations?: {
-                                            id?: number;
-                                            documentId?: string;
-                                        }[];
-                                    }[];
-                                    /** Format: date-time */
-                                    createdAt?: string;
-                                    /** Format: date-time */
-                                    updatedAt?: string;
-                                    /** Format: date-time */
-                                    publishedAt?: string;
-                                    createdBy?: {
-                                        id?: number;
-                                        documentId?: string;
-                                    };
-                                    updatedBy?: {
-                                        id?: number;
-                                        documentId?: string;
-                                    };
-                                    locale?: string;
-                                    localizations?: {
-                                        id?: number;
-                                        documentId?: string;
-                                    }[];
-                                }[];
-                                blocked?: boolean;
-                                preferedLanguage?: string;
-                                /** Format: date-time */
-                                createdAt?: string;
-                                /** Format: date-time */
-                                updatedAt?: string;
-                                /** Format: date-time */
-                                publishedAt?: string;
-                                createdBy?: {
-                                    id?: number;
-                                    documentId?: string;
-                                };
-                                updatedBy?: {
-                                    id?: number;
-                                    documentId?: string;
-                                };
-                                locale?: string;
-                                localizations?: {
-                                    id?: number;
-                                    documentId?: string;
-                                }[];
-                            };
-                            updatedBy?: {
-                                id?: number;
-                                documentId?: string;
-                            };
-                            locale?: string;
-                            localizations?: {
-                                id?: number;
-                                documentId?: string;
-                            }[];
-                        };
-                        positions?: {
-                            id?: number;
-                            documentId?: string;
-                        }[];
-                        /** Format: date-time */
-                        createdAt?: string;
-                        /** Format: date-time */
-                        updatedAt?: string;
-                        /** Format: date-time */
-                        publishedAt?: string;
-                        createdBy?: {
-                            id?: number;
-                            documentId?: string;
-                        };
-                        updatedBy?: {
-                            id?: number;
-                            documentId?: string;
-                        };
-                        locale?: string;
-                        localizations?: {
-                            id?: number;
-                            documentId?: string;
-                        }[];
-                    };
-                    /** Format: date-time */
-                    createdAt?: string;
-                    /** Format: date-time */
-                    updatedAt?: string;
-                    /** Format: date-time */
-                    publishedAt?: string;
-                    createdBy?: {
-                        id?: number;
-                        documentId?: string;
-                    };
-                    updatedBy?: {
-                        id?: number;
-                        documentId?: string;
-                    };
-                    locale?: string;
-                    localizations?: {
-                        id?: number;
-                        documentId?: string;
-                    }[];
-                };
-                title?: string;
-                handphone?: string;
-                /** Format: email */
-                email?: string;
-                photo?: {
-                    id?: number;
-                    documentId?: string;
-                    name?: string;
-                    alternativeText?: string;
-                    caption?: string;
-                    width?: number;
-                    height?: number;
-                    formats?: unknown;
-                    hash?: string;
-                    ext?: string;
-                    mime?: string;
-                    /** Format: float */
-                    size?: number;
-                    url?: string;
-                    previewUrl?: string;
-                    provider?: string;
-                    provider_metadata?: unknown;
-                    related?: {
-                        id?: number;
-                        documentId?: string;
-                    }[];
-                    folder?: {
-                        id?: number;
-                        documentId?: string;
-                        name?: string;
-                        pathId?: number;
-                        parent?: {
-                            id?: number;
-                            documentId?: string;
-                        };
-                        children?: {
-                            id?: number;
-                            documentId?: string;
-                        }[];
-                        files?: {
-                            id?: number;
-                            documentId?: string;
-                            name?: string;
-                            alternativeText?: string;
-                            caption?: string;
-                            width?: number;
-                            height?: number;
-                            formats?: unknown;
-                            hash?: string;
-                            ext?: string;
-                            mime?: string;
-                            /** Format: float */
-                            size?: number;
-                            url?: string;
-                            previewUrl?: string;
-                            provider?: string;
-                            provider_metadata?: unknown;
-                            related?: {
-                                id?: number;
-                                documentId?: string;
-                            }[];
-                            folder?: {
-                                id?: number;
-                                documentId?: string;
-                            };
-                            folderPath?: string;
-                            /** Format: date-time */
-                            createdAt?: string;
-                            /** Format: date-time */
-                            updatedAt?: string;
-                            /** Format: date-time */
-                            publishedAt?: string;
-                            createdBy?: {
-                                id?: number;
-                                documentId?: string;
-                            };
-                            updatedBy?: {
-                                id?: number;
-                                documentId?: string;
-                            };
-                            locale?: string;
-                            localizations?: {
-                                id?: number;
-                                documentId?: string;
-                            }[];
-                        }[];
-                        path?: string;
-                        /** Format: date-time */
-                        createdAt?: string;
-                        /** Format: date-time */
-                        updatedAt?: string;
-                        /** Format: date-time */
-                        publishedAt?: string;
-                        createdBy?: {
-                            id?: number;
-                            documentId?: string;
-                        };
-                        updatedBy?: {
-                            id?: number;
-                            documentId?: string;
-                        };
-                        locale?: string;
-                        localizations?: {
-                            id?: number;
-                            documentId?: string;
-                        }[];
-                    };
-                    folderPath?: string;
-                    /** Format: date-time */
-                    createdAt?: string;
-                    /** Format: date-time */
-                    updatedAt?: string;
-                    /** Format: date-time */
-                    publishedAt?: string;
-                    createdBy?: {
-                        id?: number;
-                        documentId?: string;
-                    };
-                    updatedBy?: {
-                        id?: number;
-                        documentId?: string;
-                    };
-                    locale?: string;
-                    localizations?: {
-                        id?: number;
-                        documentId?: string;
-                    }[];
-                };
-                active?: boolean;
-                /** Format: date */
-                startFrom?: string;
-                /** Format: date */
-                startTo?: string;
-                user?: {
-                    id?: number;
-                    documentId?: string;
-                    username?: string;
-                    /** Format: email */
-                    email?: string;
-                    provider?: string;
-                    resetPasswordToken?: string;
-                    confirmationToken?: string;
-                    confirmed?: boolean;
-                    blocked?: boolean;
-                    role?: {
-                        id?: number;
-                        documentId?: string;
-                        name?: string;
-                        description?: string;
-                        type?: string;
-                        permissions?: {
-                            id?: number;
-                            documentId?: string;
-                            action?: string;
-                            role?: {
-                                id?: number;
-                                documentId?: string;
-                            };
-                            /** Format: date-time */
-                            createdAt?: string;
-                            /** Format: date-time */
-                            updatedAt?: string;
-                            /** Format: date-time */
-                            publishedAt?: string;
-                            createdBy?: {
-                                id?: number;
-                                documentId?: string;
-                            };
-                            updatedBy?: {
-                                id?: number;
-                                documentId?: string;
-                            };
-                            locale?: string;
-                            localizations?: {
-                                id?: number;
-                                documentId?: string;
-                            }[];
-                        }[];
-                        users?: {
-                            id?: number;
-                            documentId?: string;
-                        }[];
-                        /** Format: date-time */
-                        createdAt?: string;
-                        /** Format: date-time */
-                        updatedAt?: string;
-                        /** Format: date-time */
-                        publishedAt?: string;
-                        createdBy?: {
-                            id?: number;
-                            documentId?: string;
-                        };
-                        updatedBy?: {
-                            id?: number;
-                            documentId?: string;
-                        };
-                        locale?: string;
-                        localizations?: {
-                            id?: number;
-                            documentId?: string;
-                        }[];
-                    };
-                    membersOf?: {
-                        id?: number;
-                        documentId?: string;
-                    }[];
-                    /** Format: date-time */
-                    createdAt?: string;
-                    /** Format: date-time */
-                    updatedAt?: string;
-                    /** Format: date-time */
-                    publishedAt?: string;
-                    createdBy?: {
-                        id?: number;
-                        documentId?: string;
-                    };
-                    updatedBy?: {
-                        id?: number;
-                        documentId?: string;
-                    };
-                    locale?: string;
-                    localizations?: {
-                        id?: number;
-                        documentId?: string;
-                    }[];
-                };
-                /** Format: date-time */
-                createdAt?: string;
-                /** Format: date-time */
-                updatedAt?: string;
-                /** Format: date-time */
-                publishedAt?: string;
-                createdBy?: {
-                    id?: number;
-                    documentId?: string;
-                };
-                updatedBy?: {
-                    id?: number;
-                    documentId?: string;
-                };
-                locale?: string;
-                localizations?: {
-                    id?: number;
-                    documentId?: string;
-                }[];
-            };
-            structure?: {
-                id?: number;
-                documentId?: string;
-            };
-            /** Format: date-time */
-            createdAt?: string;
-            /** Format: date-time */
-            updatedAt?: string;
-            /** Format: date-time */
-            publishedAt?: string;
-            createdBy?: {
-                id?: number;
-                documentId?: string;
-            };
-            updatedBy?: {
-                id?: number;
-                documentId?: string;
-            };
-            locale?: string;
-            localizations?: {
-                id?: number;
-                documentId?: string;
-            }[];
-        };
-        OrgPositionResponse: {
-            data?: components["schemas"]["OrgPosition"];
-            meta?: Record<string, never>;
-        };
-        OrgStructureRequest: {
-            data: {
-                name?: string;
-                active: boolean;
-                /** @example string or id */
-                parent?: number | string;
-                childs?: (number | string)[];
-                /** @example string or id */
-                organization?: number | string;
-                positions?: (number | string)[];
-                locale?: string;
-                localizations?: (number | string)[];
-            };
-        };
-        OrgStructureListResponse: {
-            data?: components["schemas"]["OrgStructure"][];
-            meta?: {
-                pagination?: {
-                    page?: number;
-                    pageSize?: number;
-                    pageCount?: number;
-                    total?: number;
-                };
-            };
-        };
-        OrgStructure: {
-            id?: number;
-            documentId?: string;
-            name?: string;
-            active: boolean;
-            parent?: {
-                id?: number;
-                documentId?: string;
-                name?: string;
-                active?: boolean;
-                parent?: {
-                    id?: number;
-                    documentId?: string;
-                };
-                childs?: {
-                    id?: number;
-                    documentId?: string;
-                }[];
-                organization?: {
-                    id?: number;
-                    documentId?: string;
-                    name?: string;
-                    description?: string;
-                    active?: boolean;
-                    structures?: {
-                        id?: number;
-                        documentId?: string;
-                    }[];
-                    shortName?: string;
-                    /** Format: date-time */
-                    createdAt?: string;
-                    /** Format: date-time */
-                    updatedAt?: string;
-                    /** Format: date-time */
-                    publishedAt?: string;
-                    createdBy?: {
-                        id?: number;
-                        documentId?: string;
-                        firstname?: string;
-                        lastname?: string;
-                        username?: string;
-                        /** Format: email */
-                        email?: string;
-                        resetPasswordToken?: string;
-                        registrationToken?: string;
-                        isActive?: boolean;
-                        roles?: {
-                            id?: number;
-                            documentId?: string;
-                            name?: string;
-                            code?: string;
-                            description?: string;
-                            users?: {
-                                id?: number;
-                                documentId?: string;
-                            }[];
-                            permissions?: {
-                                id?: number;
-                                documentId?: string;
-                                action?: string;
-                                actionParameters?: unknown;
-                                subject?: string;
-                                properties?: unknown;
-                                conditions?: unknown;
-                                role?: {
-                                    id?: number;
-                                    documentId?: string;
-                                };
-                                /** Format: date-time */
-                                createdAt?: string;
-                                /** Format: date-time */
-                                updatedAt?: string;
-                                /** Format: date-time */
-                                publishedAt?: string;
-                                createdBy?: {
-                                    id?: number;
-                                    documentId?: string;
-                                };
-                                updatedBy?: {
-                                    id?: number;
-                                    documentId?: string;
-                                };
-                                locale?: string;
-                                localizations?: {
-                                    id?: number;
-                                    documentId?: string;
-                                }[];
-                            }[];
-                            /** Format: date-time */
-                            createdAt?: string;
-                            /** Format: date-time */
-                            updatedAt?: string;
-                            /** Format: date-time */
-                            publishedAt?: string;
-                            createdBy?: {
-                                id?: number;
-                                documentId?: string;
-                            };
-                            updatedBy?: {
-                                id?: number;
-                                documentId?: string;
-                            };
-                            locale?: string;
-                            localizations?: {
-                                id?: number;
-                                documentId?: string;
-                            }[];
-                        }[];
-                        blocked?: boolean;
-                        preferedLanguage?: string;
-                        /** Format: date-time */
-                        createdAt?: string;
-                        /** Format: date-time */
-                        updatedAt?: string;
-                        /** Format: date-time */
-                        publishedAt?: string;
-                        createdBy?: {
-                            id?: number;
-                            documentId?: string;
-                        };
-                        updatedBy?: {
-                            id?: number;
-                            documentId?: string;
-                        };
-                        locale?: string;
-                        localizations?: {
-                            id?: number;
-                            documentId?: string;
-                        }[];
-                    };
-                    updatedBy?: {
-                        id?: number;
-                        documentId?: string;
-                    };
-                    locale?: string;
-                    localizations?: {
-                        id?: number;
-                        documentId?: string;
-                    }[];
-                };
-                positions?: {
-                    id?: number;
-                    documentId?: string;
-                    name?: string;
-                    active?: boolean;
-                    heldBy?: {
-                        id?: number;
-                        documentId?: string;
-                        name?: string;
-                        position?: {
-                            id?: number;
-                            documentId?: string;
-                        };
-                        title?: string;
-                        handphone?: string;
-                        /** Format: email */
-                        email?: string;
-                        photo?: {
-                            id?: number;
-                            documentId?: string;
-                            name?: string;
-                            alternativeText?: string;
-                            caption?: string;
-                            width?: number;
-                            height?: number;
-                            formats?: unknown;
-                            hash?: string;
-                            ext?: string;
-                            mime?: string;
-                            /** Format: float */
-                            size?: number;
-                            url?: string;
-                            previewUrl?: string;
-                            provider?: string;
-                            provider_metadata?: unknown;
-                            related?: {
-                                id?: number;
-                                documentId?: string;
-                            }[];
-                            folder?: {
-                                id?: number;
-                                documentId?: string;
-                                name?: string;
-                                pathId?: number;
-                                parent?: {
-                                    id?: number;
-                                    documentId?: string;
-                                };
-                                children?: {
-                                    id?: number;
-                                    documentId?: string;
-                                }[];
-                                files?: {
-                                    id?: number;
-                                    documentId?: string;
-                                    name?: string;
-                                    alternativeText?: string;
-                                    caption?: string;
-                                    width?: number;
-                                    height?: number;
-                                    formats?: unknown;
-                                    hash?: string;
-                                    ext?: string;
-                                    mime?: string;
-                                    /** Format: float */
-                                    size?: number;
-                                    url?: string;
-                                    previewUrl?: string;
-                                    provider?: string;
-                                    provider_metadata?: unknown;
-                                    related?: {
-                                        id?: number;
-                                        documentId?: string;
-                                    }[];
-                                    folder?: {
-                                        id?: number;
-                                        documentId?: string;
-                                    };
-                                    folderPath?: string;
-                                    /** Format: date-time */
-                                    createdAt?: string;
-                                    /** Format: date-time */
-                                    updatedAt?: string;
-                                    /** Format: date-time */
-                                    publishedAt?: string;
-                                    createdBy?: {
-                                        id?: number;
-                                        documentId?: string;
-                                    };
-                                    updatedBy?: {
-                                        id?: number;
-                                        documentId?: string;
-                                    };
-                                    locale?: string;
-                                    localizations?: {
-                                        id?: number;
-                                        documentId?: string;
-                                    }[];
-                                }[];
-                                path?: string;
-                                /** Format: date-time */
-                                createdAt?: string;
-                                /** Format: date-time */
-                                updatedAt?: string;
-                                /** Format: date-time */
-                                publishedAt?: string;
-                                createdBy?: {
-                                    id?: number;
-                                    documentId?: string;
-                                };
-                                updatedBy?: {
-                                    id?: number;
-                                    documentId?: string;
-                                };
-                                locale?: string;
-                                localizations?: {
-                                    id?: number;
-                                    documentId?: string;
-                                }[];
-                            };
-                            folderPath?: string;
-                            /** Format: date-time */
-                            createdAt?: string;
-                            /** Format: date-time */
-                            updatedAt?: string;
-                            /** Format: date-time */
-                            publishedAt?: string;
-                            createdBy?: {
-                                id?: number;
-                                documentId?: string;
-                            };
-                            updatedBy?: {
-                                id?: number;
-                                documentId?: string;
-                            };
-                            locale?: string;
-                            localizations?: {
-                                id?: number;
-                                documentId?: string;
-                            }[];
-                        };
-                        active?: boolean;
-                        /** Format: date */
-                        startFrom?: string;
-                        /** Format: date */
-                        startTo?: string;
-                        user?: {
-                            id?: number;
-                            documentId?: string;
-                            username?: string;
-                            /** Format: email */
-                            email?: string;
-                            provider?: string;
-                            resetPasswordToken?: string;
-                            confirmationToken?: string;
-                            confirmed?: boolean;
-                            blocked?: boolean;
-                            role?: {
-                                id?: number;
-                                documentId?: string;
-                                name?: string;
-                                description?: string;
-                                type?: string;
-                                permissions?: {
-                                    id?: number;
-                                    documentId?: string;
-                                    action?: string;
-                                    role?: {
-                                        id?: number;
-                                        documentId?: string;
-                                    };
-                                    /** Format: date-time */
-                                    createdAt?: string;
-                                    /** Format: date-time */
-                                    updatedAt?: string;
-                                    /** Format: date-time */
-                                    publishedAt?: string;
-                                    createdBy?: {
-                                        id?: number;
-                                        documentId?: string;
-                                    };
-                                    updatedBy?: {
-                                        id?: number;
-                                        documentId?: string;
-                                    };
-                                    locale?: string;
-                                    localizations?: {
-                                        id?: number;
-                                        documentId?: string;
-                                    }[];
-                                }[];
-                                users?: {
-                                    id?: number;
-                                    documentId?: string;
-                                }[];
-                                /** Format: date-time */
-                                createdAt?: string;
-                                /** Format: date-time */
-                                updatedAt?: string;
-                                /** Format: date-time */
-                                publishedAt?: string;
-                                createdBy?: {
-                                    id?: number;
-                                    documentId?: string;
-                                };
-                                updatedBy?: {
-                                    id?: number;
-                                    documentId?: string;
-                                };
-                                locale?: string;
-                                localizations?: {
-                                    id?: number;
-                                    documentId?: string;
-                                }[];
-                            };
-                            membersOf?: {
-                                id?: number;
-                                documentId?: string;
-                            }[];
-                            /** Format: date-time */
-                            createdAt?: string;
-                            /** Format: date-time */
-                            updatedAt?: string;
-                            /** Format: date-time */
-                            publishedAt?: string;
-                            createdBy?: {
-                                id?: number;
-                                documentId?: string;
-                            };
-                            updatedBy?: {
-                                id?: number;
-                                documentId?: string;
-                            };
-                            locale?: string;
-                            localizations?: {
-                                id?: number;
-                                documentId?: string;
-                            }[];
-                        };
-                        /** Format: date-time */
-                        createdAt?: string;
-                        /** Format: date-time */
-                        updatedAt?: string;
-                        /** Format: date-time */
-                        publishedAt?: string;
-                        createdBy?: {
-                            id?: number;
-                            documentId?: string;
-                        };
-                        updatedBy?: {
-                            id?: number;
-                            documentId?: string;
-                        };
-                        locale?: string;
-                        localizations?: {
-                            id?: number;
-                            documentId?: string;
-                        }[];
-                    };
-                    structure?: {
-                        id?: number;
-                        documentId?: string;
-                    };
-                    /** Format: date-time */
-                    createdAt?: string;
-                    /** Format: date-time */
-                    updatedAt?: string;
-                    /** Format: date-time */
-                    publishedAt?: string;
-                    createdBy?: {
-                        id?: number;
-                        documentId?: string;
-                    };
-                    updatedBy?: {
-                        id?: number;
-                        documentId?: string;
-                    };
-                    locale?: string;
-                    localizations?: {
-                        id?: number;
-                        documentId?: string;
-                    }[];
-                }[];
-                /** Format: date-time */
-                createdAt?: string;
-                /** Format: date-time */
-                updatedAt?: string;
-                /** Format: date-time */
-                publishedAt?: string;
-                createdBy?: {
-                    id?: number;
-                    documentId?: string;
-                };
-                updatedBy?: {
-                    id?: number;
-                    documentId?: string;
-                };
-                locale?: string;
-                localizations?: {
-                    id?: number;
-                    documentId?: string;
-                }[];
-            };
-            childs?: {
-                id?: number;
-                documentId?: string;
-            }[];
-            organization?: {
-                id?: number;
-                documentId?: string;
-            };
-            positions?: {
-                id?: number;
-                documentId?: string;
-            }[];
-            /** Format: date-time */
-            createdAt?: string;
-            /** Format: date-time */
-            updatedAt?: string;
-            /** Format: date-time */
-            publishedAt?: string;
-            createdBy?: {
-                id?: number;
-                documentId?: string;
-            };
-            updatedBy?: {
-                id?: number;
-                documentId?: string;
-            };
-            locale?: string;
-            localizations?: {
-                id?: number;
-                documentId?: string;
-            }[];
-        };
-        OrgStructureResponse: {
-            data?: components["schemas"]["OrgStructure"];
-            meta?: Record<string, never>;
-        };
-        OrganizationRequest: {
-            data: {
-                name: string;
-                description?: string;
-                active: boolean;
-                structures?: (number | string)[];
-                shortName?: string;
-                locale?: string;
-                localizations?: (number | string)[];
-            };
-        };
-        OrganizationListResponse: {
-            data?: components["schemas"]["Organization"][];
-            meta?: {
-                pagination?: {
-                    page?: number;
-                    pageSize?: number;
-                    pageCount?: number;
-                    total?: number;
-                };
-            };
-        };
-        Organization: {
-            id?: number;
-            documentId?: string;
-            name: string;
-            description?: string;
-            active: boolean;
-            structures?: {
-                id?: number;
-                documentId?: string;
-                name?: string;
-                active?: boolean;
-                parent?: {
-                    id?: number;
-                    documentId?: string;
-                };
-                childs?: {
-                    id?: number;
-                    documentId?: string;
-                }[];
-                organization?: {
-                    id?: number;
-                    documentId?: string;
-                    name?: string;
-                    description?: string;
-                    active?: boolean;
-                    structures?: {
-                        id?: number;
-                        documentId?: string;
-                    }[];
-                    shortName?: string;
-                    /** Format: date-time */
-                    createdAt?: string;
-                    /** Format: date-time */
-                    updatedAt?: string;
-                    /** Format: date-time */
-                    publishedAt?: string;
-                    createdBy?: {
-                        id?: number;
-                        documentId?: string;
-                        firstname?: string;
-                        lastname?: string;
-                        username?: string;
-                        /** Format: email */
-                        email?: string;
-                        resetPasswordToken?: string;
-                        registrationToken?: string;
-                        isActive?: boolean;
-                        roles?: {
-                            id?: number;
-                            documentId?: string;
-                            name?: string;
-                            code?: string;
-                            description?: string;
-                            users?: {
-                                id?: number;
-                                documentId?: string;
-                            }[];
-                            permissions?: {
-                                id?: number;
-                                documentId?: string;
-                                action?: string;
-                                actionParameters?: unknown;
-                                subject?: string;
-                                properties?: unknown;
-                                conditions?: unknown;
-                                role?: {
-                                    id?: number;
-                                    documentId?: string;
-                                };
-                                /** Format: date-time */
-                                createdAt?: string;
-                                /** Format: date-time */
-                                updatedAt?: string;
-                                /** Format: date-time */
-                                publishedAt?: string;
-                                createdBy?: {
-                                    id?: number;
-                                    documentId?: string;
-                                };
-                                updatedBy?: {
-                                    id?: number;
-                                    documentId?: string;
-                                };
-                                locale?: string;
-                                localizations?: {
-                                    id?: number;
-                                    documentId?: string;
-                                }[];
-                            }[];
-                            /** Format: date-time */
-                            createdAt?: string;
-                            /** Format: date-time */
-                            updatedAt?: string;
-                            /** Format: date-time */
-                            publishedAt?: string;
-                            createdBy?: {
-                                id?: number;
-                                documentId?: string;
-                            };
-                            updatedBy?: {
-                                id?: number;
-                                documentId?: string;
-                            };
-                            locale?: string;
-                            localizations?: {
-                                id?: number;
-                                documentId?: string;
-                            }[];
-                        }[];
-                        blocked?: boolean;
-                        preferedLanguage?: string;
-                        /** Format: date-time */
-                        createdAt?: string;
-                        /** Format: date-time */
-                        updatedAt?: string;
-                        /** Format: date-time */
-                        publishedAt?: string;
-                        createdBy?: {
-                            id?: number;
-                            documentId?: string;
-                        };
-                        updatedBy?: {
-                            id?: number;
-                            documentId?: string;
-                        };
-                        locale?: string;
-                        localizations?: {
-                            id?: number;
-                            documentId?: string;
-                        }[];
-                    };
-                    updatedBy?: {
-                        id?: number;
-                        documentId?: string;
-                    };
-                    locale?: string;
-                    localizations?: {
-                        id?: number;
-                        documentId?: string;
-                    }[];
-                };
-                positions?: {
-                    id?: number;
-                    documentId?: string;
-                    name?: string;
-                    active?: boolean;
-                    heldBy?: {
-                        id?: number;
-                        documentId?: string;
-                        name?: string;
-                        position?: {
-                            id?: number;
-                            documentId?: string;
-                        };
-                        title?: string;
-                        handphone?: string;
-                        /** Format: email */
-                        email?: string;
-                        photo?: {
-                            id?: number;
-                            documentId?: string;
-                            name?: string;
-                            alternativeText?: string;
-                            caption?: string;
-                            width?: number;
-                            height?: number;
-                            formats?: unknown;
-                            hash?: string;
-                            ext?: string;
-                            mime?: string;
-                            /** Format: float */
-                            size?: number;
-                            url?: string;
-                            previewUrl?: string;
-                            provider?: string;
-                            provider_metadata?: unknown;
-                            related?: {
-                                id?: number;
-                                documentId?: string;
-                            }[];
-                            folder?: {
-                                id?: number;
-                                documentId?: string;
-                                name?: string;
-                                pathId?: number;
-                                parent?: {
-                                    id?: number;
-                                    documentId?: string;
-                                };
-                                children?: {
-                                    id?: number;
-                                    documentId?: string;
-                                }[];
-                                files?: {
-                                    id?: number;
-                                    documentId?: string;
-                                    name?: string;
-                                    alternativeText?: string;
-                                    caption?: string;
-                                    width?: number;
-                                    height?: number;
-                                    formats?: unknown;
-                                    hash?: string;
-                                    ext?: string;
-                                    mime?: string;
-                                    /** Format: float */
-                                    size?: number;
-                                    url?: string;
-                                    previewUrl?: string;
-                                    provider?: string;
-                                    provider_metadata?: unknown;
-                                    related?: {
-                                        id?: number;
-                                        documentId?: string;
-                                    }[];
-                                    folder?: {
-                                        id?: number;
-                                        documentId?: string;
-                                    };
-                                    folderPath?: string;
-                                    /** Format: date-time */
-                                    createdAt?: string;
-                                    /** Format: date-time */
-                                    updatedAt?: string;
-                                    /** Format: date-time */
-                                    publishedAt?: string;
-                                    createdBy?: {
-                                        id?: number;
-                                        documentId?: string;
-                                    };
-                                    updatedBy?: {
-                                        id?: number;
-                                        documentId?: string;
-                                    };
-                                    locale?: string;
-                                    localizations?: {
-                                        id?: number;
-                                        documentId?: string;
-                                    }[];
-                                }[];
-                                path?: string;
-                                /** Format: date-time */
-                                createdAt?: string;
-                                /** Format: date-time */
-                                updatedAt?: string;
-                                /** Format: date-time */
-                                publishedAt?: string;
-                                createdBy?: {
-                                    id?: number;
-                                    documentId?: string;
-                                };
-                                updatedBy?: {
-                                    id?: number;
-                                    documentId?: string;
-                                };
-                                locale?: string;
-                                localizations?: {
-                                    id?: number;
-                                    documentId?: string;
-                                }[];
-                            };
-                            folderPath?: string;
-                            /** Format: date-time */
-                            createdAt?: string;
-                            /** Format: date-time */
-                            updatedAt?: string;
-                            /** Format: date-time */
-                            publishedAt?: string;
-                            createdBy?: {
-                                id?: number;
-                                documentId?: string;
-                            };
-                            updatedBy?: {
-                                id?: number;
-                                documentId?: string;
-                            };
-                            locale?: string;
-                            localizations?: {
-                                id?: number;
-                                documentId?: string;
-                            }[];
-                        };
-                        active?: boolean;
-                        /** Format: date */
-                        startFrom?: string;
-                        /** Format: date */
-                        startTo?: string;
-                        user?: {
-                            id?: number;
-                            documentId?: string;
-                            username?: string;
-                            /** Format: email */
-                            email?: string;
-                            provider?: string;
-                            resetPasswordToken?: string;
-                            confirmationToken?: string;
-                            confirmed?: boolean;
-                            blocked?: boolean;
-                            role?: {
-                                id?: number;
-                                documentId?: string;
-                                name?: string;
-                                description?: string;
-                                type?: string;
-                                permissions?: {
-                                    id?: number;
-                                    documentId?: string;
-                                    action?: string;
-                                    role?: {
-                                        id?: number;
-                                        documentId?: string;
-                                    };
-                                    /** Format: date-time */
-                                    createdAt?: string;
-                                    /** Format: date-time */
-                                    updatedAt?: string;
-                                    /** Format: date-time */
-                                    publishedAt?: string;
-                                    createdBy?: {
-                                        id?: number;
-                                        documentId?: string;
-                                    };
-                                    updatedBy?: {
-                                        id?: number;
-                                        documentId?: string;
-                                    };
-                                    locale?: string;
-                                    localizations?: {
-                                        id?: number;
-                                        documentId?: string;
-                                    }[];
-                                }[];
-                                users?: {
-                                    id?: number;
-                                    documentId?: string;
-                                }[];
-                                /** Format: date-time */
-                                createdAt?: string;
-                                /** Format: date-time */
-                                updatedAt?: string;
-                                /** Format: date-time */
-                                publishedAt?: string;
-                                createdBy?: {
-                                    id?: number;
-                                    documentId?: string;
-                                };
-                                updatedBy?: {
-                                    id?: number;
-                                    documentId?: string;
-                                };
-                                locale?: string;
-                                localizations?: {
-                                    id?: number;
-                                    documentId?: string;
-                                }[];
-                            };
-                            membersOf?: {
-                                id?: number;
-                                documentId?: string;
-                            }[];
-                            /** Format: date-time */
-                            createdAt?: string;
-                            /** Format: date-time */
-                            updatedAt?: string;
-                            /** Format: date-time */
-                            publishedAt?: string;
-                            createdBy?: {
-                                id?: number;
-                                documentId?: string;
-                            };
-                            updatedBy?: {
-                                id?: number;
-                                documentId?: string;
-                            };
-                            locale?: string;
-                            localizations?: {
-                                id?: number;
-                                documentId?: string;
-                            }[];
-                        };
-                        /** Format: date-time */
-                        createdAt?: string;
-                        /** Format: date-time */
-                        updatedAt?: string;
-                        /** Format: date-time */
-                        publishedAt?: string;
-                        createdBy?: {
-                            id?: number;
-                            documentId?: string;
-                        };
-                        updatedBy?: {
-                            id?: number;
-                            documentId?: string;
-                        };
-                        locale?: string;
-                        localizations?: {
-                            id?: number;
-                            documentId?: string;
-                        }[];
-                    };
-                    structure?: {
-                        id?: number;
-                        documentId?: string;
-                    };
-                    /** Format: date-time */
-                    createdAt?: string;
-                    /** Format: date-time */
-                    updatedAt?: string;
-                    /** Format: date-time */
-                    publishedAt?: string;
-                    createdBy?: {
-                        id?: number;
-                        documentId?: string;
-                    };
-                    updatedBy?: {
-                        id?: number;
-                        documentId?: string;
-                    };
-                    locale?: string;
-                    localizations?: {
-                        id?: number;
-                        documentId?: string;
-                    }[];
-                }[];
-                /** Format: date-time */
-                createdAt?: string;
-                /** Format: date-time */
-                updatedAt?: string;
-                /** Format: date-time */
-                publishedAt?: string;
-                createdBy?: {
-                    id?: number;
-                    documentId?: string;
-                };
-                updatedBy?: {
-                    id?: number;
-                    documentId?: string;
-                };
-                locale?: string;
-                localizations?: {
-                    id?: number;
-                    documentId?: string;
-                }[];
-            }[];
-            shortName?: string;
-            /** Format: date-time */
-            createdAt?: string;
-            /** Format: date-time */
-            updatedAt?: string;
-            /** Format: date-time */
-            publishedAt?: string;
-            createdBy?: {
-                id?: number;
-                documentId?: string;
-            };
-            updatedBy?: {
-                id?: number;
-                documentId?: string;
-            };
-            locale?: string;
-            localizations?: {
-                id?: number;
-                documentId?: string;
-            }[];
-        };
-        OrganizationResponse: {
-            data?: components["schemas"]["Organization"];
             meta?: Record<string, never>;
         };
         StaticRequest: {
@@ -4249,6 +2273,13 @@ export interface components {
         StaticResponse: {
             data?: components["schemas"]["Static"];
             meta?: Record<string, never>;
+        };
+        BlockSeoComponent: {
+            id?: number;
+            __component?: string;
+            metaTitle?: string;
+            metaDescription?: string;
+            shareImageUrl?: string;
         };
         UploadFile: {
             id?: number;
@@ -4657,6 +2688,368 @@ export interface operations {
         };
     };
     "delete/an-marriages/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": number;
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+        };
+    };
+    "get/announcements": {
+        parameters: {
+            query?: {
+                /** @description Sort by attributes ascending (asc) or descending (desc) */
+                sort?: string;
+                /** @description Return page/pageSize (default: true) */
+                "pagination[withCount]"?: boolean;
+                /** @description Page number (default: 0) */
+                "pagination[page]"?: number;
+                /** @description Page size (default: 25) */
+                "pagination[pageSize]"?: number;
+                /** @description Offset value (default: 0) */
+                "pagination[start]"?: number;
+                /** @description Number of entities to return (default: 25) */
+                "pagination[limit]"?: number;
+                /** @description Fields to return (ex: title,author) */
+                fields?: string;
+                /** @description Relations to return */
+                populate?: string;
+                /** @description Filters to apply */
+                filters?: {
+                    [key: string]: unknown;
+                };
+                /** @description Locale to apply */
+                locale?: string;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["AnnouncementListResponse"];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+        };
+    };
+    "post/announcements": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["AnnouncementRequest"];
+            };
+        };
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["AnnouncementResponse"];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+        };
+    };
+    "get/announcements/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["AnnouncementResponse"];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+        };
+    };
+    "put/announcements/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["AnnouncementRequest"];
+            };
+        };
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["AnnouncementResponse"];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+        };
+    };
+    "delete/announcements/{id}": {
         parameters: {
             query?: never;
             header?: never;
@@ -5381,1454 +3774,6 @@ export interface operations {
         };
     };
     "delete/categories/{id}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                id: number;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description OK */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": number;
-                };
-            };
-            /** @description Bad Request */
-            400: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-            /** @description Unauthorized */
-            401: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-            /** @description Forbidden */
-            403: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-            /** @description Not Found */
-            404: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-            /** @description Internal Server Error */
-            500: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-        };
-    };
-    "get/org-members": {
-        parameters: {
-            query?: {
-                /** @description Sort by attributes ascending (asc) or descending (desc) */
-                sort?: string;
-                /** @description Return page/pageSize (default: true) */
-                "pagination[withCount]"?: boolean;
-                /** @description Page number (default: 0) */
-                "pagination[page]"?: number;
-                /** @description Page size (default: 25) */
-                "pagination[pageSize]"?: number;
-                /** @description Offset value (default: 0) */
-                "pagination[start]"?: number;
-                /** @description Number of entities to return (default: 25) */
-                "pagination[limit]"?: number;
-                /** @description Fields to return (ex: title,author) */
-                fields?: string;
-                /** @description Relations to return */
-                populate?: string;
-                /** @description Filters to apply */
-                filters?: {
-                    [key: string]: unknown;
-                };
-                /** @description Locale to apply */
-                locale?: string;
-            };
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description OK */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["OrgMemberListResponse"];
-                };
-            };
-            /** @description Bad Request */
-            400: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-            /** @description Unauthorized */
-            401: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-            /** @description Forbidden */
-            403: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-            /** @description Not Found */
-            404: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-            /** @description Internal Server Error */
-            500: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-        };
-    };
-    "post/org-members": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["OrgMemberRequest"];
-            };
-        };
-        responses: {
-            /** @description OK */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["OrgMemberResponse"];
-                };
-            };
-            /** @description Bad Request */
-            400: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-            /** @description Unauthorized */
-            401: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-            /** @description Forbidden */
-            403: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-            /** @description Not Found */
-            404: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-            /** @description Internal Server Error */
-            500: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-        };
-    };
-    "get/org-members/{id}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                id: number;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description OK */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["OrgMemberResponse"];
-                };
-            };
-            /** @description Bad Request */
-            400: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-            /** @description Unauthorized */
-            401: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-            /** @description Forbidden */
-            403: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-            /** @description Not Found */
-            404: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-            /** @description Internal Server Error */
-            500: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-        };
-    };
-    "put/org-members/{id}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                id: number;
-            };
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["OrgMemberRequest"];
-            };
-        };
-        responses: {
-            /** @description OK */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["OrgMemberResponse"];
-                };
-            };
-            /** @description Bad Request */
-            400: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-            /** @description Unauthorized */
-            401: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-            /** @description Forbidden */
-            403: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-            /** @description Not Found */
-            404: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-            /** @description Internal Server Error */
-            500: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-        };
-    };
-    "delete/org-members/{id}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                id: number;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description OK */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": number;
-                };
-            };
-            /** @description Bad Request */
-            400: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-            /** @description Unauthorized */
-            401: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-            /** @description Forbidden */
-            403: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-            /** @description Not Found */
-            404: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-            /** @description Internal Server Error */
-            500: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-        };
-    };
-    "get/org-positions": {
-        parameters: {
-            query?: {
-                /** @description Sort by attributes ascending (asc) or descending (desc) */
-                sort?: string;
-                /** @description Return page/pageSize (default: true) */
-                "pagination[withCount]"?: boolean;
-                /** @description Page number (default: 0) */
-                "pagination[page]"?: number;
-                /** @description Page size (default: 25) */
-                "pagination[pageSize]"?: number;
-                /** @description Offset value (default: 0) */
-                "pagination[start]"?: number;
-                /** @description Number of entities to return (default: 25) */
-                "pagination[limit]"?: number;
-                /** @description Fields to return (ex: title,author) */
-                fields?: string;
-                /** @description Relations to return */
-                populate?: string;
-                /** @description Filters to apply */
-                filters?: {
-                    [key: string]: unknown;
-                };
-                /** @description Locale to apply */
-                locale?: string;
-            };
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description OK */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["OrgPositionListResponse"];
-                };
-            };
-            /** @description Bad Request */
-            400: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-            /** @description Unauthorized */
-            401: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-            /** @description Forbidden */
-            403: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-            /** @description Not Found */
-            404: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-            /** @description Internal Server Error */
-            500: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-        };
-    };
-    "post/org-positions": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["OrgPositionRequest"];
-            };
-        };
-        responses: {
-            /** @description OK */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["OrgPositionResponse"];
-                };
-            };
-            /** @description Bad Request */
-            400: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-            /** @description Unauthorized */
-            401: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-            /** @description Forbidden */
-            403: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-            /** @description Not Found */
-            404: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-            /** @description Internal Server Error */
-            500: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-        };
-    };
-    "get/org-positions/{id}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                id: number;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description OK */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["OrgPositionResponse"];
-                };
-            };
-            /** @description Bad Request */
-            400: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-            /** @description Unauthorized */
-            401: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-            /** @description Forbidden */
-            403: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-            /** @description Not Found */
-            404: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-            /** @description Internal Server Error */
-            500: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-        };
-    };
-    "put/org-positions/{id}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                id: number;
-            };
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["OrgPositionRequest"];
-            };
-        };
-        responses: {
-            /** @description OK */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["OrgPositionResponse"];
-                };
-            };
-            /** @description Bad Request */
-            400: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-            /** @description Unauthorized */
-            401: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-            /** @description Forbidden */
-            403: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-            /** @description Not Found */
-            404: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-            /** @description Internal Server Error */
-            500: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-        };
-    };
-    "delete/org-positions/{id}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                id: number;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description OK */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": number;
-                };
-            };
-            /** @description Bad Request */
-            400: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-            /** @description Unauthorized */
-            401: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-            /** @description Forbidden */
-            403: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-            /** @description Not Found */
-            404: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-            /** @description Internal Server Error */
-            500: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-        };
-    };
-    "get/org-structures": {
-        parameters: {
-            query?: {
-                /** @description Sort by attributes ascending (asc) or descending (desc) */
-                sort?: string;
-                /** @description Return page/pageSize (default: true) */
-                "pagination[withCount]"?: boolean;
-                /** @description Page number (default: 0) */
-                "pagination[page]"?: number;
-                /** @description Page size (default: 25) */
-                "pagination[pageSize]"?: number;
-                /** @description Offset value (default: 0) */
-                "pagination[start]"?: number;
-                /** @description Number of entities to return (default: 25) */
-                "pagination[limit]"?: number;
-                /** @description Fields to return (ex: title,author) */
-                fields?: string;
-                /** @description Relations to return */
-                populate?: string;
-                /** @description Filters to apply */
-                filters?: {
-                    [key: string]: unknown;
-                };
-                /** @description Locale to apply */
-                locale?: string;
-            };
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description OK */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["OrgStructureListResponse"];
-                };
-            };
-            /** @description Bad Request */
-            400: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-            /** @description Unauthorized */
-            401: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-            /** @description Forbidden */
-            403: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-            /** @description Not Found */
-            404: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-            /** @description Internal Server Error */
-            500: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-        };
-    };
-    "post/org-structures": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["OrgStructureRequest"];
-            };
-        };
-        responses: {
-            /** @description OK */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["OrgStructureResponse"];
-                };
-            };
-            /** @description Bad Request */
-            400: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-            /** @description Unauthorized */
-            401: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-            /** @description Forbidden */
-            403: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-            /** @description Not Found */
-            404: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-            /** @description Internal Server Error */
-            500: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-        };
-    };
-    "get/org-structures/{id}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                id: number;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description OK */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["OrgStructureResponse"];
-                };
-            };
-            /** @description Bad Request */
-            400: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-            /** @description Unauthorized */
-            401: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-            /** @description Forbidden */
-            403: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-            /** @description Not Found */
-            404: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-            /** @description Internal Server Error */
-            500: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-        };
-    };
-    "put/org-structures/{id}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                id: number;
-            };
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["OrgStructureRequest"];
-            };
-        };
-        responses: {
-            /** @description OK */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["OrgStructureResponse"];
-                };
-            };
-            /** @description Bad Request */
-            400: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-            /** @description Unauthorized */
-            401: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-            /** @description Forbidden */
-            403: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-            /** @description Not Found */
-            404: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-            /** @description Internal Server Error */
-            500: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-        };
-    };
-    "delete/org-structures/{id}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                id: number;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description OK */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": number;
-                };
-            };
-            /** @description Bad Request */
-            400: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-            /** @description Unauthorized */
-            401: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-            /** @description Forbidden */
-            403: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-            /** @description Not Found */
-            404: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-            /** @description Internal Server Error */
-            500: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-        };
-    };
-    "get/organizations": {
-        parameters: {
-            query?: {
-                /** @description Sort by attributes ascending (asc) or descending (desc) */
-                sort?: string;
-                /** @description Return page/pageSize (default: true) */
-                "pagination[withCount]"?: boolean;
-                /** @description Page number (default: 0) */
-                "pagination[page]"?: number;
-                /** @description Page size (default: 25) */
-                "pagination[pageSize]"?: number;
-                /** @description Offset value (default: 0) */
-                "pagination[start]"?: number;
-                /** @description Number of entities to return (default: 25) */
-                "pagination[limit]"?: number;
-                /** @description Fields to return (ex: title,author) */
-                fields?: string;
-                /** @description Relations to return */
-                populate?: string;
-                /** @description Filters to apply */
-                filters?: {
-                    [key: string]: unknown;
-                };
-                /** @description Locale to apply */
-                locale?: string;
-            };
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description OK */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["OrganizationListResponse"];
-                };
-            };
-            /** @description Bad Request */
-            400: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-            /** @description Unauthorized */
-            401: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-            /** @description Forbidden */
-            403: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-            /** @description Not Found */
-            404: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-            /** @description Internal Server Error */
-            500: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-        };
-    };
-    "post/organizations": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["OrganizationRequest"];
-            };
-        };
-        responses: {
-            /** @description OK */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["OrganizationResponse"];
-                };
-            };
-            /** @description Bad Request */
-            400: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-            /** @description Unauthorized */
-            401: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-            /** @description Forbidden */
-            403: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-            /** @description Not Found */
-            404: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-            /** @description Internal Server Error */
-            500: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-        };
-    };
-    "get/organizations/{id}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                id: number;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description OK */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["OrganizationResponse"];
-                };
-            };
-            /** @description Bad Request */
-            400: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-            /** @description Unauthorized */
-            401: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-            /** @description Forbidden */
-            403: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-            /** @description Not Found */
-            404: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-            /** @description Internal Server Error */
-            500: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-        };
-    };
-    "put/organizations/{id}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                id: number;
-            };
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["OrganizationRequest"];
-            };
-        };
-        responses: {
-            /** @description OK */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["OrganizationResponse"];
-                };
-            };
-            /** @description Bad Request */
-            400: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-            /** @description Unauthorized */
-            401: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-            /** @description Forbidden */
-            403: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-            /** @description Not Found */
-            404: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-            /** @description Internal Server Error */
-            500: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-        };
-    };
-    "delete/organizations/{id}": {
         parameters: {
             query?: never;
             header?: never;
