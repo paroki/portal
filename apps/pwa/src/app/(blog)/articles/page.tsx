@@ -19,6 +19,12 @@ export default async function ArticlePage() {
     };
   }
 
+  if (!items) {
+    return {
+      notFound: true,
+    };
+  }
+
   return (
     <div>
       <div className="pb-4">
