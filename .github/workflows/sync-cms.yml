@@ -1,0 +1,44 @@
+name: Synchronize Repository
+
+on:
+  push:
+    branches:
+      - main
+      - next
+      - beta
+      - debug
+
+jobs:
+  sync:
+    name: Sync CMS
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Clone cms repo
+        run: |
+          gh repo clone paroki/pkrbt-cms  /tmp/pkrbt-cms
+
+      - name: set branch
+        run: |
+          git checkout -b ${{ github.ref_name }}
+        working-directory: /tmp/pkrbt-cms
+
+      - name: copy latest changes
+        run: |
+          cp -Rvf apps/api /tmp/pkrbt-cms
+
+      - name: Set Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: install
+        run: |
+          npm install -g yarn
+          yarn install
+          git add . -A
+          git commit -am ${{ github.event.head_commit.message }}
+          git push origin main --force
+        working-directory: /tmp/pkrbt-cms
