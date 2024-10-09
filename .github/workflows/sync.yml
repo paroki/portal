@@ -1,11 +1,13 @@
-name: GitLab
+name: Synchronize Repository
 
 on:
   workflow_call:
 
+env:
+  GH_TOKEN: ${{ secrets.PAT }}
 jobs:
   gitlab:
-    name: GitLab Mirror
+    name: GitLab
     runs-on: ubuntu-latest
     steps:
       - uses: keninkujovic/gitlab-sync@2.0.0

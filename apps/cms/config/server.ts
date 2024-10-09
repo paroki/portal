@@ -5,5 +5,5 @@ export default ({ env }) => ({
     keys: env.array("APP_KEYS"),
   },
   url: env("URL", "http://localhost:1337"),
-  proxy: env.bool("IS_PROXIED", false),
+  // proxy: env.bool("IS_PROXIED", false),
 });

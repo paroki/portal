@@ -55,7 +55,7 @@ jobs:
       - name: build
         shell: bash
         run: |
-          cp apps/api/.env.default apps/api/.env
+          cp apps/cms/.env.default apps/cms/.env
           cp apps/web/.env.default apps/web/.env
           pnpm build
 
@@ -70,7 +70,7 @@ jobs:
           files: ./clover.xml
           token: ${{ secrets.CODECOV_TOKEN }} # required
           verbose: true
-          directory: ./apps/api/coverage
+          directory: ./apps/cms/coverage
 
       - name: upload web coverage
         uses: codecov/codecov-action@v4
@@ -140,7 +140,7 @@ jobs:
       - name: Build
         shell: bash
         run: |
-          cp apps/api/.env.default apps/api/.env
+          cp apps/cms/.env.default apps/cms/.env
           cp apps/web/.env.default apps/web/.env
           pnpm build
           pnpm seed:dev

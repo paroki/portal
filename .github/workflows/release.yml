@@ -47,16 +47,7 @@ jobs:
   image:
     name: Image
     needs: ["release"]
-    uses: paroki/pkrbt/.github/workflows/image.yml@main
+    uses: "paroki/pkrbt/.github/workflows/image.yml@next"
     secrets: inherit
     with:
       ref_name: ${{ needs.release.outputs.version }}
-
-  deploy:
-    name: Deploy
-    needs: ["image"]
-    runs-on: ubuntu-latest
-    steps:
-      - name: Deploy to Coolify
-        run: |
-          curl --request GET '${{ secrets.COOLIFY_WEBHOOK }}' --header 'Authorization: Bearer ${{ secrets.COOLIFY_TOKEN }}'
