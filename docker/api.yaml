@@ -4,7 +4,7 @@
 #    listening: true
 
 file:
-  /api:
+  /cms:
     exists: true
     filetype: directory
 

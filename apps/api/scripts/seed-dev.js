@@ -193,7 +193,7 @@ function generateImage() {
  * generates slider blocks
  */
 function generateSlider() {
-  const rand = faker.number.int({ min: 0, max: images.length - 1 });
+  const rand = faker.number.int({ min: 2, max: images.length - 1 });
   let entries = [];
   for (let i = 1; i <= rand; i++) {
     entries.push(images[i]);
@@ -283,53 +283,6 @@ async function importImages() {
   images = await checkFileExistsBeforeUpload(data.images);
 }
 
-async function importOrganization() {
-  let organizations = [];
-
-  for (const o of data.organizations) {
-    const entry = await createEntry({
-      model: "organization",
-      entry: {
-        name: o.name,
-      },
-    });
-    organizations.push(entry);
-  }
-
-  let structures = [];
-  for (const s of data.structures) {
-    const entry = await createEntry({
-      model: "org-structure",
-      entry: {
-        name: s.name,
-        organization: { id: 1 },
-      },
-    });
-    structures.push(entry);
-  }
-
-  let positions = [];
-  for (const p of data.positions) {
-    const item = await createEntry({
-      model: "org-position",
-      entry: p,
-    });
-
-    positions.push(item);
-  }
-
-  for (const p of positions) {
-    const sex = faker.person.sex();
-    await createEntry({
-      model: "org-member",
-      entry: {
-        name: faker.person.firstName(sex) + " " + faker.person.lastName(sex),
-        position: { documentId: p.documentId },
-      },
-    });
-  }
-}
-
 async function importMarriages() {
   for (let i = 0; i < 30; i++) {
     const tdate = faker.date.between({
@@ -343,14 +296,31 @@ async function importMarriages() {
       entry: {
         groomName:
           faker.person.firstName("male") + " " + faker.person.lastName("male"),
-        groomFrom: `${faker.location.city()}`,
+        groomFrom: `Paroki di ${faker.location.city()}`,
         brideName:
           faker.person.firstName("female") +
           " " +
           faker.person.lastName("female"),
-        brideFrom: `${faker.location.city()}`,
+        brideFrom: `Paroki di ${faker.location.city()}`,
         startAt,
         endAt,
+      },
+    });
+  }
+}
+
+async function importAnnouncement() {
+  for (let i = 0; i < 30; i++) {
+    const title = _.startCase(faker.lorem.words({ min: 2, max: 4 }));
+    const slug = _.kebabCase(title);
+    const { body: content } = generateMarkdown();
+
+    await createEntry({
+      model: "announcement",
+      entry: {
+        title,
+        slug,
+        content,
       },
     });
   }
@@ -361,9 +331,12 @@ async function importSeedData() {
     category: ["find", "findOne"],
     static: ["find", "findOne"],
     article: ["find", "findOne"],
+    announcement: ["find", "findOne"],
+    "an-marriages": ["find", "findOne"],
   });
+
   await importMarriages();
-  await importOrganization();
+  await importAnnouncement();
   await importCategories();
   await importImages();
   await importArticles();
