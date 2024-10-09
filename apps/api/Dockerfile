@@ -48,4 +48,4 @@ WORKDIR /cms
 EXPOSE 1337
 VOLUME [ "/cms/public" ]
 
-CMD [ "npm", "run", "start"]
+CMD [ "pnpm", "develop"]
