@@ -42,6 +42,7 @@ jobs:
           git config --global user.name "Anthonius Munthi"
           git config --global user.email "me@itstoni.com"
           corepack enable
+          rm yarn.lock
           yarn init
           yarn install
           git add . -A
