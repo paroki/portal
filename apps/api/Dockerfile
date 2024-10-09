@@ -35,16 +35,17 @@ WORKDIR /pkrbt
 
 RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --filter=api --frozen-lockfile
 RUN turbo prune --docker @pkrbt/api
-RUN pnpm deploy --filter=api /prod/api
+RUN pnpm deploy --filter=api /prod/cms
 
-WORKDIR /prod/api
+WORKDIR /prod/cms
 RUN pnpm build
 
 FROM base AS prod
 
-COPY --from=build --chown=node:node /prod/api /api
+COPY --from=build --chown=node:node /prod/cms /cms
 USER node
-WORKDIR /api
+WORKDIR /cms
 EXPOSE 1337
+VOLUME [ "/cms/public" ]
 
 CMD [ "pnpm", "start" ]
