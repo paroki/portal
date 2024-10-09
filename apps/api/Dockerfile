@@ -38,7 +38,7 @@ RUN turbo prune --docker @pkrbt/api
 RUN pnpm deploy --filter=api /prod/cms
 
 WORKDIR /prod/cms
-# RUN pnpm build
+RUN pnpm build
 
 FROM base AS prod
 
@@ -48,5 +48,4 @@ WORKDIR /cms
 EXPOSE 1337
 VOLUME [ "/cms/public" ]
 
-RUN pnpm build
 CMD [ "npm", "run", "start"]
