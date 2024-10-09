@@ -8,6 +8,8 @@ on:
       - beta
       - debug
 
+env:
+  GH_TOKEN: ${{ secrets.PAT }}
 jobs:
   sync:
     name: Sync CMS
@@ -40,5 +42,5 @@ jobs:
           yarn install
           git add . -A
           git commit -am ${{ github.event.head_commit.message }}
-          git push origin main --force
+          git push origin ${{ github.ref_name }} --force
         working-directory: /tmp/pkrbt-cms
