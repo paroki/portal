@@ -27,3 +27,10 @@ jobs:
     if: github.event_name != 'pull_request'
     uses: paroki/pkrbt/.github/workflows/image.yml@next
     secrets: inherit
+
+  sync:
+    name: Synchronize
+    needs: ["image"]
+    if: github.event_name != 'pull_request'
+    uses: paroki/pkrbt/.github/workflows/sync.yml@next
+    secrets: inherit

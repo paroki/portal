@@ -47,7 +47,7 @@ jobs:
   image:
     name: Image
     needs: ["release"]
-    uses: paroki/pkrbt/.github/workflows/image.yml@next
+    uses: "paroki/pkrbt/.github/workflows/image.yml@next"
     secrets: inherit
     with:
       ref_name: ${{ needs.release.outputs.version }}

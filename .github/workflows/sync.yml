@@ -1,12 +1,7 @@
 name: Synchronize Repository
 
 on:
-  push:
-    branches:
-      - main
-      - next
-      - beta
-      - debug
+  workflow_call:
 
 env:
   GH_TOKEN: ${{ secrets.PAT }}
