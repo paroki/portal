@@ -16,11 +16,11 @@ jobs:
     strategy:
       matrix:
         include:
-          - name: api
+          - name: cms
             prefix: ghcr.io/paroki/pkrbt-cms
             dockerfile: ./apps/api/Dockerfile
             target: prod
-            goss_file: ./docker/api.yaml
+            goss_file: ./docker/goss-cms.yaml
 
     steps:
       - name: Checkout code

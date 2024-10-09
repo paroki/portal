@@ -17,7 +17,7 @@ RUN apk update && apk add --no-cache \
   git
 
 RUN corepack enable && \
-	corepack prepare --activate pnpm@latest && \
+	corepack prepare --activate pnpm@9.12.0 && \
 	pnpm config -g set store-dir /pnpm/store && \
   npm install -g \
     turbo \
@@ -38,7 +38,7 @@ RUN turbo prune --docker @pkrbt/api
 RUN pnpm deploy --filter=api /prod/cms
 
 WORKDIR /prod/cms
-RUN pnpm build
+# RUN pnpm build
 
 FROM base AS prod
 
@@ -48,4 +48,5 @@ WORKDIR /cms
 EXPOSE 1337
 VOLUME [ "/cms/public" ]
 
-CMD [ "pnpm", "start" ]
+RUN pnpm build
+CMD [ "pnpm", "start"]
