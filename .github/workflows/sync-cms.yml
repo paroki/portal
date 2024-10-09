@@ -39,7 +39,6 @@ jobs:
       - name: install
         run: |
           corepack enable
-          npm install -g yarn
           yarn install
           git add . -A
           git commit -am ${{ github.event.head_commit.message }}
