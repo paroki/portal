@@ -49,4 +49,4 @@ EXPOSE 1337
 VOLUME [ "/cms/public" ]
 
 RUN pnpm build
-CMD [ "pnpm", "start"]
+CMD [ "npm", "run", "start"]
