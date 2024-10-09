@@ -37,6 +37,7 @@ jobs:
           node-version: 20
 
       - name: install
+        shell: bash
         run: |
           git config --global user.name "Anthonius Munthi"
           git config --global user.email "me@itstoni.com"
