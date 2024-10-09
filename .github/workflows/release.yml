@@ -44,17 +44,17 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.PAT }}
         id: release
 
-  image:
-    name: Image
-    needs: ["release"]
-    uses: paroki/pkrbt/.github/workflows/image.yml@main
-    secrets: inherit
-    with:
-      ref_name: ${{ needs.release.outputs.version }}
+  #image:
+  #  name: Image
+  #  needs: ["release"]
+  #  uses: paroki/pkrbt/.github/workflows/image.yml@main
+  #  secrets: inherit
+  #  with:
+  #    ref_name: ${{ needs.release.outputs.version }}
 
   deploy:
     name: Deploy
-    needs: ["image"]
+    needs: ["release"]
     runs-on: ubuntu-latest
     steps:
       - name: Deploy to Coolify
