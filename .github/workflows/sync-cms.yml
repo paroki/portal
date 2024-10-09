@@ -44,6 +44,6 @@ jobs:
           corepack enable
           yarn install
           git add . -A
-          git commit -am ${{ github.event.head_commit.message }}
+          git commit -am "${{ github.event.head_commit.message }}"
           git push origin ${{ github.ref_name }} --force
         working-directory: /tmp/pkrbt-cms
