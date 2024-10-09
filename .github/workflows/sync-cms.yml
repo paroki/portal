@@ -38,6 +38,8 @@ jobs:
 
       - name: install
         run: |
+          git config --global user.name="Anthonius Munthi"
+          git config --global user.email="me@itstoni.com"
           corepack enable
           yarn install
           git add . -A
