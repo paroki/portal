@@ -1,0 +1,12 @@
+services:
+  cms-dev:
+    container_name: pkrbt-cms-dev
+    image: pkrbt-cms-dev:latest
+    build:
+      context: .
+      dockerfile: ./apps/api/Dockerfile
+    env_file: .env
+    ports:
+      - 1338:1337
+    volumes:
+      - ./vars/cms-public:/cms/public:rw
