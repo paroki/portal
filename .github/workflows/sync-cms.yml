@@ -20,7 +20,7 @@ jobs:
 
       - name: Clone cms repo
         run: |
-          gh repo clone paroki/pkrbt-cms  /tmp/pkrbt-cms
+          git clone git@github.com:paroki/pkrbt-cms.git  /tmp/pkrbt-cms
 
       - name: set branch
         run: |
