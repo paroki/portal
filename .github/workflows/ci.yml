@@ -21,9 +21,9 @@ jobs:
     uses: paroki/pkrbt/.github/workflows/testing.yml@next
     secrets: inherit
 
-  #image:
-  #  name: Image
-  #  needs: ["testing"]
-  #  if: github.event_name != 'pull_request'
-  #  uses: paroki/pkrbt/.github/workflows/image.yml@next
-  #  secrets: inherit
+  image:
+    name: Image
+    needs: ["testing"]
+    if: github.event_name != 'pull_request'
+    uses: paroki/pkrbt/.github/workflows/image.yml@next
+    secrets: inherit
