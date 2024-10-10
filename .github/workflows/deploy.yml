@@ -14,9 +14,12 @@ jobs:
         id: vars
         run: |
           webhooks=${{secrets.CF_DEV_URL}}
-          if[[ ${{ github.ref_name }} == 'main' ]];
+          ref="${{ github.ref_name }}"
+
+          if [[ $ref == 'main' ]];
             webhooks=${{ secrets.CF_PROD_URL }}
           fi
+
           echo "webhooks=${webhooks}" >> $GITHUB_OUTPUT
 
       - name: Deploy
