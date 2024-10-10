@@ -25,23 +25,23 @@ jobs:
     uses: paroki/pkrbt/.github/workflows/testing.yml@debug
     secrets: inherit
 
-  image:
-    name: Image
-    needs: ["testing"]
-    if: github.event_name != 'pull_request'
-    uses: paroki/pkrbt/.github/workflows/image.yml@debug
-    secrets: inherit
+  #image:
+  #  name: Image
+  #  needs: ["testing"]
+  #  if: github.event_name != 'pull_request'
+  #  uses: paroki/pkrbt/.github/workflows/image.yml@debug
+  #  secrets: inherit
 
-  sync:
-    name: Synchronize
-    needs: ["image"]
-    if: github.event_name != 'pull_request'
-    uses: paroki/pkrbt/.github/workflows/sync.yml@debug
-    secrets: inherit
+  #sync:
+  #  name: Synchronize
+  #  needs: ["image"]
+  #  if: github.event_name != 'pull_request'
+  #  uses: paroki/pkrbt/.github/workflows/sync.yml@debug
+  #  secrets: inherit
 
   deploy:
     name: Deploy
-    needs: ["image"]
+    #needs: ["image"]
     if: github.event_name != 'pull_request'
     uses: paroki/pkrbt/.github/workflows/deploy.yml@debug
     secrets: inherit
