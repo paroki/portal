@@ -14,7 +14,7 @@ jobs:
         shell: bash
         id: vars
         run: |
-          webhooks=${{secrets.CF_DEV_URL}}
+          webhooks=${{ secrets.CF_DEV_URL }}
           ref="${{ github.ref_name }}"
 
           if [[ $ref == 'main' ]]; then
@@ -26,4 +26,6 @@ jobs:
       - name: Deploy
         shell: bash
         run: |
-          curl --request GET '${{ steps.vars.outputs.webhooks }}' --header 'Authorization: Bearer ${{ secrets.CF_API_TOKEN }}'
+          curl --request GET $WEBHOOKS --header 'Authorization: Bearer ${{ secrets.CF_API_TOKEN }}'
+        env:
+          WEBHOOKS: ${{ steps.vars.outputs.webhooks }}
