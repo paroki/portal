@@ -26,6 +26,6 @@ jobs:
       - name: Deploy
         shell: bash
         run: |
-          curl --request GET $WEBHOOKS --header 'Authorization: Bearer ${{ secrets.CF_API_TOKEN }}'
+          curl --request GET "${WEBHOOKS}" --header 'Authorization: Bearer ${{ secrets.CF_API_TOKEN }}'
         env:
           WEBHOOKS: ${{ steps.vars.outputs.webhooks }}
