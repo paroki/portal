@@ -45,10 +45,8 @@ WORKDIR /prod/cms
 
 FROM base AS prod
 
-USER node
-
-COPY --link --chown=1000:1000 --chmod=755 apps/cms/docker/docker-entrypoint.sh /bin/docker-entrypoint
-COPY --link --from=build --chown=node:node /prod/cms /cms
+COPY --link --chmod=755 apps/cms/docker/docker-entrypoint.sh /bin/docker-entrypoint
+COPY --link --from=build /prod/cms /cms
 
 WORKDIR /cms
 EXPOSE 1337
