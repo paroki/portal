@@ -24,7 +24,7 @@ RUN corepack enable && \
     turbo \
     node-gyp
 
-COPY --chmod=755 apps/api/docker/docker-entrypoint.sh /bin/docker-entrypoint
+COPY --chmod=755 apps/cms/docker/docker-entrypoint.sh /bin/docker-entrypoint
 ENTRYPOINT [ "docker-entrypoint" ]
 
 WORKDIR /pkrbt
@@ -38,17 +38,18 @@ COPY . /pkrbt
 WORKDIR /pkrbt
 
 RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --filter=api --frozen-lockfile
-RUN turbo prune --docker @pkrbt/api
-RUN pnpm deploy --filter=api /prod/cms
+RUN turbo prune --docker @pkrbt/cms
+RUN pnpm deploy --filter=cms /prod/cms
 
 WORKDIR /prod/cms
 # RUN pnpm build
 
 FROM base AS prod
 
+USER node
+
 COPY --link --from=build --chown=node:node /prod/cms /cms
 
-USER node
 WORKDIR /cms
 EXPOSE 1337
 VOLUME [ "/cms/public" ]

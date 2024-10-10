@@ -18,7 +18,7 @@ jobs:
         include:
           - name: cms
             prefix: ghcr.io/paroki/pkrbt-cms
-            dockerfile: ./apps/api/Dockerfile
+            dockerfile: ./apps/cms/Dockerfile
             target: prod
             goss_file: ./docker/goss-cms.yaml
 

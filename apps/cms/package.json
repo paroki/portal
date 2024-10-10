@@ -1,5 +1,5 @@
 {
-  "name": "@pkrbt/api",
+  "name": "@pkrbt/cms",
   "version": "0.0.0-development",
   "private": true,
   "description": "A Strapi application",
