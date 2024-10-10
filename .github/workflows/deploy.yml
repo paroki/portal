@@ -5,27 +5,19 @@ on:
   workflow_call:
 
 jobs:
-  dev:
-    name: Development
+  deploy:
+    name: Deploy
     if: github.ref_name == 'debug'
     runs-on: ubuntu-latest
     steps:
-      - name: generate vars
+      - name: development
         shell: bash
-        id: vars
-        run: |
-          webhooks=${{ secrets.CF_DEV_URL }}
-          ref="${{ github.ref_name }}"
-
-          if [[ $ref == 'main' ]]; then
-            webhooks=${{ secrets.CF_PROD_URL }}
-          fi
-
-          echo "webhooks=${webhooks}" >> $GITHUB_OUTPUT
-
-      - name: Deploy
-        shell: bash
+        if: github.ref_name == 'next' || github.ref_name == 'debug'
         run: |
           curl --request GET --header "Authorization: Bearer ${{ secrets.CF_API_TOKEN }}" ${{ secrets.CF_DEV_URL }}
-        env:
-          WEBHOOKS: ${{ steps.vars.outputs.webhooks }}
+
+      - name: production
+        shell: bash
+        if: github.ref_name == 'main' || github.ref_name == 'beta'
+        run: |
+          curl --request GET --header "Authorization: Bearer ${{ secrets.CF_API_TOKEN }}" ${{ secrets.CF_PROD_URL }}
