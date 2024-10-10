@@ -1,0 +1,25 @@
+name: Deploy
+
+on:
+  workflow_call:
+
+jobs:
+  dev:
+    name: Development
+    if: github.ref_name == 'debug'
+    runs-on: ubuntu-latest
+    steps:
+      - name: generate vars
+        shell: bash
+        id: vars
+        run: |
+          webhooks=${{secrets.CF_DEV_URL}}
+          if[[ ${{ github.ref_name }} == 'main' ]];
+            webhooks=${{ secrets.CF_PROD_URL }}
+          fi
+          echo "webhooks=${webhooks}" >> $GITHUB_OUTPUT
+
+      - name: Deploy
+        shell: bash
+        run: |
+          curl --request GET '${{ steps.vars.outputs.webhooks }}' --header 'Authorization: Bearer ${{ secrets.CF_API_TOKEN }}'

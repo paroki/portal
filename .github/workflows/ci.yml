@@ -38,3 +38,10 @@ jobs:
     if: github.event_name != 'pull_request'
     uses: paroki/pkrbt/.github/workflows/sync.yml@debug
     secrets: inherit
+
+  deploy:
+    name: Deploy
+    needs: ["image"]
+    if: github.event_name != 'pull_request'
+    uses: paroki/pkrbt/.github/workflows/deploy.yml@debug
+    secrets: inherit
