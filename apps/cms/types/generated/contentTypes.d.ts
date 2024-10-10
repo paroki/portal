@@ -674,6 +674,33 @@ export interface ApiCategoryCategory extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiDppDpp extends Struct.CollectionTypeSchema {
+  collectionName: 'dpps';
+  info: {
+    singularName: 'dpp';
+    pluralName: 'dpps';
+    displayName: 'Dewan Pastoral Paroki';
+    description: '';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    name: Schema.Attribute.String;
+    title: Schema.Attribute.String;
+    photo: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    createdAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    publishedAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::dpp.dpp'>;
+  };
+}
+
 export interface ApiStaticStatic extends Struct.CollectionTypeSchema {
   collectionName: 'statics';
   info: {
@@ -1109,6 +1136,7 @@ declare module '@strapi/strapi' {
       'api::announcement.announcement': ApiAnnouncementAnnouncement;
       'api::article.article': ApiArticleArticle;
       'api::category.category': ApiCategoryCategory;
+      'api::dpp.dpp': ApiDppDpp;
       'api::static.static': ApiStaticStatic;
       'admin::permission': AdminPermission;
       'admin::user': AdminUser;

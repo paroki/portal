@@ -326,6 +326,30 @@ async function importAnnouncement() {
   }
 }
 
+async function importDpp() {
+  const titles = [
+    "Ketua",
+    "Wakil Ketua I",
+    "Wakil Ketua II",
+    "Sekretaris I",
+    "Sekretaris II",
+    "Bendahara I",
+    "Bendahara II",
+    "Bendahara III",
+  ];
+
+  for (let i = 0; i < titles.length; i++) {
+    const sex = faker.person.sexType();
+    await createEntry({
+      model: "dpp",
+      entry: {
+        title: titles[i],
+        name: `${faker.person.firstName({ sex })} ${faker.person.lastName({ sex })}`,
+      },
+    });
+  }
+}
+
 async function importSeedData() {
   await setPublicPermissions({
     category: ["find", "findOne"],
@@ -335,6 +359,7 @@ async function importSeedData() {
     "an-marriages": ["find", "findOne"],
   });
 
+  await importDpp();
   await importMarriages();
   await importAnnouncement();
   await importCategories();

@@ -5,6 +5,7 @@ import {
   type Article,
   type Static,
   Announcement,
+  DPP,
 } from "../types";
 
 /**
@@ -16,5 +17,6 @@ export function plugins(strapi: Strapi) {
     static: rest<Static>(strapi, "/statics"),
     mariages: rest<Marriage>(strapi, "/an-marriages"),
     annoucements: rest<Announcement>(strapi, "/announcements"),
+    dpp: rest<DPP>(strapi, "/dpp"),
   };
 }

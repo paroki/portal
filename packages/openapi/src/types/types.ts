@@ -66,3 +66,4 @@ export type Static = components["schemas"]["Static"] &
 /* Announcement Section */
 export type Marriage = components["schemas"]["AnMarriage"] & Item;
 export type Announcement = components["schemas"]["Announcement"] & Item;
+export type DPP = components["schemas"]["Dpp"] & Item;
