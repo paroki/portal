@@ -22,14 +22,14 @@ env:
 jobs:
   testing:
     name: Testing
-    uses: paroki/pkrbt/.github/workflows/testing.yml@next
+    uses: paroki/pkrbt/.github/workflows/testing.yml@debug
     secrets: inherit
 
   image:
     name: Image
     needs: ["testing"]
     if: github.event_name != 'pull_request'
-    uses: paroki/pkrbt/.github/workflows/image.yml@next
+    uses: paroki/pkrbt/.github/workflows/image.yml@debug
     secrets: inherit
 
   sync:
