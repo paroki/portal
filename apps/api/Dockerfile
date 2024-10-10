@@ -1,8 +1,9 @@
-# Alpine image
+#syntax=docker/dockerfile:1.4
+
 FROM node:20-alpine AS base
 
-ENV PNPM_HOME="/pnpm"
-ENV PATH="$PNPM_HOME:$PATH"
+ENV PNPM_HOME "/pnpm"
+ENV PATH "$PNPM_HOME:$PATH"
 RUN apk update && apk add --no-cache \
   libc6-compat \
   build-base \
@@ -23,6 +24,8 @@ RUN corepack enable && \
     turbo \
     node-gyp
 
+COPY --chmod=755 docker/cms/docker-entrypoint.sh /bin/
+ENTRYPOINT [ "docker-entrypoint" ]
 WORKDIR /pkrbt
 
 FROM base AS build
@@ -38,14 +41,15 @@ RUN turbo prune --docker @pkrbt/api
 RUN pnpm deploy --filter=api /prod/cms
 
 WORKDIR /prod/cms
-RUN pnpm build
+# RUN pnpm build
 
 FROM base AS prod
 
-COPY --from=build --chown=node:node /prod/cms /cms
+COPY --link --from=build --chown=node:node /prod/cms /cms
+
 USER node
 WORKDIR /cms
 EXPOSE 1337
 VOLUME [ "/cms/public" ]
 
-CMD [ "pnpm", "start"]
+ENTRYPOINT [ "docker-entrypoint" ]

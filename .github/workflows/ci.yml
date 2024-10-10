@@ -12,6 +12,10 @@ on:
       - main
       - debug
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
+  cancel-in-progress: true
+
 env:
   STRAPI_URL: http://localhost:1337
 

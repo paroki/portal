@@ -6,6 +6,8 @@ services:
       context: .
       dockerfile: ./apps/api/Dockerfile
     env_file: .env
+    environment:
+      NODE_ENV: production
     ports:
       - 1338:1337
     volumes:
