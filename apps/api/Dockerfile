@@ -18,14 +18,15 @@ RUN apk update && apk add --no-cache \
   git
 
 RUN corepack enable && \
-	corepack prepare --activate pnpm@9.12.0 && \
+	corepack prepare --activate pnpm@9.12.1 && \
 	pnpm config -g set store-dir /pnpm/store && \
   npm install -g \
     turbo \
     node-gyp
 
-COPY --chmod=755 docker/cms/docker-entrypoint.sh /bin/
+COPY --chmod=755 apps/api/docker/docker-entrypoint.sh /bin/docker-entrypoint
 ENTRYPOINT [ "docker-entrypoint" ]
+
 WORKDIR /pkrbt
 
 FROM base AS build
